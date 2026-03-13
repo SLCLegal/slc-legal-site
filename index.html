@@ -3,25 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SLC Legal | Employment Law and Personal Injury</title>
+
+    <title>California Employment Lawyer | SLC Legal</title>
     <meta
       name="description"
-      content="SLC Legal helps employees and injury clients take a clear first step in employment and personal injury matters."
+      content="SLC Legal represents employees in retaliation, discrimination, harassment, wrongful termination, wage and hour, leave, accommodation, and PAGA matters, and also handles personal injury cases."
     />
+    <link rel="canonical" href="https://www.stoltzlawcorp.com/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        img-src 'self' data:;
+        style-src 'self' 'unsafe-inline';
+        script-src 'self' 'unsafe-inline';
+        font-src 'self' data:;
+        connect-src 'self';
+        frame-ancestors 'none';
+        base-uri 'self';
+        form-action 'self' https://formsubmit.co;
+        upgrade-insecure-requests;
+      "
+    />
+    <meta
+      http-equiv="Permissions-Policy"
+      content="camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="California Employment Lawyer | SLC Legal" />
+    <meta
+      property="og:description"
+      content="Retaliation, discrimination, harassment, wrongful termination, wage and hour, leave, accommodation, and personal injury intake."
+    />
+    <meta property="og:url" content="https://www.stoltzlawcorp.com/" />
+    <meta property="og:site_name" content="SLC Legal" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="California Employment Lawyer | SLC Legal" />
+    <meta
+      name="twitter:description"
+      content="SLC Legal represents employees in retaliation, discrimination, harassment, wrongful termination, wage and hour, leave, accommodation, and personal injury matters."
+    />
+
     <meta name="theme-color" content="#10283d" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SLC Legal",
+        "legalName": "Stoltz Law Corporation",
+        "url": "https://www.stoltzlawcorp.com/"
+      }
+    </script>
+
     <style>
       :root {
-        --navy: #10283d;
-        --navy-2: #163752;
-        --teal: #1f7078;
-        --aqua: #7fd7da;
-        --sand: #c0a383;
+        --navy: #0f273b;
+        --navy-2: #183a57;
+        --teal: #216f78;
+        --aqua: #8ad9db;
+        --sand: #b79a78;
         --bg: #f6f2eb;
         --paper: #ffffff;
         --paper-2: #fbf8f3;
         --text: #1c2730;
         --muted: #5b6874;
-        --line: #d7e0e7;
+        --line: #d9e1e6;
         --shadow: 0 18px 44px rgba(16, 40, 61, 0.10);
         --soft: 0 8px 24px rgba(16, 40, 61, 0.06);
         --r-xl: 28px;
@@ -38,7 +88,7 @@
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         color: var(--text);
         background: var(--bg);
-        line-height: 1.55;
+        line-height: 1.5;
         letter-spacing: -0.01em;
       }
 
@@ -47,31 +97,6 @@
       .container {
         width: min(var(--maxw), calc(100% - 28px));
         margin: 0 auto;
-      }
-
-      .eyebrow {
-        margin: 0 0 10px;
-        color: var(--teal);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-      }
-
-      .title {
-        margin: 0;
-        font-family: "Iowan Old Style", Georgia, serif;
-        font-size: clamp(2.05rem, 5vw, 3.55rem);
-        line-height: 0.98;
-        letter-spacing: -0.05em;
-        color: var(--navy);
-      }
-
-      .copy {
-        margin-top: 14px;
-        max-width: 720px;
-        color: var(--muted);
-        font-size: 1rem;
       }
 
       .topbar {
@@ -84,7 +109,7 @@
       }
 
       .topbar-inner {
-        min-height: 76px;
+        min-height: 74px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -98,17 +123,16 @@
       }
 
       .brand-mark {
-        width: 44px;
-        height: 44px;
+        width: 42px;
+        height: 42px;
         flex: 0 0 auto;
       }
 
       .brand-title {
         margin: 0;
-        font-size: 1.08rem;
+        font-size: 1.04rem;
         font-weight: 700;
         color: var(--navy);
-        letter-spacing: -0.03em;
       }
 
       .brand-sub {
@@ -181,20 +205,18 @@
         position: absolute;
         inset: 0;
         background:
-          radial-gradient(circle at 20% 20%, rgba(127, 215, 218, 0.20), transparent 32%),
-          radial-gradient(circle at 88% 12%, rgba(192, 163, 131, 0.16), transparent 26%),
-          radial-gradient(rgba(31, 112, 120, 0.08) 1px, transparent 1px);
-        background-size: auto, auto, 22px 22px;
+          radial-gradient(circle at 18% 18%, rgba(138,217,219,.22), transparent 30%),
+          radial-gradient(circle at 84% 14%, rgba(183,154,120,.14), transparent 24%);
         pointer-events: none;
       }
 
       .hero-grid {
         position: relative;
         display: grid;
-        grid-template-columns: 1.06fr 0.94fr;
+        grid-template-columns: 1.08fr 0.92fr;
         gap: 28px;
         align-items: start;
-        padding: 62px 0 54px;
+        padding: 58px 0 50px;
       }
 
       .chip {
@@ -204,7 +226,7 @@
         padding: 9px 14px;
         border-radius: 999px;
         border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255,255,255,.9);
         color: var(--teal);
         font-size: 0.76rem;
         font-weight: 700;
@@ -215,16 +237,16 @@
       .hero h1 {
         margin: 16px 0 0;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: clamp(3.1rem, 6vw, 5.5rem);
+        font-size: clamp(3rem, 6vw, 5.2rem);
         line-height: 0.9;
         letter-spacing: -0.065em;
         color: var(--navy);
-        max-width: 9.1ch;
+        max-width: 8.8ch;
       }
 
       .hero-copy {
         margin-top: 18px;
-        max-width: 640px;
+        max-width: 620px;
         font-size: 1.08rem;
         color: var(--muted);
       }
@@ -233,50 +255,53 @@
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
-        margin-top: 26px;
+        margin-top: 24px;
       }
 
-      .hero-strip {
-        margin-top: 26px;
+      .trust-row {
+        margin-top: 24px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 12px;
       }
 
-      .hero-pill {
+      .trust-item {
         padding: 14px 15px;
         border-radius: var(--r-md);
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255,255,255,.92);
         border: 1px solid var(--line);
         box-shadow: var(--soft);
       }
 
-      .hero-pill strong {
+      .trust-item strong {
         display: block;
         color: var(--navy);
+        font-size: 0.97rem;
       }
 
-      .hero-pill span {
+      .trust-item span {
         display: block;
-        margin-top: 5px;
+        margin-top: 4px;
         color: var(--muted);
-        font-size: 0.86rem;
+        font-size: 0.88rem;
       }
 
       .panel {
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.92));
+        background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.92));
         border: 1px solid var(--line);
         border-radius: var(--r-xl);
         box-shadow: var(--shadow);
       }
 
-      .intro-card { padding: 24px; }
+      .intro-card {
+        padding: 24px;
+      }
 
       .intro-card h2 {
         margin: 0;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: 2.05rem;
-        line-height: 1.02;
+        font-size: 2rem;
+        line-height: 1.03;
         letter-spacing: -0.04em;
         color: var(--navy);
       }
@@ -316,68 +341,70 @@
 
       .detail-body li { margin: 8px 0; }
 
-      .band {
-        background: var(--navy);
-        color: #fff;
+      .section {
+        padding: 70px 0;
       }
 
-      .band-inner {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        padding: 18px 0;
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--teal);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
       }
 
-      .band-item {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        color: rgba(255, 255, 255, 0.94);
-        font-size: 0.9rem;
+      .title {
+        margin: 0;
+        font-family: "Iowan Old Style", Georgia, serif;
+        font-size: clamp(2rem, 5vw, 3.3rem);
+        line-height: 0.98;
+        letter-spacing: -0.05em;
+        color: var(--navy);
       }
 
-      .band-dot {
-        width: 9px;
-        height: 9px;
-        border-radius: 999px;
-        background: var(--aqua);
-        flex: 0 0 auto;
+      .copy {
+        margin-top: 14px;
+        max-width: 700px;
+        color: var(--muted);
       }
-
-      .section { padding: 78px 0; }
 
       .issue-grid {
         margin-top: 22px;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
       }
 
       .issue {
-        padding: 14px 16px;
-        border-radius: var(--r-md);
+        padding: 18px;
+        border-radius: var(--r-lg);
         border: 1px solid var(--line);
         background: var(--paper);
+        box-shadow: var(--soft);
+      }
+
+      .issue strong {
+        display: block;
         color: var(--navy);
-        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 6px;
+      }
+
+      .issue span {
+        color: var(--muted);
+        font-size: 0.92rem;
       }
 
       .split {
         display: grid;
-        grid-template-columns: 1.02fr 0.98fr;
+        grid-template-columns: 1fr 1fr;
         gap: 24px;
       }
 
-      .cards {
-        margin-top: 24px;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-      }
-
       .card {
-        padding: 22px;
-        border-radius: var(--r-lg);
+        padding: 24px;
+        border-radius: var(--r-xl);
         border: 1px solid var(--line);
         background: var(--paper);
         box-shadow: var(--soft);
@@ -385,65 +412,24 @@
 
       .card h3 {
         margin: 0;
+        font-family: "Iowan Old Style", Georgia, serif;
+        font-size: 1.7rem;
+        line-height: 1.02;
         color: var(--navy);
-        font-size: 1.06rem;
-        letter-spacing: -0.02em;
       }
 
       .card p {
-        margin: 10px 0 0;
+        margin: 12px 0 0;
         color: var(--muted);
       }
 
-      .dark-card {
-        padding: 26px;
-        border-radius: var(--r-xl);
-        background: linear-gradient(180deg, var(--navy), var(--navy-2));
-        color: #fff;
-        box-shadow: var(--shadow);
+      .card ul {
+        margin: 16px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
       }
 
-      .dark-card h3,
-      .injury-card h3 {
-        margin: 0;
-        font-family: "Iowan Old Style", Georgia, serif;
-        font-size: clamp(1.9rem, 4vw, 2.8rem);
-        line-height: 1.03;
-        letter-spacing: -0.045em;
-      }
-
-      .dark-list {
-        margin-top: 18px;
-        display: grid;
-        gap: 12px;
-      }
-
-      .dark-item {
-        padding: 14px 16px;
-        border-radius: var(--r-md);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.05);
-      }
-
-      .dark-item strong {
-        display: block;
-        margin-bottom: 6px;
-      }
-
-      .dark-item span {
-        color: rgba(255, 255, 255, 0.82);
-      }
-
-      .injury-wrap {
-        background: linear-gradient(180deg, rgba(16, 40, 61, 0.06), rgba(16, 40, 61, 0));
-      }
-
-      .injury-grid {
-        display: grid;
-        grid-template-columns: 0.92fr 1.08fr;
-        gap: 24px;
-        align-items: start;
-      }
+      .card li { margin: 8px 0; }
 
       .injury-card {
         padding: 28px;
@@ -453,51 +439,39 @@
         box-shadow: 0 20px 46px rgba(16, 40, 61, 0.18);
       }
 
+      .injury-card h3 {
+        margin: 0;
+        font-family: "Iowan Old Style", Georgia, serif;
+        font-size: clamp(1.9rem, 4vw, 2.7rem);
+        line-height: 1.03;
+        letter-spacing: -0.045em;
+      }
+
       .injury-card p {
         margin: 14px 0 0;
-        color: rgba(255, 255, 255, 0.88);
+        color: rgba(255,255,255,.88);
       }
 
       .injury-card .actions {
-        margin-top: 20px;
+        margin-top: 18px;
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
       }
 
-      .injury-list {
-        display: grid;
-        gap: 12px;
-      }
-
-      .injury-box {
-        padding: 18px;
-        border-radius: var(--r-md);
-        border: 1px solid var(--line);
-        background: var(--paper);
-        box-shadow: var(--soft);
-      }
-
-      .injury-box strong {
-        display: block;
-        color: var(--navy);
-        margin-bottom: 6px;
-      }
-
       .cta {
-        padding: 36px;
+        padding: 34px;
         border-radius: var(--r-xl);
         border: 1px solid var(--line);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.82));
+        background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.84));
         box-shadow: var(--shadow);
       }
 
       .cta h3 {
         margin: 0;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: clamp(1.8rem, 4vw, 2.55rem);
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
         line-height: 1.03;
-        letter-spacing: -0.045em;
         color: var(--navy);
       }
 
@@ -508,7 +482,7 @@
       }
 
       .cta-actions {
-        margin-top: 20px;
+        margin-top: 18px;
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
@@ -543,9 +517,7 @@
       @media (max-width: 980px) {
         .hero-grid,
         .split,
-        .cards,
-        .band-inner,
-        .injury-grid {
+        .issue-grid {
           grid-template-columns: 1fr 1fr;
         }
       }
@@ -553,12 +525,9 @@
       @media (max-width: 820px) {
         .topbar-inner,
         .hero-grid,
-        .hero-strip,
-        .band-inner,
+        .trust-row,
         .issue-grid,
         .split,
-        .cards,
-        .injury-grid,
         .footer-inner {
           display: grid;
           grid-template-columns: 1fr;
@@ -584,13 +553,18 @@
 
         .btn { width: 100%; }
 
-        .hero-grid { padding: 36px 0 48px; }
-        .section { padding: 58px 0; }
+        .hero-grid {
+          padding: 36px 0 46px;
+        }
+
+        .section {
+          padding: 56px 0;
+        }
 
         .intro-card,
-        .dark-card,
-        .cta,
-        .injury-card {
+        .card,
+        .injury-card,
+        .cta {
           padding: 22px;
         }
 
@@ -627,43 +601,42 @@
       <section class="hero">
         <div class="container hero-grid">
           <div>
-            <div class="chip">Retaliation, discrimination, leave, wage and hour, and wrongful termination</div>
-            <h1>When work turns against you, the right lawyer can change everything.</h1>
+            <div class="chip">Employment law and personal injury</div>
+            <h1>When work turns against you, the facts matter.</h1>
             <p class="hero-copy">
-              If something changed after you spoke up, requested leave, asked for accommodation, reported a problem, or were treated differently because of who you are, this is where you start.
+              Retaliation, discrimination, harassment, wrongful termination, unpaid wages, leave, accommodation, and personal injury matters start with the same question: what happened, when did it happen, and what changed after that?
             </p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="employment-intake.html">Start Employment Intake</a>
               <a class="btn btn-accent" href="personal-injury-intake.html">Start Personal Injury Intake</a>
-              <a class="btn btn-secondary" href="#learn-more">Learn More</a>
             </div>
-            <div class="hero-strip">
-              <div class="hero-pill">
-                <strong>Start with the facts you know</strong>
-                <span>You do not need to have everything perfectly organized before you reach out.</span>
+
+            <div class="trust-row">
+              <div class="trust-item">
+                <strong>Clear intake</strong>
+                <span>Start with the issue that best fits what happened.</span>
               </div>
-              <div class="hero-pill">
-                <strong>Focus on what matters</strong>
-                <span>Facts, timing, complaints, leave, pay, and what changed afterward all matter.</span>
+              <div class="trust-item">
+                <strong>Careful review</strong>
+                <span>Facts, timing, records, and witness details matter.</span>
               </div>
-              <div class="hero-pill">
-                <strong>Take a real next step</strong>
-                <span>Clear direction matters when your job, health, or income are at stake.</span>
+              <div class="trust-item">
+                <strong>Serious representation</strong>
+                <span>State and federal litigation, arbitration, wage and hour, FEHA, and PAGA matters.</span>
               </div>
             </div>
           </div>
 
           <div class="panel intro-card">
-            <h2>Meet Zachary Stoltz</h2>
+            <h2>Zachary Stoltz</h2>
             <p>
-              Zachary Stoltz represents employees because he understands how quickly work problems can become one-sided once a paycheck is at risk. When income stops, pressure builds fast. People are pushed to accept whatever they are offered, even when something about the situation feels wrong.
-            </p>
-            <p>You do not need to do that alone.</p>
-            <p>
-              His practice is built around retaliation, discrimination, harassment, wrongful termination, wage-and-hour disputes, PAGA matters, leave and accommodation cases, arbitration proceedings, employment contract disputes, and state and federal court litigation. He looks closely at the facts, the timeline, who said what, when things changed, and why. He has also handled issues involving unlawful employment agreements, severance agreements, and covenants not to compete.
+              Zachary Stoltz represents employees because he knows how quickly the balance of power changes when a paycheck, leave request, medical issue, or complaint is used against the person who raised it.
             </p>
             <p>
-              That matters because employees often focus only on the final decision, while missing the conduct that led up to it. A complaint that was ignored. A leave request that changed how they were treated. A doctor’s note that triggered pressure. Pay practices that only made sense once discipline or termination followed. Those details often matter just as much as the ending.
+              His work focuses on retaliation, discrimination, harassment, wrongful termination, wage and hour disputes, PAGA matters, leave and accommodation cases, arbitration proceedings, and employment contract disputes. He also handles personal injury matters, including auto accidents and premises-liability claims.
+            </p>
+            <p>
+              He looks closely at the timeline, the documents, and the people involved. That is often where the real case begins.
             </p>
 
             <details>
@@ -703,115 +676,73 @@
         </div>
       </section>
 
-      <section class="band">
-        <div class="container band-inner">
-          <div class="band-item"><span class="band-dot"></span><span>FEHA, Labor Code, leave, and wage-hour issues</span></div>
-          <div class="band-item"><span class="band-dot"></span><span>Careful case screening from the start</span></div>
-          <div class="band-item"><span class="band-dot"></span><span>Clear next step without legal jargon</span></div>
-          <div class="band-item"><span class="band-dot"></span><span>Facts, timeline, and records matter</span></div>
-        </div>
-      </section>
-
       <section class="section" id="learn-more">
         <div class="container">
-          <p class="eyebrow">We review cases involving</p>
-          <h2 class="title">If your employer changed course after you spoke up, that matters.</h2>
+          <p class="eyebrow">Common case types</p>
+          <h2 class="title">Tell us which problem sounds most like yours.</h2>
+          <p class="copy">
+            If more than one applies, that is common. Start with the one that feels most important.
+          </p>
+
           <div class="issue-grid">
-            <div class="issue">Retaliation</div>
-            <div class="issue">Discrimination</div>
-            <div class="issue">Harassment</div>
-            <div class="issue">Wrongful termination</div>
-            <div class="issue">Pregnancy discrimination</div>
-            <div class="issue">Disability discrimination</div>
-            <div class="issue">Failure to accommodate</div>
-            <div class="issue">Failure to engage in the interactive process</div>
-            <div class="issue">CFRA / FMLA retaliation</div>
-            <div class="issue">Paid Family Leave retaliation</div>
-            <div class="issue">Labor Code retaliation</div>
-            <div class="issue">Whistleblower retaliation</div>
-            <div class="issue">Unpaid overtime</div>
-            <div class="issue">Noncompliant wage statements</div>
-            <div class="issue">Meal and rest break violations</div>
-            <div class="issue">One in seven day-of-rest violations</div>
-            <div class="issue">PAGA claims</div>
-            <div class="issue">Arbitration and employment contract disputes</div>
+            <div class="issue">
+              <strong>Retaliation and wrongful termination</strong>
+              <span>You complained, requested leave, asked for accommodation, reported a problem, or spoke up about pay, and the employer turned against you.</span>
+            </div>
+            <div class="issue">
+              <strong>Discrimination and harassment</strong>
+              <span>Pregnancy, disability, race, sex, age, national origin, religion, medical condition, or another protected basis changed how you were treated.</span>
+            </div>
+            <div class="issue">
+              <strong>Wage and hour</strong>
+              <span>Unpaid overtime, missed meal or rest breaks, late final pay, wage statement problems, or company-wide pay practices affecting multiple workers.</span>
+            </div>
+            <div class="issue">
+              <strong>Leave and accommodation</strong>
+              <span>You requested leave, provided a doctor’s note, asked for restrictions or schedule changes, and the employer ignored, delayed, denied, or punished you.</span>
+            </div>
+            <div class="issue">
+              <strong>Whistleblower and Labor Code retaliation</strong>
+              <span>You reported unlawful conduct, safety issues, fraud, patient-care concerns, or wage violations and were disciplined, pushed out, or terminated.</span>
+            </div>
+            <div class="issue">
+              <strong>Personal injury</strong>
+              <span>Auto accidents, slip and fall incidents, or other injury matters where liability, treatment, and damages need to be taken seriously from the start.</span>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="section" style="background:#fff;">
         <div class="container split">
-          <div>
-            <p class="eyebrow">Before you reach out</p>
-            <h2 class="title">You do not need to have everything perfectly organized before you reach out.</h2>
-            <p class="copy">
-              Most people looking for an employment lawyer are dealing with stress, time pressure, and uncertainty. What matters most at the beginning is starting with the facts you do know and the records you already have.
+          <div class="card">
+            <h3>Employment matters</h3>
+            <p>
+              Start here if the problem happened at work.
             </p>
-            <div class="cards">
-              <article class="card">
-                <h3>What often matters most</h3>
-                <p>What happened, when it happened, who was involved, what you reported or requested, and what changed afterward.</p>
-              </article>
-              <article class="card">
-                <h3>What can strengthen your case</h3>
-                <p>Pay records, schedules, emails, texts, leave paperwork, doctor’s notes, write-ups, complaints, and witness information.</p>
-              </article>
-              <article class="card">
-                <h3>What to do next</h3>
-                <p>Start with what happened, from the beginning. Important details often show up in the lead-up, not just at the end.</p>
-              </article>
+            <ul>
+              <li>Retaliation</li>
+              <li>Discrimination</li>
+              <li>Harassment</li>
+              <li>Wrongful termination</li>
+              <li>Wage and hour / PAGA</li>
+              <li>Leave and accommodation</li>
+            </ul>
+            <div class="cta-actions">
+              <a class="btn btn-primary" href="employment-intake.html">Start Employment Intake</a>
             </div>
           </div>
 
-          <aside class="dark-card">
-            <p class="eyebrow" style="color:var(--aqua);">Tell us your story</p>
-            <h3>From start to finish.</h3>
-            <div class="dark-list">
-              <div class="dark-item">
-                <strong>Start with the change</strong>
-                <span>What changed at work, and when did it start?</span>
-              </div>
-              <div class="dark-item">
-                <strong>Name the people involved</strong>
-                <span>Who said what, who knew about it, and who made decisions afterward?</span>
-              </div>
-              <div class="dark-item">
-                <strong>Include what you reported or requested</strong>
-                <span>Complaints, leave requests, accommodation requests, wage concerns, and protected activity often matter more than people realize.</span>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="section injury-wrap">
-        <div class="container injury-grid">
           <div class="injury-card">
-            <p class="eyebrow" style="color:#dffaf8;">Personal injury</p>
-            <h3>Injured because someone else was careless? Start here.</h3>
+            <h3>Personal injury matters</h3>
             <p>
-              Zachary Stoltz’s practice reflects a broader plaintiff-side focus. In employment cases, that often means understanding not only what happened at work, but the financial pressure, emotional strain, and disruption that follow when a person’s income, health, or stability are put at risk.
+              Start here if you were hurt because someone else was careless.
             </p>
             <p>
-              That same plaintiff-side perspective extends to personal injury matters, including auto accidents, slip-and-fall cases, and other claims where the facts, the injuries, and their effect on a person’s life need to be taken seriously from the start.
+              Auto accidents, slip and fall incidents, and other injury cases turn on the same things clients often miss at the beginning: timing, documentation, treatment, witnesses, and what can still be preserved.
             </p>
             <div class="actions">
-              <a class="btn btn-accent" href="personal-injury-intake.html">Start Personal Injury Intake</a>
-            </div>
-          </div>
-
-          <div class="injury-list">
-            <div class="injury-box">
-              <strong>We handle</strong>
-              <span>Auto accidents, slip-and-fall claims, and other personal injury matters where liability, treatment, and damages all matter.</span>
-            </div>
-            <div class="injury-box">
-              <strong>What often matters first</strong>
-              <span>When and where it happened, what injuries you suffered, whether there are photos, witnesses, a report, insurance information, or medical treatment.</span>
-            </div>
-            <div class="injury-box">
-              <strong>What to do next</strong>
-              <span>Get medical treatment, keep records, avoid guessing about injuries, and start the intake before details are lost.</span>
+              <a class="btn btn-secondary" href="personal-injury-intake.html">Start Personal Injury Intake</a>
             </div>
           </div>
         </div>
@@ -822,7 +753,7 @@
           <p class="eyebrow">Start here</p>
           <h3>Tell us your story, from start to finish.</h3>
           <p>
-            You do not need to write it perfectly. Start at the beginning, tell us what changed, who was involved, what you reported or requested, and what happened after that.
+            You do not need to write it perfectly. Start with what happened, who was involved, what you reported or requested, and what changed after that.
           </p>
           <div class="cta-actions">
             <a class="btn btn-primary" href="employment-intake.html">Start Employment Intake</a>
@@ -851,7 +782,7 @@
         <div class="footer-meta">
           <div>Licensed in the State of California and the State of Hawai'i</div>
           <div style="margin-top:10px; max-width:640px; font-size:12px; line-height:1.5; color:#5b6874;">
-            Attorney advertising. This website is for general information only and does not create an attorney-client relationship. Prior results do not guarantee a similar outcome. If there is no recovery, clients may still be responsible for costs if that is provided in the fee agreement.
+            Attorney advertising. This website is for general information only and does not create an attorney-client relationship. Prior results do not guarantee a similar outcome.
           </div>
         </div>
       </div>
