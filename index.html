@@ -16,12 +16,11 @@
       http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
-        img-src 'self' data: https://www.superlawyers.com https://profiles.superlawyers.com;
+        img-src 'self' data:;
         style-src 'self' 'unsafe-inline';
-        script-src 'self' 'unsafe-inline' https://www.superlawyers.com;
+        script-src 'self' 'unsafe-inline';
         font-src 'self' data:;
-        connect-src 'self' https://www.superlawyers.com https://profiles.superlawyers.com;
-        frame-src https://www.superlawyers.com https://profiles.superlawyers.com;
+        connect-src 'self';
         frame-ancestors 'none';
         base-uri 'self';
         form-action 'self' https://formsubmit.co;
@@ -84,23 +83,26 @@
 
     <style>
       :root {
-        --navy: #10283d;
+        --navy: #0f2438;
         --navy-2: #173751;
         --teal: #1f7078;
         --aqua: #84d7d9;
         --sand: #b89b7a;
-        --ink: #1a2530;
-        --muted: #5b6874;
-        --bg: #f6f2eb;
+        --gold: #b79663;
+        --ink: #18232d;
+        --muted: #5d6974;
+        --bg: #f5f0e8;
         --paper: #ffffff;
-        --paper-2: #fcfaf7;
+        --paper-2: #fcfaf6;
         --line: #d8e1e7;
-        --shadow: 0 28px 70px rgba(16, 40, 61, 0.11);
+        --line-2: rgba(16, 40, 61, 0.10);
+        --shadow: 0 28px 80px rgba(16, 40, 61, 0.12);
         --soft: 0 12px 28px rgba(16, 40, 61, 0.06);
-        --r-xl: 32px;
+        --r-xxl: 38px;
+        --r-xl: 30px;
         --r-lg: 22px;
         --r-md: 16px;
-        --maxw: 1180px;
+        --maxw: 1200px;
       }
 
       * { box-sizing: border-box; }
@@ -111,9 +113,9 @@
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         color: var(--ink);
         background:
-          radial-gradient(circle at top left, rgba(132, 215, 217, 0.10), transparent 28%),
-          radial-gradient(circle at top right, rgba(184, 155, 122, 0.10), transparent 24%),
-          var(--bg);
+          radial-gradient(circle at top left, rgba(132, 215, 217, 0.10), transparent 26%),
+          radial-gradient(circle at top right, rgba(183, 150, 99, 0.08), transparent 20%),
+          linear-gradient(180deg, #f7f3ec 0%, #f4efe7 100%);
         line-height: 1.58;
         letter-spacing: -0.01em;
       }
@@ -129,13 +131,13 @@
         position: sticky;
         top: 0;
         z-index: 50;
-        background: rgba(246, 242, 235, 0.90);
+        background: rgba(247, 243, 236, 0.90);
         backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--line);
       }
 
       .topbar-inner {
-        min-height: 78px;
+        min-height: 80px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -149,14 +151,14 @@
       }
 
       .brand-mark {
-        width: 46px;
-        height: 46px;
+        width: 48px;
+        height: 48px;
         flex: 0 0 auto;
       }
 
       .brand-title {
         margin: 0;
-        font-size: 1.06rem;
+        font-size: 1.08rem;
         font-weight: 800;
         color: var(--navy);
       }
@@ -231,18 +233,18 @@
         position: absolute;
         inset: 0;
         background:
-          radial-gradient(circle at 18% 18%, rgba(132, 215, 217, 0.18), transparent 28%),
-          radial-gradient(circle at 86% 12%, rgba(184, 155, 122, 0.12), transparent 22%);
+          radial-gradient(circle at 16% 18%, rgba(132, 215, 217, 0.16), transparent 28%),
+          radial-gradient(circle at 86% 12%, rgba(183, 150, 99, 0.11), transparent 22%);
         pointer-events: none;
       }
 
       .hero-grid {
         position: relative;
         display: grid;
-        grid-template-columns: 1.12fr 0.88fr;
+        grid-template-columns: 1.08fr 0.92fr;
         gap: 30px;
         align-items: start;
-        padding: 62px 0 48px;
+        padding: 66px 0 54px;
       }
 
       .eyeband {
@@ -263,10 +265,10 @@
       .brand-stage {
         position: relative;
         margin-top: 18px;
-        padding: 32px 34px 30px;
-        border-radius: 34px;
+        padding: 36px 36px 32px;
+        border-radius: var(--r-xxl);
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.97), rgba(255,255,255,0.82));
+          linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.84));
         border: 1px solid rgba(16, 40, 61, 0.08);
         box-shadow: var(--shadow);
         overflow: hidden;
@@ -278,20 +280,20 @@
         position: absolute;
         inset: 0;
         background:
-          linear-gradient(125deg, rgba(132, 215, 217, 0.14), transparent 35%),
-          linear-gradient(300deg, rgba(184, 155, 122, 0.10), transparent 28%);
+          linear-gradient(120deg, rgba(132, 215, 217, 0.14), transparent 35%),
+          linear-gradient(300deg, rgba(183, 150, 99, 0.10), transparent 30%);
         pointer-events: none;
       }
 
       .brand-stage::after {
         content: "";
         position: absolute;
-        right: -30px;
-        top: -30px;
-        width: 220px;
-        height: 220px;
+        right: -36px;
+        top: -40px;
+        width: 240px;
+        height: 240px;
         border-radius: 50%;
-        border: 1px solid rgba(16, 40, 61, 0.07);
+        border: 1px solid rgba(16, 40, 61, 0.06);
         box-shadow:
           0 0 0 34px rgba(16, 40, 61, 0.02),
           0 0 0 68px rgba(16, 40, 61, 0.015);
@@ -313,37 +315,48 @@
 
       .hero-kicker::before {
         content: "";
-        width: 28px;
+        width: 34px;
         height: 1px;
-        background: linear-gradient(90deg, var(--teal), var(--sand));
+        background: linear-gradient(90deg, var(--teal), var(--gold));
       }
 
-      .slogan-lockup {
+      .slogan-crest {
         position: relative;
         z-index: 1;
         margin-top: 18px;
+        max-width: 760px;
+      }
+
+      .slogan-frame {
+        display: inline-block;
+        padding: 18px 18px 12px;
+        border: 1px solid rgba(16, 40, 61, 0.10);
+        border-radius: 20px;
+        background: rgba(255,255,255,0.56);
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45);
       }
 
       .slogan-line {
         display: block;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: clamp(3.25rem, 6vw, 5.8rem);
-        line-height: 0.88;
-        letter-spacing: -0.075em;
+        font-size: clamp(3.4rem, 6vw, 6.1rem);
+        line-height: 0.86;
+        letter-spacing: -0.08em;
         color: var(--navy);
+        text-wrap: balance;
       }
 
-      .slogan-divider {
-        width: 108px;
+      .slogan-mark {
+        width: 126px;
         height: 6px;
         border-radius: 999px;
-        margin: 18px 0 16px;
-        background: linear-gradient(90deg, var(--teal), var(--sand));
-        box-shadow: 0 6px 18px rgba(16, 40, 61, 0.10);
+        margin: 18px 0 18px;
+        background: linear-gradient(90deg, var(--teal), var(--gold));
+        box-shadow: 0 8px 20px rgba(16, 40, 61, 0.10);
       }
 
       .slogan-sub {
-        max-width: 670px;
+        max-width: 680px;
         font-size: 1.08rem;
         color: var(--muted);
       }
@@ -354,7 +367,7 @@
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
-        margin-top: 26px;
+        margin-top: 28px;
       }
 
       .hero-micro {
@@ -401,47 +414,67 @@
       }
 
       .intro-card {
-        padding: 26px;
+        padding: 28px;
         position: relative;
       }
 
-      .intro-card h2 {
+      .proof-crown {
+        margin: -4px 0 22px;
+        padding: 18px;
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(16,40,61,0.05), rgba(16,40,61,0.02));
+        border: 1px solid var(--line);
+      }
+
+      .proof-crown-top {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .proof-crown h2 {
         margin: 0;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: 2.14rem;
+        font-size: 1.95rem;
         line-height: 1.02;
         letter-spacing: -0.04em;
         color: var(--navy);
       }
 
-      .intro-card p {
+      .proof-crown-copy {
+        margin-top: 12px;
+        color: var(--muted);
+      }
+
+      .badge-stack {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .badge-graphic {
+        display: block;
+        width: 180px;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 14px 32px rgba(16, 40, 61, 0.16);
+        border: 1px solid rgba(16, 40, 61, 0.06);
+        background: #fff;
+      }
+
+      .bio-block h3 {
+        margin: 0;
+        font-family: "Iowan Old Style", Georgia, serif;
+        font-size: 2.1rem;
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+        color: var(--navy);
+      }
+
+      .bio-block p {
         margin: 14px 0 0;
         color: var(--muted);
-      }
-
-      .hero-badge-band {
-        margin: 0 0 20px;
-        padding: 18px;
-        border-radius: 24px;
-        background: linear-gradient(180deg, rgba(16,40,61,0.04), rgba(16,40,61,0.02));
-        border: 1px solid var(--line);
-        display: grid;
-        grid-template-columns: 190px 1fr;
-        gap: 18px;
-        align-items: center;
-      }
-
-      .hero-badge-copy strong {
-        display: block;
-        color: var(--navy);
-        font-size: 1rem;
-      }
-
-      .hero-badge-copy span {
-        display: block;
-        margin-top: 6px;
-        color: var(--muted);
-        font-size: 0.92rem;
       }
 
       .proof-strip {
@@ -501,7 +534,7 @@
 
       .detail-body li { margin: 8px 0; }
 
-      .section { padding: 72px 0; }
+      .section { padding: 74px 0; }
 
       .eyebrow {
         margin: 0 0 10px;
@@ -515,10 +548,11 @@
       .title {
         margin: 0;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: clamp(2rem, 5vw, 3.35rem);
+        font-size: clamp(2.1rem, 5vw, 3.45rem);
         line-height: 0.98;
         letter-spacing: -0.05em;
         color: var(--navy);
+        text-wrap: balance;
       }
 
       .copy {
@@ -528,7 +562,7 @@
       }
 
       .issue-grid {
-        margin-top: 22px;
+        margin-top: 24px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 14px;
@@ -561,7 +595,7 @@
       }
 
       .card {
-        padding: 24px;
+        padding: 26px;
         border-radius: var(--r-xl);
         border: 1px solid var(--line);
         background: var(--paper);
@@ -571,7 +605,7 @@
       .card h3 {
         margin: 0;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: 1.82rem;
+        font-size: 1.88rem;
         line-height: 1.02;
         color: var(--navy);
       }
@@ -591,7 +625,7 @@
 
       .review-card {
         margin-top: 22px;
-        padding: 20px;
+        padding: 22px;
         border-radius: 20px;
         border: 1px solid var(--line);
         background: linear-gradient(180deg, #ffffff, #fbfaf7);
@@ -601,7 +635,7 @@
         margin: 0;
         color: var(--navy);
         font-size: 1rem;
-        line-height: 1.6;
+        line-height: 1.65;
       }
 
       .review-card cite {
@@ -613,27 +647,45 @@
       }
 
       .accent-card {
-        padding: 30px;
+        padding: 32px;
         border-radius: var(--r-xl);
-        background: linear-gradient(145deg, var(--navy), var(--teal));
+        background:
+          linear-gradient(145deg, rgba(15,36,56,1), rgba(31,112,120,0.96));
         color: #fff;
-        box-shadow: 0 20px 46px rgba(16, 40, 61, 0.18);
+        box-shadow: 0 24px 56px rgba(16, 40, 61, 0.22);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .accent-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at top right, rgba(255,255,255,0.09), transparent 24%);
+        pointer-events: none;
       }
 
       .accent-card h3 {
         margin: 0;
+        position: relative;
+        z-index: 1;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: clamp(1.95rem, 4vw, 2.75rem);
+        font-size: clamp(2rem, 4vw, 2.9rem);
         line-height: 1.03;
         letter-spacing: -0.045em;
       }
 
       .accent-card p {
+        position: relative;
+        z-index: 1;
         margin: 14px 0 0;
         color: rgba(255,255,255,.90);
       }
 
       .accent-card .actions {
+        position: relative;
+        z-index: 1;
         margin-top: 18px;
         display: flex;
         gap: 12px;
@@ -641,7 +693,7 @@
       }
 
       .coverage-grid {
-        margin-top: 22px;
+        margin-top: 24px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 14px;
@@ -668,17 +720,17 @@
       }
 
       .cta {
-        padding: 36px;
+        padding: 38px;
         border-radius: var(--r-xl);
         border: 1px solid var(--line);
-        background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.84));
+        background: linear-gradient(180deg, rgba(255,255,255,.97), rgba(255,255,255,.86));
         box-shadow: var(--shadow);
       }
 
       .cta h3 {
         margin: 0;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: clamp(1.85rem, 4vw, 2.55rem);
+        font-size: clamp(1.9rem, 4vw, 2.65rem);
         line-height: 1.03;
         color: var(--navy);
       }
@@ -704,7 +756,7 @@
 
       .footer {
         border-top: 1px solid var(--line);
-        background: rgba(255,255,255,0.78);
+        background: rgba(255,255,255,0.80);
       }
 
       .footer-inner {
@@ -736,9 +788,9 @@
           grid-template-columns: 1fr 1fr;
         }
 
-        .hero-badge-band {
-          grid-template-columns: 1fr;
-          justify-items: start;
+        .proof-crown-top {
+          flex-direction: column;
+          align-items: flex-start;
         }
       }
 
@@ -776,7 +828,7 @@
         .btn { width: 100%; }
 
         .hero-grid { padding: 38px 0 44px; }
-        .section { padding: 56px 0; }
+        .section { padding: 58px 0; }
 
         .brand-stage,
         .intro-card,
@@ -787,6 +839,10 @@
         }
 
         .mobile-cta { display: inline-flex; }
+
+        .slogan-line {
+          font-size: clamp(2.8rem, 10vw, 4.4rem);
+        }
       }
     </style>
   </head>
@@ -824,12 +880,14 @@
             <div class="brand-stage">
               <div class="hero-kicker">SLC Legal, Inc.</div>
 
-              <div class="slogan-lockup" aria-label="Brand slogan">
-                <span class="slogan-line">Serious facts.</span>
-                <span class="slogan-line">Serious representation.</span>
-                <div class="slogan-divider"></div>
+              <div class="slogan-crest" aria-label="Brand slogan">
+                <div class="slogan-frame">
+                  <span class="slogan-line">Serious facts.</span>
+                  <span class="slogan-line">Serious representation.</span>
+                </div>
+                <div class="slogan-mark"></div>
                 <div class="slogan-sub">
-                  Litigation-forward representation for people facing workplace harm, personal injury, and the kind of disruption that often spreads across income, health, emotional stability, and everyday life.
+                  A litigation-forward brand for people facing workplace harm, personal injury, and the kind of disruption that can spread across income, health, emotional stability, and everyday life.
                 </div>
               </div>
 
@@ -860,28 +918,30 @@
           </div>
 
           <div class="panel intro-card">
-            <div class="hero-badge-band">
-              <div>
-                <!-- begin super lawyers badge -->
-                <div data-slbadge="v2-slbadge-gray" data-text1="Selected in 2026" style="width:180px;height:150px;border-radius:12px;font-family:arial, sans-serif;color:gray;text-align:center">
-                  <a class="slbadge_profileurl" title="View the profile of Southern California Employment &amp;amp; Labor Attorney Zachary Stoltz" href="https://profiles.superlawyers.com/california/los-angeles/lawyer/zachary-stoltz/77cb55f1-0e50-4daa-af20-105c766a56ff.html?npcmp=slb:badge:sl_badge:77cb55f1-0e50-4daa-af20-105c766a56ff:year&utm_source=77cb55f1-0e50-4daa-af20-105c766a56ff&utm_campaign=v2-slbadge-gray&utm_content=profile">Zachary Stoltz</a>
-                  <div style="margin-top:6px">Rated by Super Lawyers<br/><br/><br/>loading ...</div>
+            <div class="proof-crown">
+              <div class="proof-crown-top">
+                <div class="badge-stack" aria-label="Super Lawyers recognition">
+                  <img class="badge-graphic" src="download.png" alt="Super Lawyers Rising Stars badge for Zachary Stoltz" />
+                  <img class="badge-graphic" src="Grey.png" alt="Super Lawyers Selected in 2026 badge for Zachary Stoltz" />
                 </div>
-                <!-- end super lawyers badge -->
+                <div>
+                  <h2>Recognition that is visible on purpose.</h2>
+                </div>
               </div>
-              <div class="hero-badge-copy">
-                <strong>Recognized by Super Lawyers</strong>
-                <span>Placed prominently because external recognition should be visible immediately, not buried lower on the page.</span>
+              <div class="proof-crown-copy">
+                These badges belong high on the page because third-party recognition should reinforce trust immediately, not appear as an afterthought.
               </div>
             </div>
 
-            <h2>Zac Stoltz</h2>
-            <p>
-              Zac Stoltz serves clients across California and Hawai'i in matters involving retaliation, discrimination, harassment, wrongful termination, wage and hour disputes, leave and accommodation, disability-related issues, pregnancy-related issues, PAGA claims, and select personal injury cases.
-            </p>
-            <p>
-              He has litigated in courts up and down the California coast and brings a disciplined, detail-driven approach to cases where the damage is not merely legal on paper, but personal, financial, professional, medical, and emotional in real life.
-            </p>
+            <div class="bio-block">
+              <h3>Zac Stoltz</h3>
+              <p>
+                Zac Stoltz serves clients across California and Hawai'i in matters involving retaliation, discrimination, harassment, wrongful termination, wage and hour disputes, leave and accommodation, disability-related issues, pregnancy-related issues, PAGA claims, and select personal injury cases.
+              </p>
+              <p>
+                He has litigated in courts up and down the California coast and brings a disciplined, detail-driven approach to cases where the damage is not merely legal on paper, but personal, financial, professional, medical, and emotional in real life.
+              </p>
+            </div>
 
             <div class="proof-strip">
               <div class="proof-box">
@@ -922,6 +982,7 @@
               <summary>Recognition</summary>
               <div class="detail-body">
                 <ul>
+                  <li>Super Lawyers Rising Stars</li>
                   <li>Selected by Super Lawyers in 2026</li>
                   <li>Hollywood Foreign Press Fellow</li>
                 </ul>
@@ -991,12 +1052,12 @@
           </div>
 
           <div class="accent-card">
-            <h3>A brand built for gravity, not noise.</h3>
+            <h3>A more memorable brand starts with authority.</h3>
             <p>
-              SLC Legal, Inc. should feel measured, sharp, and credible. The right audience is not looking for slogans without substance. They are looking for a lawyer who understands what happened, sees the pattern early, and knows which details will matter later.
+              The right audience is not looking for noise. They are looking for calm pressure, visible credibility, and a lawyer whose presence suggests control before the case even begins.
             </p>
             <p>
-              That is why the site leads with seriousness, structure, and controlled confidence instead of generic law-firm language.
+              That is why this site should feel refined, sharp, and deliberate. The brand does not need to shout. It needs to look like it can carry weight.
             </p>
             <div class="actions">
               <a class="btn btn-secondary" href="employment-intake.html">Employment Intake</a>
@@ -1011,7 +1072,7 @@
           <p class="eyebrow">Statewide positioning</p>
           <h2 class="title">Built to reach clients throughout California and Hawai'i.</h2>
           <p class="copy">
-            This site should not read like a neighborhood brochure. It should read like a serious, modern litigation brand that can speak to someone in Los Angeles, San Diego, Orange County, the Bay Area, Sacramento, the Central Coast, or Hawai'i with equal credibility.
+            This site should not read like a neighborhood brochure. It should read like a modern litigation brand that can speak to someone in Los Angeles, San Diego, Orange County, the Bay Area, Sacramento, the Central Coast, or Hawai'i with equal credibility.
           </p>
 
           <div class="coverage-grid">
@@ -1075,7 +1136,5 @@
     </footer>
 
     <a class="btn btn-primary btn-small mobile-cta" href="employment-intake.html">Start Employment Intake</a>
-
-    <script async type="text/javascript" src="https://www.superlawyers.com/static/sl-badge/v2/load.min.js"></script>
   </body>
 </html>
