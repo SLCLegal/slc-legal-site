@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>California Employment Lawyer | Retaliation, Discrimination, Wage &amp; Hour | SLC Legal</title>
+    <title>SLC Legal, Inc. | California Employment Lawyer | Serving California and Hawai'i</title>
     <meta
       name="description"
-      content="SLC Legal represents employees in retaliation, discrimination, harassment, wrongful termination, wage and hour, leave, accommodation, disability, pregnancy, and PAGA matters, and also handles personal injury cases."
+      content="SLC Legal, Inc. represents employees across California and Hawai'i in retaliation, discrimination, harassment, wrongful termination, wage and hour, leave, accommodation, disability, pregnancy, and PAGA matters, and also handles select personal injury cases."
     />
     <link rel="canonical" href="https://www.stoltzlawcorp.com/" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
@@ -31,19 +31,20 @@
       http-equiv="Permissions-Policy"
       content="camera=(), microphone=(), geolocation=(), interest-cohort=()"
     />
+
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="California Employment Lawyer | SLC Legal" />
+    <meta property="og:title" content="SLC Legal, Inc. | California Employment Lawyer" />
     <meta
       property="og:description"
-      content="Retaliation, discrimination, harassment, wage and hour, leave, accommodation, and personal injury intake."
+      content="Serving clients across California and Hawai'i in retaliation, discrimination, wrongful termination, wage and hour, leave, accommodation, PAGA, and select personal injury matters."
     />
     <meta property="og:url" content="https://www.stoltzlawcorp.com/" />
-    <meta property="og:site_name" content="SLC Legal" />
+    <meta property="og:site_name" content="SLC Legal, Inc." />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="California Employment Lawyer | SLC Legal" />
+    <meta name="twitter:title" content="SLC Legal, Inc. | California Employment Lawyer" />
     <meta
       name="twitter:description"
-      content="Retaliation, discrimination, harassment, wage and hour, leave, accommodation, and personal injury intake."
+      content="Serving clients across California and Hawai'i in retaliation, discrimination, wrongful termination, wage and hour, leave, accommodation, PAGA, and select personal injury matters."
     />
     <meta name="theme-color" content="#10283d" />
 
@@ -51,14 +52,32 @@
       {
         "@context": "https://schema.org",
         "@type": "LegalService",
-        "name": "SLC Legal",
-        "legalName": "Stoltz Law Corporation",
+        "name": "SLC Legal, Inc.",
+        "legalName": "SLC Legal, Inc.",
         "url": "https://www.stoltzlawcorp.com/",
-        "areaServed": ["California", "Hawaii"],
+        "areaServed": [
+          { "@type": "State", "name": "California" },
+          { "@type": "State", "name": "Hawaii" }
+        ],
         "founder": {
           "@type": "Person",
-          "name": "Zachary Stoltz"
-        }
+          "name": "Zac Stoltz"
+        },
+        "attorney": {
+          "@type": "Person",
+          "name": "Zac Stoltz"
+        },
+        "serviceType": [
+          "Employment Law",
+          "Wrongful Termination",
+          "Retaliation",
+          "Discrimination",
+          "Harassment",
+          "Wage and Hour",
+          "Leave and Accommodation",
+          "PAGA",
+          "Personal Injury"
+        ]
       }
     </script>
 
@@ -80,7 +99,7 @@
         --r-xl: 30px;
         --r-lg: 22px;
         --r-md: 16px;
-        --maxw: 1120px;
+        --maxw: 1160px;
       }
 
       * { box-sizing: border-box; }
@@ -91,7 +110,7 @@
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         color: var(--text);
         background: var(--bg);
-        line-height: 1.5;
+        line-height: 1.55;
         letter-spacing: -0.01em;
       }
 
@@ -106,13 +125,13 @@
         position: sticky;
         top: 0;
         z-index: 50;
-        background: rgba(247, 243, 237, 0.92);
+        background: rgba(247, 243, 237, 0.94);
         backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--line);
       }
 
       .topbar-inner {
-        min-height: 74px;
+        min-height: 78px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -126,22 +145,22 @@
       }
 
       .brand-mark {
-        width: 42px;
-        height: 42px;
+        width: 44px;
+        height: 44px;
         flex: 0 0 auto;
       }
 
       .brand-title {
         margin: 0;
-        font-size: 1.04rem;
-        font-weight: 700;
+        font-size: 1.05rem;
+        font-weight: 800;
         color: var(--navy);
       }
 
       .brand-sub {
         margin-top: 2px;
-        font-size: 0.72rem;
-        letter-spacing: 0.16em;
+        font-size: 0.73rem;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--muted);
       }
@@ -169,11 +188,15 @@
         border: 1px solid transparent;
         cursor: pointer;
         font: inherit;
-        font-weight: 600;
-        transition: transform 0.18s ease, box-shadow 0.18s ease;
+        font-weight: 700;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
       }
 
       .btn:hover { transform: translateY(-1px); }
+      .btn:focus-visible {
+        outline: 3px solid rgba(132, 215, 217, 0.38);
+        outline-offset: 2px;
+      }
 
       .btn-primary {
         background: var(--navy);
@@ -182,7 +205,7 @@
       }
 
       .btn-secondary {
-        background: rgba(255, 255, 255, 0.94);
+        background: rgba(255, 255, 255, 0.96);
         color: var(--navy);
         border-color: var(--line);
       }
@@ -208,8 +231,24 @@
         position: absolute;
         inset: 0;
         background:
-          radial-gradient(circle at 18% 18%, rgba(132, 215, 217, 0.22), transparent 30%),
-          radial-gradient(circle at 84% 12%, rgba(184, 155, 122, 0.14), transparent 24%);
+          radial-gradient(circle at 14% 16%, rgba(132, 215, 217, 0.20), transparent 30%),
+          radial-gradient(circle at 82% 10%, rgba(184, 155, 122, 0.12), transparent 24%),
+          linear-gradient(180deg, rgba(255,255,255,0.30), rgba(255,255,255,0));
+        pointer-events: none;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        top: 14%;
+        right: -120px;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        border: 1px solid rgba(16, 40, 61, 0.08);
+        box-shadow:
+          0 0 0 40px rgba(16, 40, 61, 0.03),
+          0 0 0 80px rgba(16, 40, 61, 0.02);
         pointer-events: none;
       }
 
@@ -219,7 +258,7 @@
         grid-template-columns: 1.08fr 0.92fr;
         gap: 28px;
         align-items: start;
-        padding: 58px 0 46px;
+        padding: 60px 0 48px;
       }
 
       .chip {
@@ -232,7 +271,7 @@
         background: rgba(255, 255, 255, 0.92);
         color: var(--teal);
         font-size: 0.76rem;
-        font-weight: 700;
+        font-weight: 800;
         letter-spacing: 0.14em;
         text-transform: uppercase;
       }
@@ -240,16 +279,16 @@
       .hero h1 {
         margin: 16px 0 0;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: clamp(3rem, 6vw, 5.15rem);
+        font-size: clamp(3rem, 6vw, 5.35rem);
         line-height: 0.9;
         letter-spacing: -0.065em;
         color: var(--navy);
-        max-width: 8.7ch;
+        max-width: 9.2ch;
       }
 
       .hero-copy {
         margin-top: 18px;
-        max-width: 610px;
+        max-width: 650px;
         font-size: 1.08rem;
         color: var(--muted);
       }
@@ -259,6 +298,12 @@
         gap: 12px;
         flex-wrap: wrap;
         margin-top: 24px;
+      }
+
+      .microcopy {
+        margin-top: 14px;
+        font-size: 0.94rem;
+        color: var(--muted);
       }
 
       .trust-row {
@@ -271,7 +316,7 @@
       .trust-item {
         padding: 14px 15px;
         border-radius: var(--r-md);
-        background: rgba(255, 255, 255, 0.94);
+        background: rgba(255, 255, 255, 0.95);
         border: 1px solid var(--line);
         box-shadow: var(--soft);
       }
@@ -290,7 +335,7 @@
       }
 
       .panel {
-        background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.92));
+        background: linear-gradient(180deg, rgba(255,255,255,.99), rgba(255,255,255,.93));
         border: 1px solid var(--line);
         border-radius: var(--r-xl);
         box-shadow: var(--shadow);
@@ -301,8 +346,8 @@
       .intro-card h2 {
         margin: 0;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: 1.95rem;
-        line-height: 1.03;
+        font-size: 2.05rem;
+        line-height: 1.02;
         letter-spacing: -0.04em;
         color: var(--navy);
       }
@@ -310,6 +355,52 @@
       .intro-card p {
         margin: 14px 0 0;
         color: var(--muted);
+      }
+
+      .proof-strip {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .proof-box {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--paper-2);
+        padding: 14px;
+      }
+
+      .proof-box strong {
+        display: block;
+        color: var(--navy);
+        font-size: 0.96rem;
+      }
+
+      .proof-box span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .logo-slot {
+        margin-top: 16px;
+        padding: 14px 16px;
+        border: 1px dashed rgba(16, 40, 61, 0.22);
+        border-radius: 16px;
+        background: #fff;
+      }
+
+      .logo-slot img {
+        max-width: 180px;
+        height: auto;
+        display: block;
+      }
+
+      .logo-slot .placeholder {
+        color: var(--muted);
+        font-size: 0.9rem;
       }
 
       details {
@@ -342,13 +433,13 @@
 
       .detail-body li { margin: 8px 0; }
 
-      .section { padding: 68px 0; }
+      .section { padding: 70px 0; }
 
       .eyebrow {
         margin: 0 0 10px;
         color: var(--teal);
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 800;
         letter-spacing: 0.18em;
         text-transform: uppercase;
       }
@@ -364,7 +455,7 @@
 
       .copy {
         margin-top: 14px;
-        max-width: 700px;
+        max-width: 760px;
         color: var(--muted);
       }
 
@@ -412,7 +503,7 @@
       .card h3 {
         margin: 0;
         font-family: "Iowan Old Style", Georgia, serif;
-        font-size: 1.72rem;
+        font-size: 1.78rem;
         line-height: 1.02;
         color: var(--navy);
       }
@@ -429,6 +520,29 @@
       }
 
       .card li { margin: 8px 0; }
+
+      .review-card {
+        margin-top: 22px;
+        padding: 20px;
+        border-radius: 20px;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, #ffffff, #fbfaf7);
+      }
+
+      .review-card blockquote {
+        margin: 0;
+        color: var(--navy);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .review-card cite {
+        display: block;
+        margin-top: 12px;
+        color: var(--muted);
+        font-style: normal;
+        font-size: 0.92rem;
+      }
 
       .injury-card {
         padding: 28px;
@@ -458,6 +572,33 @@
         flex-wrap: wrap;
       }
 
+      .coverage-grid {
+        margin-top: 22px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .coverage-item {
+        padding: 18px;
+        border-radius: var(--r-lg);
+        border: 1px solid var(--line);
+        background: var(--paper);
+        box-shadow: var(--soft);
+      }
+
+      .coverage-item strong {
+        display: block;
+        color: var(--navy);
+      }
+
+      .coverage-item span {
+        display: block;
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
       .cta {
         padding: 34px;
         border-radius: var(--r-xl);
@@ -477,7 +618,7 @@
       .cta p {
         margin: 12px 0 0;
         color: var(--muted);
-        max-width: 700px;
+        max-width: 760px;
       }
 
       .cta-actions {
@@ -485,6 +626,12 @@
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
+      }
+
+      .contact-note {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 0.94rem;
       }
 
       .footer {
@@ -497,7 +644,7 @@
         justify-content: space-between;
         align-items: center;
         gap: 20px;
-        padding: 28px 0 40px;
+        padding: 30px 0 40px;
       }
 
       .footer-meta {
@@ -516,7 +663,8 @@
       @media (max-width: 980px) {
         .hero-grid,
         .split,
-        .issue-grid {
+        .issue-grid,
+        .coverage-grid {
           grid-template-columns: 1fr 1fr;
         }
       }
@@ -527,6 +675,8 @@
         .trust-row,
         .issue-grid,
         .split,
+        .coverage-grid,
+        .proof-strip,
         .footer-inner {
           display: grid;
           grid-template-columns: 1fr;
@@ -553,7 +703,7 @@
         .btn { width: 100%; }
 
         .hero-grid { padding: 36px 0 44px; }
-        .section { padding: 54px 0; }
+        .section { padding: 56px 0; }
 
         .intro-card,
         .card,
@@ -579,12 +729,12 @@
             <path d="M42 86 C33 80, 28 72, 28 60 C28 49, 33 41, 41 35" fill="none" stroke="#10283D" stroke-width="5" stroke-linecap="round" />
           </svg>
           <div>
-            <p class="brand-title">SLC Legal</p>
-            <div class="brand-sub">Stoltz Law Corporation</div>
+            <p class="brand-title">SLC Legal, Inc.</p>
+            <div class="brand-sub">Zac Stoltz • Serving California and Hawai'i</div>
           </div>
         </div>
         <div class="top-actions">
-          <div class="top-note">Licensed in the State of California and the State of Hawai'i</div>
+          <div class="top-note">Employment law and select personal injury matters</div>
           <a class="btn btn-primary btn-small" href="employment-intake.html">Start Employment Intake</a>
           <a class="btn btn-accent btn-small" href="personal-injury-intake.html">Start Personal Injury Intake</a>
         </div>
@@ -595,11 +745,15 @@
       <section class="hero">
         <div class="container hero-grid">
           <div>
-            <div class="chip">Employment law and personal injury</div>
-            <h1>When work turns against you, the facts matter.</h1>
+            <div class="chip">Serving California and Hawai'i</div>
+            <h1>Serious facts. Serious representation.</h1>
             <p class="hero-copy">
-              Retaliation, discrimination, harassment, wrongful termination, unpaid wages, leave, accommodation, disability, pregnancy, and personal injury matters all start the same way: what happened, when did it happen, and what changed after that?
+              SLC Legal, Inc. represents employees across California and Hawai'i in retaliation, discrimination, harassment, wrongful termination, wage and hour, leave, accommodation, disability, pregnancy, and PAGA matters, and also handles select personal injury cases.
             </p>
+            <p class="microcopy">
+              If your workplace turned against you after you reported a problem, requested leave, needed accommodation, raised pay issues, or asserted your rights, start here. If you were injured because someone else was careless, start here too.
+            </p>
+
             <div class="hero-actions">
               <a class="btn btn-primary" href="employment-intake.html">Start Employment Intake</a>
               <a class="btn btn-accent" href="personal-injury-intake.html">Start Personal Injury Intake</a>
@@ -607,28 +761,45 @@
 
             <div class="trust-row">
               <div class="trust-item">
-                <strong>Clear intake</strong>
-                <span>Start with the issue that best fits what happened.</span>
+                <strong>Statewide service</strong>
+                <span>Serving clients across California and Hawai'i, not limited to a single city or county.</span>
               </div>
               <div class="trust-item">
-                <strong>Careful review</strong>
-                <span>Facts, records, timing, and witness details matter.</span>
+                <strong>Litigation-focused</strong>
+                <span>Experience in state and federal matters, arbitration, FEHA, wage and hour, and PAGA litigation.</span>
               </div>
               <div class="trust-item">
-                <strong>Serious representation</strong>
-                <span>State and federal litigation, arbitration, FEHA, wage and hour, and PAGA matters.</span>
+                <strong>Built around facts</strong>
+                <span>Timing, records, witnesses, complaints, treatment, and what changed next often decide the case.</span>
               </div>
             </div>
           </div>
 
           <div class="panel intro-card">
-            <h2>Zachary Stoltz</h2>
+            <h2>Zac Stoltz</h2>
             <p>
-              Zachary Stoltz represents employees because he understands how quickly the balance of power changes when a paycheck, leave request, medical issue, or workplace complaint is used against the person who raised it.
+              Zac Stoltz represents employees and injured clients in matters where the details matter early and often. His approach is direct, disciplined, and built around facts that can be documented, preserved, and used.
             </p>
             <p>
-              His work focuses on retaliation, discrimination, harassment, wrongful termination, wage and hour disputes, leave and accommodation cases, PAGA matters, arbitration proceedings, and employment contract disputes. He also handles personal injury matters, including auto accidents and premises-liability claims.
+              He serves clients across California and Hawai'i and has litigated in courts up and down the California coast. His practice focuses primarily on plaintiff-side employment law, including retaliation, discrimination, harassment, wrongful termination, leave and accommodation, wage and hour, and PAGA matters, as well as select personal injury cases.
             </p>
+
+            <div class="proof-strip">
+              <div class="proof-box">
+                <strong>Primary focus</strong>
+                <span>Plaintiff-side employment litigation across California and Hawai'i.</span>
+              </div>
+              <div class="proof-box">
+                <strong>Also handles</strong>
+                <span>Select personal injury matters including auto and premises liability cases.</span>
+              </div>
+            </div>
+
+            <div class="logo-slot" aria-label="Awards and recognition">
+              <!-- Replace the src below after you upload the Super Lawyers logo -->
+              <!-- Example: <img src="assets/superlawyers-rising-stars.png" alt="Super Lawyers Rising Stars" /> -->
+              <div class="placeholder">Super Lawyers logo placeholder. Upload your logo asset and replace this block with the image tag above.</div>
+            </div>
 
             <details>
               <summary>Admissions</summary>
@@ -655,7 +826,7 @@
             </details>
 
             <details>
-              <summary>Awards</summary>
+              <summary>Recognition</summary>
               <div class="detail-body">
                 <ul>
                   <li>Recognized as a Rising Star by Super Lawyers</li>
@@ -669,36 +840,36 @@
 
       <section class="section" id="learn-more">
         <div class="container">
-          <p class="eyebrow">Common issues</p>
+          <p class="eyebrow">Common matters</p>
           <h2 class="title">Tell us which problem sounds most like yours.</h2>
           <p class="copy">
-            If more than one applies, that is common. Start with the issue that feels most important.
+            Most people who contact a lawyer are not trying to classify their case perfectly. They are trying to figure out whether what happened to them is serious, unlawful, and worth pursuing. Start with the issue that feels closest.
           </p>
 
           <div class="issue-grid">
             <div class="issue">
               <strong>Retaliation and wrongful termination</strong>
-              <span>You complained, requested leave, asked for accommodation, reported a problem, or raised pay issues, and the employer turned against you.</span>
+              <span>You complained, requested leave, asked for accommodation, reported unlawful conduct, raised pay issues, or protected yourself at work, and the employer turned against you.</span>
             </div>
             <div class="issue">
               <strong>Discrimination and harassment</strong>
-              <span>Pregnancy, disability, medical condition, race, national origin, religion, sex, gender identity or expression, sexual orientation, or age changed how you were treated.</span>
+              <span>Pregnancy, disability, medical condition, race, national origin, religion, sex, gender identity or expression, sexual orientation, or age affected how you were treated.</span>
             </div>
             <div class="issue">
               <strong>Wage and hour</strong>
-              <span>Unpaid overtime, salary misclassification, missed breaks, late final pay, wage statement violations, or company-wide pay practices affecting multiple workers.</span>
+              <span>Unpaid overtime, salary misclassification, missed breaks, late final pay, inaccurate wage statements, or broader pay practices affecting groups of workers.</span>
             </div>
             <div class="issue">
               <strong>Leave and accommodation</strong>
-              <span>You requested leave, provided a doctor’s note, asked for work restrictions, or needed schedule changes, and the employer ignored, delayed, denied, or punished you.</span>
+              <span>You requested medical leave, work restrictions, schedule changes, or accommodation, and the employer ignored, delayed, denied, or punished you.</span>
             </div>
             <div class="issue">
               <strong>Whistleblower and Labor Code retaliation</strong>
-              <span>You reported unlawful conduct, safety issues, fraud, patient-care concerns, or wage violations and were disciplined, pushed out, or terminated.</span>
+              <span>You reported safety concerns, unlawful conduct, fraud, patient-care issues, or wage violations and were disciplined, pushed out, or terminated.</span>
             </div>
             <div class="issue">
               <strong>Personal injury</strong>
-              <span>Auto accidents, slip and fall incidents, and other injury matters where liability, treatment, and damages need to be taken seriously from the start.</span>
+              <span>Auto collisions, premises liability incidents, and other injury cases where liability, treatment, documentation, and preservation need to be handled correctly from the beginning.</span>
             </div>
           </div>
         </div>
@@ -708,24 +879,35 @@
         <div class="container split">
           <div class="card">
             <h3>Employment matters</h3>
-            <p>Start here if the problem happened at work.</p>
+            <p>
+              This is the core of the practice. If the problem happened at work, involved your employer, affected your pay, leave, medical restrictions, complaints, or job status, start here.
+            </p>
             <ul>
               <li>Retaliation</li>
               <li>Discrimination and harassment</li>
-              <li>Wage and hour / salary misclassification / PAGA</li>
-              <li>Leave and accommodation</li>
               <li>Wrongful termination</li>
+              <li>Leave and accommodation</li>
+              <li>Wage and hour / PAGA / misclassification</li>
             </ul>
             <div class="cta-actions">
               <a class="btn btn-primary" href="employment-intake.html">Start Employment Intake</a>
             </div>
+
+            <div class="review-card">
+              <blockquote>
+                “Placeholder review text goes here. Use a real client review that highlights responsiveness, clarity, and seriousness.”
+              </blockquote>
+              <cite>Review placeholder • Replace with approved testimonial text</cite>
+            </div>
           </div>
 
           <div class="injury-card">
-            <h3>Personal injury matters</h3>
-            <p>Start here if you were hurt because someone else was careless.</p>
+            <h3>Select personal injury matters</h3>
             <p>
-              Auto accidents, slip and fall incidents, and other injury cases often turn on the details people do not realize matter until later: timing, photos, treatment, witness information, and what can still be preserved.
+              Personal injury cases often turn on the details people do not realize matter until later: photos, treatment, timing, witnesses, insurance information, and what evidence can still be preserved.
+            </p>
+            <p>
+              Start here for auto accidents, premises liability, and other injury matters where the harm is real and the documentation needs to be handled seriously from the outset.
             </p>
             <div class="actions">
               <a class="btn btn-secondary" href="personal-injury-intake.html">Start Personal Injury Intake</a>
@@ -735,15 +917,45 @@
       </section>
 
       <section class="section">
+        <div class="container">
+          <p class="eyebrow">Why this reaches the right audience</p>
+          <h2 class="title">Built for clients across California and Hawai'i.</h2>
+          <p class="copy">
+            The audience for this site is not looking for legal theory. They want to know whether you handle cases like theirs, whether you take them seriously, and whether they can reach you no matter where they are. This section should make that clear.
+          </p>
+
+          <div class="coverage-grid">
+            <div class="coverage-item">
+              <strong>Not confined to one city</strong>
+              <span>Statewide positioning makes the site relevant to clients throughout California and Hawai'i.</span>
+            </div>
+            <div class="coverage-item">
+              <strong>Grounded in litigation</strong>
+              <span>Experience across courts up and down the California coast signals practical reach and credibility.</span>
+            </div>
+            <div class="coverage-item">
+              <strong>Clear next step</strong>
+              <span>The homepage gives visitors an immediate path to act without forcing them to overthink their case type.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
         <div class="container cta">
           <p class="eyebrow">Start here</p>
-          <h3>Tell us your story, from start to finish.</h3>
+          <h3>Tell us what happened.</h3>
           <p>
-            You do not need to write it perfectly. Start with what happened, who was involved, what you reported or requested, and what changed after that.
+            You do not need to write it perfectly. Start with what happened, who was involved, what you reported or requested, what changed afterward, and what records or evidence you still have.
           </p>
           <div class="cta-actions">
             <a class="btn btn-primary" href="employment-intake.html">Start Employment Intake</a>
             <a class="btn btn-accent" href="personal-injury-intake.html">Start Personal Injury Intake</a>
+          </div>
+          <div class="contact-note">
+            Optional contact placeholder: add phone and email here once you are ready, for example:
+            <br />
+            [PHONE NUMBER] • [INTAKE EMAIL]
           </div>
         </div>
       </section>
@@ -761,13 +973,13 @@
             <path d="M42 86 C33 80, 28 72, 28 60 C28 49, 33 41, 41 35" fill="none" stroke="#10283D" stroke-width="5" stroke-linecap="round" />
           </svg>
           <div>
-            <p class="brand-title">SLC Legal</p>
-            <div class="brand-sub">Stoltz Law Corporation</div>
+            <p class="brand-title">SLC Legal, Inc.</p>
+            <div class="brand-sub">Serving California and Hawai'i</div>
           </div>
         </div>
         <div class="footer-meta">
-          <div>Licensed in the State of California and the State of Hawai'i</div>
-          <div style="margin-top:10px; max-width:640px; font-size:12px; line-height:1.5; color:#5b6874;">
+          <div>Zac Stoltz • Plaintiff-side employment law and select personal injury matters</div>
+          <div style="margin-top:10px; max-width:700px; font-size:12px; line-height:1.5; color:#5b6874;">
             Attorney advertising. This website is for general information only and does not create an attorney-client relationship. Prior results do not guarantee a similar outcome.
           </div>
         </div>
