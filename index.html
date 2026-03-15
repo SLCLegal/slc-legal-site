@@ -16,11 +16,12 @@
       http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
-        img-src 'self' data:;
+        img-src 'self' data: https://www.superlawyers.com https://profiles.superlawyers.com;
         style-src 'self' 'unsafe-inline';
-        script-src 'self' 'unsafe-inline';
+        script-src 'self' 'unsafe-inline' https://www.superlawyers.com;
         font-src 'self' data:;
-        connect-src 'self';
+        connect-src 'self' https://www.superlawyers.com https://profiles.superlawyers.com;
+        frame-src https://www.superlawyers.com https://profiles.superlawyers.com;
         frame-ancestors 'none';
         base-uri 'self';
         form-action 'self' https://formsubmit.co;
@@ -193,6 +194,7 @@
       }
 
       .btn:hover { transform: translateY(-1px); }
+
       .btn:focus-visible {
         outline: 3px solid rgba(132, 215, 217, 0.38);
         outline-offset: 2px;
@@ -293,17 +295,18 @@
         color: var(--muted);
       }
 
+      .microcopy {
+        margin-top: 14px;
+        font-size: 0.96rem;
+        color: var(--muted);
+        max-width: 650px;
+      }
+
       .hero-actions {
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
         margin-top: 24px;
-      }
-
-      .microcopy {
-        margin-top: 14px;
-        font-size: 0.94rem;
-        color: var(--muted);
       }
 
       .trust-row {
@@ -384,23 +387,19 @@
         font-size: 0.88rem;
       }
 
-      .logo-slot {
-        margin-top: 16px;
-        padding: 14px 16px;
-        border: 1px dashed rgba(16, 40, 61, 0.22);
-        border-radius: 16px;
+      .badge-wrap {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: flex-start;
+      }
+
+      .badge-card {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
         background: #fff;
-      }
-
-      .logo-slot img {
-        max-width: 180px;
-        height: auto;
-        display: block;
-      }
-
-      .logo-slot .placeholder {
-        color: var(--muted);
-        font-size: 0.9rem;
       }
 
       details {
@@ -795,10 +794,26 @@
               </div>
             </div>
 
-            <div class="logo-slot" aria-label="Awards and recognition">
-              <!-- Replace the src below after you upload the Super Lawyers logo -->
-              <!-- Example: <img src="assets/superlawyers-rising-stars.png" alt="Super Lawyers Rising Stars" /> -->
-              <div class="placeholder">Super Lawyers logo placeholder. Upload your logo asset and replace this block with the image tag above.</div>
+            <div class="badge-wrap" aria-label="Awards and recognition">
+              <div class="badge-card">
+                <!-- begin super lawyers badge -->
+                <div data-slbadge="v2-rsbadge-blue" style="width:180px;height:150px;border-radius:12px;font-family:arial, sans-serif;color:gray;text-align:center">
+                  <script async type="text/javascript" src="https://www.superlawyers.com/static/sl-badge/v2/load.min.js"></script>
+                  <a class="slbadge_profileurl" title="View the profile of Southern California Employment &amp;amp; Labor Attorney Zachary Stoltz" href="https://profiles.superlawyers.com/california/los-angeles/lawyer/zachary-stoltz/77cb55f1-0e50-4daa-af20-105c766a56ff.html?npcmp=rsb:badge:sl_badge:77cb55f1-0e50-4daa-af20-105c766a56ff:main&utm_source=77cb55f1-0e50-4daa-af20-105c766a56ff&utm_campaign=v2-rsbadge-blue&utm_content=profile">Zachary Stoltz</a>
+                  <div style="margin-top:6px">Rated by Super Lawyers<br /><br /><br />loading ...</div>
+                </div>
+                <!-- end super lawyers badge -->
+              </div>
+
+              <div class="badge-card">
+                <!-- begin super lawyers badge -->
+                <div data-slbadge="v2-slbadge-gray" data-text1="Selected in 2026" style="width:180px;height:150px;border-radius:12px;font-family:arial, sans-serif;color:gray;text-align:center">
+                  <script async type="text/javascript" src="https://www.superlawyers.com/static/sl-badge/v2/load.min.js"></script>
+                  <a class="slbadge_profileurl" title="View the profile of Southern California Employment &amp;amp; Labor Attorney Zachary Stoltz" href="https://profiles.superlawyers.com/california/los-angeles/lawyer/zachary-stoltz/77cb55f1-0e50-4daa-af20-105c766a56ff.html?npcmp=slb:badge:sl_badge:77cb55f1-0e50-4daa-af20-105c766a56ff:year&utm_source=77cb55f1-0e50-4daa-af20-105c766a56ff&utm_campaign=v2-slbadge-gray&utm_content=profile">Zachary Stoltz</a>
+                  <div style="margin-top:6px">Rated by Super Lawyers<br /><br /><br />loading ...</div>
+                </div>
+                <!-- end super lawyers badge -->
+              </div>
             </div>
 
             <details>
@@ -829,7 +844,8 @@
               <summary>Recognition</summary>
               <div class="detail-body">
                 <ul>
-                  <li>Recognized as a Rising Star by Super Lawyers</li>
+                  <li>Selected to Super Lawyers Rising Stars</li>
+                  <li>Selected by Super Lawyers in 2026</li>
                   <li>Hollywood Foreign Press Fellow</li>
                 </ul>
               </div>
@@ -843,7 +859,7 @@
           <p class="eyebrow">Common matters</p>
           <h2 class="title">Tell us which problem sounds most like yours.</h2>
           <p class="copy">
-            Most people who contact a lawyer are not trying to classify their case perfectly. They are trying to figure out whether what happened to them is serious, unlawful, and worth pursuing. Start with the issue that feels closest.
+            Most people contacting a lawyer are not trying to classify their case perfectly. They are trying to figure out whether what happened to them is serious, unlawful, and worth pursuing. Start with the issue that feels closest.
           </p>
 
           <div class="issue-grid">
@@ -869,7 +885,7 @@
             </div>
             <div class="issue">
               <strong>Personal injury</strong>
-              <span>Auto collisions, premises liability incidents, and other injury cases where liability, treatment, documentation, and preservation need to be handled correctly from the beginning.</span>
+              <span>Auto collisions, premises liability incidents, and other injury cases where liability, treatment, documentation, and preservation need to be handled seriously from the beginning.</span>
             </div>
           </div>
         </div>
@@ -921,7 +937,7 @@
           <p class="eyebrow">Why this reaches the right audience</p>
           <h2 class="title">Built for clients across California and Hawai'i.</h2>
           <p class="copy">
-            The audience for this site is not looking for legal theory. They want to know whether you handle cases like theirs, whether you take them seriously, and whether they can reach you no matter where they are. This section should make that clear.
+            The audience for this site is not looking for legal theory. They want to know whether you handle cases like theirs, whether you take them seriously, and whether they can reach you no matter where they are. This section makes that clear.
           </p>
 
           <div class="coverage-grid">
@@ -953,9 +969,7 @@
             <a class="btn btn-accent" href="personal-injury-intake.html">Start Personal Injury Intake</a>
           </div>
           <div class="contact-note">
-            Optional contact placeholder: add phone and email here once you are ready, for example:
-            <br />
-            [PHONE NUMBER] • [INTAKE EMAIL]
+            Add your direct phone number and intake email here when ready.
           </div>
         </div>
       </section>
