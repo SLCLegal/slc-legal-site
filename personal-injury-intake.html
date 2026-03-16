@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personal Injury Intake | SLC Legal, Inc.</title>
-  <meta name="description" content="Personal injury intake for SLC Legal, Inc. Facts, timing, treatment, coverage, and liability details captured early and clearly." />
+  <meta
+    name="description"
+    content="Personal injury intake for SLC Legal, Inc. Facts, timing, treatment, coverage, and liability details captured early and clearly."
+  />
   <style>
     :root {
       --bg: #ffffff;
@@ -317,8 +320,7 @@
     input[type="email"],
     input[type="tel"],
     input[type="date"],
-    textarea,
-    select {
+    textarea {
       width: 100%;
       border: 1px solid #cbd5e1;
       background: #fff;
@@ -334,7 +336,7 @@
       min-height: 130px;
       resize: vertical;
     }
-    input:focus, textarea:focus, select:focus {
+    input:focus, textarea:focus {
       border-color: var(--brand);
       box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.08);
     }
@@ -707,7 +709,7 @@
 
         <section class="step hidden" data-step="2">
           <div class="section-head">
-            <h2>Case type</h2>
+            <h2>Case Type</h2>
             <p>Select the case type that fits best.</p>
             <div class="section-aside">Choose the closest option if you are not sure. The intake will open the questions that matter most for that type of case.</div>
           </div>
@@ -854,6 +856,7 @@
 
           <div class="panel hidden" id="autoLiabilityPanel">
             <h3>Auto liability and fault</h3>
+
             <div class="two-col" style="margin-top:16px;">
               <div class="tile-group">
                 <div class="group-label">What do you think caused the collision?</div>
@@ -891,6 +894,7 @@
 
           <div class="panel hidden" id="premisesLiabilityPanel">
             <h3>Premises liability and notice</h3>
+
             <div class="two-col" style="margin-top:16px;">
               <div class="tile-group">
                 <div class="group-label">Was the condition reported to anyone?</div>
@@ -1162,6 +1166,7 @@
           <div class="status error hidden" id="errorMessage">There was a problem sending the intake. Please try again.</div>
         </section>
 
+        <!-- BUTTON CONTROLS -->
         <div class="nav-row">
           <div class="nav-text">State, case type, and contact information are required. Most other questions can be answered later or with a best estimate.</div>
           <div class="btns">
@@ -1411,6 +1416,15 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
+      nextBtn.addEventListener('click', function () {
+        if (!validateStep(currentStep)) return;
+        if (currentStep < totalSteps - 1) showStep(currentStep + 1);
+      });
+
+      backBtn.addEventListener('click', function () {
+        if (currentStep > 0) showStep(currentStep - 1);
+      });
+
       form.addEventListener('input', function () {
         updateConditionalSections();
         updateButtons();
@@ -1419,15 +1433,6 @@
       form.addEventListener('change', function () {
         updateConditionalSections();
         updateButtons();
-      });
-
-      nextBtn.addEventListener('click', function () {
-        if (!validateStep(currentStep)) return;
-        if (currentStep < totalSteps - 1) showStep(currentStep + 1);
-      });
-
-      backBtn.addEventListener('click', function () {
-        if (currentStep > 0) showStep(currentStep - 1);
       });
 
       form.addEventListener('submit', function (e) {
