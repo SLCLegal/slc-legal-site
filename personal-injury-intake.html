@@ -1166,7 +1166,6 @@
           <div class="status error hidden" id="errorMessage">There was a problem sending the intake. Please try again.</div>
         </section>
 
-        <!-- BUTTON CONTROLS -->
         <div class="nav-row">
           <div class="nav-text">State, case type, and contact information are required. Most other questions can be answered later or with a best estimate.</div>
           <div class="btns">
@@ -1181,12 +1180,10 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    (function () {
+    document.addEventListener('DOMContentLoaded', function () {
       const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
       const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
       const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-
-      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
       const form = document.getElementById('piIntakeForm');
       const steps = Array.from(document.querySelectorAll('.step'));
@@ -1208,11 +1205,16 @@
       const premisesCoveragePanel = document.getElementById('premisesCoveragePanel');
       const hawaiiPipPanel = document.getElementById('hawaiiPipPanel');
 
+      if (!form || !steps.length || !backBtn || !nextBtn || !submitBtn) {
+        console.error('PI intake script: required elements are missing.');
+        return;
+      }
+
       let currentStep = 0;
       const totalSteps = steps.length;
 
       function getCheckedValues(name) {
-        return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map((el) => el.value);
+        return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(el => el.value);
       }
 
       function readRadio(name) {
@@ -1236,9 +1238,69 @@
 
       function renderLines(lines) {
         return lines
-          .filter((line) => line && line.value)
-          .map((line) => '<li><strong>' + escapeHtml(line.label) + ':</strong> ' + escapeHtml(line.value) + '</li>')
+          .filter(line => line && line.value)
+          .map(line => '<li><strong>' + escapeHtml(line.label) + ':</strong> ' + escapeHtml(line.value) + '</li>')
           .join('');
+      }
+
+      function updateConditionalSections() {
+        const state = readRadio('matterState');
+        const caseType = readRadio('caseType');
+        const isAuto = caseType === 'Auto collision' || caseType === 'Pedestrian or bicycle collision';
+        const isPremises = caseType === 'Slip and fall or dangerous condition';
+
+        if (otherCaseWrap) otherCaseWrap.classList.toggle('hidden', caseType !== 'Other personal injury');
+        if (autoIncidentPanel) autoIncidentPanel.classList.toggle('hidden', !isAuto);
+        if (premisesIncidentPanel) premisesIncidentPanel.classList.toggle('hidden', !isPremises);
+        if (autoLiabilityPanel) autoLiabilityPanel.classList.toggle('hidden', !isAuto);
+        if (premisesLiabilityPanel) premisesLiabilityPanel.classList.toggle('hidden', !isPremises);
+        if (autoCoveragePanel) autoCoveragePanel.classList.toggle('hidden', !isAuto);
+        if (premisesCoveragePanel) premisesCoveragePanel.classList.toggle('hidden', isAuto);
+        if (hawaiiPipPanel) hawaiiPipPanel.classList.toggle('hidden', !(isAuto && state === "Hawai'i"));
+      }
+
+      function validateStep(index) {
+        if (index === 1) {
+          return !!(readRadio('matterState') && readField('fullName') && readField('phone') && readField('email'));
+        }
+        if (index === 2) {
+          return !!readRadio('caseType');
+        }
+        if (index === 9) {
+          const ack = document.getElementById('agreeNoRepresentation');
+          return !!(ack && ack.checked);
+        }
+        return true;
+      }
+
+      function updateButtons() {
+        backBtn.classList.toggle('hidden', currentStep === 0);
+        nextBtn.classList.toggle('hidden', currentStep === totalSteps - 1);
+        submitBtn.classList.toggle('hidden', currentStep !== totalSteps - 1);
+        nextBtn.disabled = !validateStep(currentStep);
+      }
+
+      function updateProgress() {
+        const pct = Math.round(((currentStep + 1) / totalSteps) * 100);
+        if (progressBar) progressBar.style.width = pct + '%';
+        if (progressPercent) progressPercent.textContent = pct + '%';
+
+        stepItems.forEach((item, index) => {
+          item.classList.toggle('active', index === currentStep);
+          item.classList.toggle('done', index < currentStep);
+          const badge = item.querySelector('.step-badge');
+          if (badge) badge.textContent = index < currentStep ? '✓' : String(index + 1);
+        });
+      }
+
+      function showStep(index) {
+        currentStep = index;
+        steps.forEach((stepEl, i) => {
+          stepEl.classList.toggle('hidden', i !== currentStep);
+        });
+        updateProgress();
+        updateButtons();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
       function buildEmailBody() {
@@ -1346,13 +1408,13 @@
               { label: 'Client summary', value: readField('shortNarrative') },
               { label: 'Missed work or wage loss', value: readField('missedWork') },
               { label: 'Urgent notes', value: readField('urgentNotes') },
-              { label: 'No attorney-client relationship acknowledgment', value: document.getElementById('agreeNoRepresentation').checked ? 'Yes' : 'No' }
+              { label: 'No attorney-client relationship acknowledgment', value: document.getElementById('agreeNoRepresentation')?.checked ? 'Yes' : 'No' }
             ]
           }
         ];
 
         return sections
-          .map((section) => {
+          .map(section => {
             const items = renderLines(section.lines);
             return items ? '<h3>' + escapeHtml(section.title) + '</h3><ul>' + items + '</ul>' : '';
           })
@@ -1360,69 +1422,13 @@
           .join('');
       }
 
-      function updateConditionalSections() {
-        const state = readRadio('matterState');
-        const caseType = readRadio('caseType');
-        const isAuto = caseType === 'Auto collision' || caseType === 'Pedestrian or bicycle collision';
-        const isPremises = caseType === 'Slip and fall or dangerous condition';
-
-        otherCaseWrap.classList.toggle('hidden', caseType !== 'Other personal injury');
-        autoIncidentPanel.classList.toggle('hidden', !isAuto);
-        premisesIncidentPanel.classList.toggle('hidden', !isPremises);
-        autoLiabilityPanel.classList.toggle('hidden', !isAuto);
-        premisesLiabilityPanel.classList.toggle('hidden', !isPremises);
-        autoCoveragePanel.classList.toggle('hidden', !isAuto);
-        premisesCoveragePanel.classList.toggle('hidden', isAuto);
-        hawaiiPipPanel.classList.toggle('hidden', !(isAuto && state === "Hawai'i"));
-      }
-
-      function validateStep(index) {
-        if (index === 1) {
-          return !!(readRadio('matterState') && readField('fullName') && readField('phone') && readField('email'));
-        }
-        if (index === 2) {
-          return !!readRadio('caseType');
-        }
-        if (index === 9) {
-          return document.getElementById('agreeNoRepresentation').checked;
-        }
-        return true;
-      }
-
-      function updateButtons() {
-        backBtn.classList.toggle('hidden', currentStep === 0);
-        nextBtn.classList.toggle('hidden', currentStep === totalSteps - 1);
-        submitBtn.classList.toggle('hidden', currentStep !== totalSteps - 1);
-        nextBtn.disabled = !validateStep(currentStep);
-      }
-
-      function updateProgress() {
-        const pct = Math.round(((currentStep + 1) / totalSteps) * 100);
-        progressBar.style.width = pct + '%';
-        progressPercent.textContent = pct + '%';
-
-        stepItems.forEach((item, index) => {
-          item.classList.toggle('active', index === currentStep);
-          item.classList.toggle('done', index < currentStep);
-          item.querySelector('.step-badge').textContent = index < currentStep ? '✓' : String(index + 1);
-        });
-      }
-
-      function showStep(index) {
-        currentStep = index;
-        steps.forEach((stepEl, i) => stepEl.classList.toggle('hidden', i !== currentStep));
-        updateProgress();
-        updateButtons();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      backBtn.addEventListener('click', function () {
+        if (currentStep > 0) showStep(currentStep - 1);
+      });
 
       nextBtn.addEventListener('click', function () {
         if (!validateStep(currentStep)) return;
         if (currentStep < totalSteps - 1) showStep(currentStep + 1);
-      });
-
-      backBtn.addEventListener('click', function () {
-        if (currentStep > 0) showStep(currentStep - 1);
       });
 
       form.addEventListener('input', function () {
@@ -1439,8 +1445,8 @@
         e.preventDefault();
         if (!validateStep(9)) return;
 
-        successMessage.classList.add('hidden');
-        errorMessage.classList.add('hidden');
+        successMessage?.classList.add('hidden');
+        errorMessage?.classList.add('hidden');
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending...';
 
@@ -1452,15 +1458,30 @@
           message_html: buildEmailBody()
         };
 
+        if (!window.emailjs) {
+          console.error('EmailJS failed to load.');
+          errorMessage?.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Intake';
+          return;
+        }
+
+        try {
+          emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+        } catch (err) {
+          console.error('EmailJS init error:', err);
+        }
+
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
           .then(function () {
-            successMessage.classList.remove('hidden');
+            successMessage?.classList.remove('hidden');
             form.reset();
             updateConditionalSections();
             showStep(0);
           })
-          .catch(function () {
-            errorMessage.classList.remove('hidden');
+          .catch(function (err) {
+            console.error('EmailJS send error:', err);
+            errorMessage?.classList.remove('hidden');
           })
           .finally(function () {
             submitBtn.disabled = false;
@@ -1470,7 +1491,7 @@
 
       updateConditionalSections();
       showStep(0);
-    })();
+    });
   </script>
 </body>
 </html>
