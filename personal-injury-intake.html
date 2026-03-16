@@ -25,6 +25,7 @@
       --radius: 20px;
       --max: 1180px;
     }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -34,92 +35,525 @@
       color: var(--text);
       line-height: 1.5;
     }
+
     a { color: inherit; }
     .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
-    .site-header { background: #fff; border-bottom: 1px solid var(--line); }
-    .site-header .wrap { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:16px 0; }
-    .brand-link { display:inline-flex; align-items:center; gap:14px; text-decoration:none; min-width:0; }
-    .brand-mark { display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; min-width:0; }
-    .brand-mark svg { height:46px; width:auto; display:block; }
-    .brand-text { display:flex; flex-direction:column; gap:4px; min-width:0; }
-    .brand-kicker { font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted-2); font-weight:700; }
-    .brand-name { font-size:1.1rem; font-weight:700; color:var(--text); line-height:1.1; white-space:nowrap; }
-    .main-nav { display:flex; gap:20px; flex-wrap:wrap; align-items:center; font-size:14px; color:var(--muted); }
-    .main-nav a { text-decoration:none; }
-    .hero { background:linear-gradient(180deg,var(--brand) 0%,var(--brand-2) 100%); color:#fff; border-bottom:1px solid rgba(255,255,255,.08); }
-    .hero-inner { padding:64px 0 56px; max-width:860px; }
-    .eyebrow { margin:0 0 14px; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.72); font-weight:700; }
-    .hero h1 { margin:0; font-size:clamp(2.3rem,4vw,4.5rem); line-height:1.03; letter-spacing:-.04em; font-weight:700; }
-    .hero .tagline { margin:12px 0 0; font-size:1.2rem; color:#fff; font-weight:600; }
-    .hero .lead { margin:18px 0 0; max-width:760px; font-size:1.06rem; line-height:1.8; color:rgba(255,255,255,.82); }
-    .hero-note { margin-top:24px; display:inline-block; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius); padding:14px 18px; font-size:.96rem; color:rgba(255,255,255,.92); line-height:1.7; }
-    main { padding:34px 0 56px; }
-    .grid { display:grid; grid-template-columns:300px minmax(0,1fr); gap:28px; align-items:start; }
-    .sidebar { position:sticky; top:24px; background:var(--panel); border:1px solid var(--line); border-radius:28px; padding:22px; }
-    .progress-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted-2); font-weight:700; }
-    .bar { margin-top:10px; height:10px; border-radius:999px; background:#e5e7eb; overflow:hidden; }
-    .bar > span { display:block; height:100%; width:11.1%; background:var(--brand); transition:width .25s ease; }
-    .step-list { margin:22px 0 0; padding:0; list-style:none; display:grid; gap:10px; }
-    .step-item { display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:var(--radius); color:var(--muted); font-size:.95rem; }
-    .step-item.active { background:var(--white); color:var(--text); box-shadow:var(--shadow); }
-    .step-item.done { color:var(--text); }
-    .step-badge { width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; border:1px solid #cbd5e1; color:var(--muted); background:transparent; flex:0 0 auto; }
-    .step-item.active .step-badge, .step-item.done .step-badge { background:var(--brand); border-color:var(--brand); color:#fff; }
-    .sidebar-note { margin-top:22px; padding:14px 16px; border:1px solid var(--line); background:#fff; border-radius:var(--radius); color:var(--muted); font-size:.92rem; line-height:1.7; }
-    .card { background:#fff; border:1px solid var(--line); border-radius:28px; box-shadow:var(--shadow); padding:28px; }
-    .section-head { border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:24px; }
-    .section-head h2 { margin:0; font-size:clamp(1.7rem,2.5vw,2.4rem); line-height:1.1; letter-spacing:-.03em; }
-    .section-head p { margin:12px 0 0; color:var(--muted); max-width:760px; font-size:1rem; line-height:1.8; }
-    .section-aside { margin-top:14px; padding:14px 16px; border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); color:var(--muted); font-size:.95rem; line-height:1.75; }
-    .two-col,.three-col { display:grid; gap:18px; }
-    .two-col { grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .three-col { grid-template-columns:repeat(3,minmax(0,1fr)); }
-    .field { display:grid; gap:8px; }
-    .label-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-    label.label,.group-label { font-size:.97rem; font-weight:600; color:var(--text); }
-    .req { color:var(--danger); font-size:11px; text-transform:uppercase; letter-spacing:.1em; font-weight:700; }
-    .hint { font-size:12px; color:var(--muted-2); line-height:1.7; margin-top:-2px; }
-    input[type="text"],input[type="email"],input[type="tel"],input[type="date"],textarea,select { width:100%; border:1px solid #cbd5e1; background:#fff; color:var(--text); border-radius:var(--radius); padding:14px 16px; font:inherit; font-size:16px; outline:none; transition:border-color .18s ease, box-shadow .18s ease; }
-    textarea { min-height:130px; resize:vertical; }
-    input:focus,textarea:focus,select:focus { border-color:var(--brand); box-shadow:0 0 0 4px rgba(15,23,42,.08); }
-    .tile-group { display:grid; gap:12px; }
-    .tile-grid.two { grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .tile-grid.three { grid-template-columns:repeat(3,minmax(0,1fr)); }
-    .tile-grid { display:grid; gap:12px; }
-    .tile { position:relative; }
-    .tile input { position:absolute; opacity:0; inset:0; pointer-events:none; }
-    .tile-box { display:flex; align-items:flex-start; gap:12px; border:1px solid #cbd5e1; background:#fff; border-radius:var(--radius); padding:15px 16px; min-height:62px; cursor:pointer; transition:border-color .18s ease, background .18s ease; color:var(--text); font-size:.97rem; line-height:1.55; }
-    .tile-box:hover { border-color:#64748b; }
-    .tile input:checked + .tile-box { border-color:var(--brand); background:var(--panel-2); }
-    .radio-dot,.check-dot { width:20px; height:20px; border-radius:999px; border:1.5px solid #94a3b8; flex:0 0 auto; margin-top:1px; display:inline-flex; align-items:center; justify-content:center; background:#fff; }
-    .radio-dot::after { content:""; width:10px; height:10px; border-radius:999px; background:transparent; }
-    .tile input:checked + .tile-box .radio-dot::after { background:var(--brand); }
-    .check-dot { border-radius:6px; font-size:12px; color:transparent; font-weight:700; }
-    .tile input:checked + .tile-box .check-dot { background:var(--brand); border-color:var(--brand); color:#fff; }
-    .panel { border:1px solid var(--line); background:var(--panel); border-radius:26px; padding:22px; margin-top:24px; }
-    .panel h3 { margin:0; font-size:1.2rem; letter-spacing:-.02em; }
-    .panel p { margin:10px 0 0; color:var(--muted); line-height:1.75; font-size:.98rem; }
-    .intro-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
-    .intro-box { border:1px solid var(--line); background:var(--panel); border-radius:24px; padding:20px; }
-    .intro-box h3 { margin:0; font-size:.84rem; text-transform:uppercase; letter-spacing:.16em; color:var(--muted); }
-    .intro-box ul { margin:12px 0 0; padding-left:18px; color:var(--muted); line-height:1.8; }
-    .nav-row { margin-top:28px; padding-top:22px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
-    .nav-text { color:var(--muted-2); font-size:.84rem; line-height:1.7; max-width:560px; }
-    .btns { display:flex; gap:12px; flex-wrap:wrap; }
-    .btn { appearance:none; border:0; border-radius:18px; padding:14px 20px; font:inherit; font-weight:600; cursor:pointer; transition:background .18s ease, color .18s ease, border-color .18s ease; }
-    .btn-primary { background:var(--brand); color:#fff; }
-    .btn-primary:hover { background:#1f2937; }
-    .btn-primary[disabled] { background:#cbd5e1; color:#64748b; cursor:not-allowed; }
-    .btn-secondary { background:#fff; color:var(--muted); border:1px solid #cbd5e1; }
-    .btn-secondary:hover { border-color:#64748b; color:var(--text); }
-    .hidden { display:none !important; }
-    .status { margin-top:18px; padding:14px 16px; border-radius:18px; font-size:.94rem; line-height:1.7; }
-    .status.success { border:1px solid var(--success-border); background:var(--success-bg); color:var(--success-text); }
-    .status.error { border:1px solid #fecaca; background:#fef2f2; color:#991b1b; }
-    .check-row { display:flex; align-items:flex-start; gap:12px; border:1px solid var(--line); background:var(--panel); border-radius:var(--radius); padding:16px; font-size:.95rem; color:var(--muted); line-height:1.7; }
-    .check-row input { margin-top:4px; width:16px; height:16px; accent-color:var(--brand); flex:0 0 auto; }
-    @media (max-width:980px){ .grid { grid-template-columns:1fr; } .sidebar { position:static; } .site-header .wrap { flex-direction:column; align-items:flex-start; } }
-    @media (max-width:760px){ .wrap { width:min(var(--max), calc(100% - 22px)); } .hero-inner { padding:52px 0 44px; } .card { padding:20px; } .two-col,.three-col,.intro-grid,.tile-grid.two,.tile-grid.three { grid-template-columns:1fr; } .btns { width:100%; } .btns .btn { width:100%; } .brand-name { white-space:normal; } }
+
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+    }
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      min-width: 0;
+    }
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      min-width: 0;
+    }
+    .brand-mark svg {
+      height: 46px;
+      width: auto;
+      display: block;
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .brand-kicker {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      font-weight: 700;
+    }
+    .brand-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+    .main-nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .main-nav a {
+      text-decoration: none;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, var(--brand) 0%, var(--brand-2) 100%);
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-inner {
+      padding: 64px 0 56px;
+      max-width: 860px;
+    }
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+      font-weight: 700;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.3rem, 4vw, 4.5rem);
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+    .hero .tagline {
+      margin: 12px 0 0;
+      font-size: 1.2rem;
+      color: #fff;
+      font-weight: 600;
+    }
+    .hero .lead {
+      margin: 18px 0 0;
+      max-width: 760px;
+      font-size: 1.06rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.82);
+    }
+    .hero-note {
+      margin-top: 24px;
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-size: 0.96rem;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.7;
+    }
+
+    main { padding: 34px 0 56px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 24px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 22px;
+    }
+    .progress-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      font-weight: 700;
+    }
+    .bar {
+      margin-top: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+    .bar > span {
+      display: block;
+      height: 100%;
+      width: 10%;
+      background: var(--brand);
+      transition: width 0.25s ease;
+    }
+    .step-list {
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .step-item.active {
+      background: var(--white);
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+    .step-item.done { color: var(--text); }
+    .step-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid #cbd5e1;
+      color: var(--muted);
+      background: transparent;
+      flex: 0 0 auto;
+    }
+    .step-item.active .step-badge,
+    .step-item.done .step-badge {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: var(--white);
+    }
+    .sidebar-note {
+      margin-top: 22px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+    .section-head {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 2.5vw, 2.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+    .section-head p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .section-aside {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .two-col, .three-col {
+      display: grid;
+      gap: 18px;
+    }
+    .two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three-col { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .field { display: grid; gap: 8px; }
+    .label-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    label.label, .group-label {
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .req {
+      color: var(--danger);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+    .hint {
+      font-size: 12px;
+      color: var(--muted-2);
+      line-height: 1.7;
+      margin-top: -2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      color: var(--text);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      font: inherit;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.08);
+    }
+
+    .tile-group { display: grid; gap: 12px; }
+    .tile-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tile-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tile-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .tile { position: relative; }
+    .tile input {
+      position: absolute;
+      opacity: 0;
+      inset: 0;
+      pointer-events: none;
+    }
+    .tile-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 15px 16px;
+      min-height: 62px;
+      cursor: pointer;
+      transition: border-color 0.18s ease, background 0.18s ease;
+      color: var(--text);
+      font-size: 0.97rem;
+      line-height: 1.55;
+    }
+    .tile-box:hover { border-color: #64748b; }
+    .tile input:checked + .tile-box {
+      border-color: var(--brand);
+      background: var(--panel-2);
+    }
+    .radio-dot,
+    .check-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 1.5px solid #94a3b8;
+      flex: 0 0 auto;
+      margin-top: 1px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+    }
+    .radio-dot::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: transparent;
+    }
+    .tile input:checked + .tile-box .radio-dot::after { background: var(--brand); }
+    .check-dot {
+      border-radius: 6px;
+      font-size: 12px;
+      color: transparent;
+      font-weight: 700;
+    }
+    .tile input:checked + .tile-box .check-dot {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: var(--white);
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 26px;
+      padding: 22px;
+      margin-top: 24px;
+    }
+    .panel h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+    .panel p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.98rem;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .intro-box {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 24px;
+      padding: 20px;
+    }
+    .intro-box h3 {
+      margin: 0;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+    .intro-box ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .nav-row {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .nav-text {
+      color: var(--muted-2);
+      font-size: 0.84rem;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 18px;
+      padding: 14px 20px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+    .btn-primary {
+      background: var(--brand);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: #1f2937; }
+    .btn-primary[disabled] {
+      background: #cbd5e1;
+      color: #64748b;
+      cursor: not-allowed;
+    }
+    .btn-secondary {
+      background: #fff;
+      color: var(--muted);
+      border: 1px solid #cbd5e1;
+    }
+    .btn-secondary:hover {
+      border-color: #64748b;
+      color: var(--text);
+    }
+
+    .hidden { display: none !important; }
+    .status {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
+    .status.success {
+      border: 1px solid var(--success-border);
+      background: var(--success-bg);
+      color: var(--success-text);
+    }
+    .status.error {
+      border: 1px solid #fecaca;
+      background: #fef2f2;
+      color: #991b1b;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 16px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .check-row input {
+      margin-top: 4px;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--brand);
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .site-header .wrap { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 760px) {
+      .wrap { width: min(var(--max), calc(100% - 22px)); }
+      .hero-inner { padding: 52px 0 44px; }
+      .card { padding: 20px; }
+      .two-col, .three-col, .intro-grid, .tile-grid.two, .tile-grid.three { grid-template-columns: 1fr; }
+      .btns { width: 100%; }
+      .btns .btn { width: 100%; }
+      .brand-name { white-space: normal; }
+    }
   </style>
 </head>
 <body>
@@ -154,18 +588,22 @@
     <div class="wrap hero-inner">
       <p class="eyebrow">California and Hawai'i</p>
       <h1>Serious Facts. Serious Representation.</h1>
-      <div class="tagline">Start Personal Injury Intake.</div>
-      <p class="lead">Personal injury cases turn on the incident, the mechanism of injury, treatment, records, coverage, and liability facts. This intake keeps the process direct so the important information is captured early and in the right order.</p>
-      <div class="hero-note">Simple selections first. Best estimates are okay. Use this intake for auto collisions, pedestrian or bicycle collisions, and slip-and-fall or dangerous-condition cases.</div>
+      <div class="tagline">Take it Back. Start Personal Injury Intake.</div>
+      <p class="lead">When negligence causes harm, the case turns on the incident, the mechanism of injury, treatment, records, coverage, and liability facts. This intake keeps the process direct so the important information is captured early and in the right order.</p>
+      <div class="hero-note">Take it Back. Simple selections first. Best estimates are okay. Use this intake for auto collisions, pedestrian or bicycle collisions, and slip-and-fall or dangerous-condition cases.</div>
     </div>
   </section>
 
   <main>
     <div class="wrap grid">
       <aside class="sidebar">
-        <div class="progress-meta"><span>Personal Injury Intake</span><span id="progressPercent">11%</span></div>
+        <div class="progress-meta">
+          <span>Personal Injury Intake</span>
+          <span id="progressPercent">10%</span>
+        </div>
         <div class="bar"><span id="progressBar"></span></div>
-        <ul class="step-list">
+
+        <ul class="step-list" id="stepList">
           <li class="step-item active"><span class="step-badge">1</span><span>Start</span></li>
           <li class="step-item"><span class="step-badge">2</span><span>Contact</span></li>
           <li class="step-item"><span class="step-badge">3</span><span>Case Type</span></li>
@@ -177,22 +615,24 @@
           <li class="step-item"><span class="step-badge">9</span><span>Records</span></li>
           <li class="step-item"><span class="step-badge">10</span><span>Review</span></li>
         </ul>
-        <div class="sidebar-note">State, case type, and contact information are required so the matter can be sorted correctly. Most other answers can be completed with a best estimate or left for later.</div>
+
+        <div class="sidebar-note">State, case type, and contact information are required so the matter can be sorted correctly. Most other answers can be completed with a best estimate or added later.</div>
       </aside>
 
       <form class="card" id="piIntakeForm">
         <section class="step" data-step="0">
           <div class="section-head">
-            <h2>Start with the incident.</h2>
-            <p>Use this intake to capture the facts that matter most at the outset: where the incident happened, what type of case it is, what mechanism caused injury, what treatment followed, and what insurance or coverage may apply.</p>
-            <div class="section-aside">California and Hawai'i cases share many core questions, but Hawai'i auto cases need early no-fault and PIP screening. That is built into this intake.</div>
+            <h2>Take it Back. Start with the incident.</h2>
+            <p>Personal injury cases turn on what happened, where it happened, how injury occurred, what treatment followed, and what records or coverage exist. This intake is designed to get those facts in one place quickly.</p>
+            <div class="section-aside">You do not need perfect dates, full medical terminology, or every insurance detail before you submit. Move through the selections, answer what you can, and keep going.</div>
           </div>
+
           <div class="intro-grid">
             <div class="intro-box">
-              <h3>What matters early</h3>
+              <h3>What matters from the start</h3>
               <ul>
-                <li>Clear incident facts and chronology</li>
-                <li>Clear liability and notice details</li>
+                <li>Clear incident facts and timing</li>
+                <li>Clear liability and notice facts</li>
                 <li>Clear injury, treatment, and coverage information</li>
               </ul>
             </div>
@@ -200,8 +640,8 @@
               <h3>What clients do not need</h3>
               <ul>
                 <li>Perfect medical terminology</li>
-                <li>Exact insurance information before starting</li>
-                <li>Every record before submitting the intake</li>
+                <li>Every bill, record, or photo before starting</li>
+                <li>Exact insurance information before beginning</li>
               </ul>
             </div>
           </div>
@@ -211,21 +651,37 @@
           <div class="section-head">
             <h2>Contact information</h2>
             <p>This is the only section that must be completed in full so we can follow up.</p>
-            <div class="section-aside">Start by selecting the state that applies to the incident so the intake can branch correctly from the outset.</div>
+            <div class="section-aside">Use the phone number and email address you check most often. Start by selecting whether the matter is in California or Hawai'i so the intake can be sorted correctly from the outset.</div>
           </div>
+
           <div class="tile-group" style="margin-bottom:18px;">
             <div class="label-row"><div class="group-label">State</div><span class="req">Required</span></div>
             <div class="tile-grid two">
               <label class="tile"><input type="radio" name="matterState" value="California" /><span class="tile-box"><span class="radio-dot"></span><span>California</span></span></label>
               <label class="tile"><input type="radio" name="matterState" value="Hawai'i" /><span class="tile-box"><span class="radio-dot"></span><span>Hawai'i</span></span></label>
             </div>
+            <div class="hint">Select the state that applies to the personal injury matter.</div>
           </div>
+
           <div class="two-col">
-            <div class="field"><div class="label-row"><label class="label" for="fullName">Full name</label><span class="req">Required</span></div><input id="fullName" name="fullName" type="text" placeholder="Your full name" required /></div>
-            <div class="field"><div class="label-row"><label class="label" for="phone">Phone</label><span class="req">Required</span></div><input id="phone" name="phone" type="tel" placeholder="Best phone number" required /></div>
-            <div class="field"><div class="label-row"><label class="label" for="email">Email</label><span class="req">Required</span></div><input id="email" name="email" type="email" placeholder="you@example.com" required /></div>
-            <div class="field"><label class="label" for="cityCounty">City / county</label><input id="cityCounty" name="cityCounty" type="text" placeholder="City and county" /></div>
+            <div class="field">
+              <div class="label-row"><label class="label" for="fullName">Full name</label><span class="req">Required</span></div>
+              <input id="fullName" name="fullName" type="text" placeholder="Your full name" required />
+            </div>
+            <div class="field">
+              <div class="label-row"><label class="label" for="phone">Phone</label><span class="req">Required</span></div>
+              <input id="phone" name="phone" type="tel" placeholder="Best phone number" required />
+            </div>
+            <div class="field">
+              <div class="label-row"><label class="label" for="email">Email</label><span class="req">Required</span></div>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+            <div class="field">
+              <label class="label" for="cityCounty">City / county</label>
+              <input id="cityCounty" name="cityCounty" type="text" placeholder="City and county" />
+            </div>
           </div>
+
           <div class="two-col" style="margin-top:18px;">
             <div class="tile-group">
               <div class="group-label">Preferred contact method</div>
@@ -235,9 +691,16 @@
                 <label class="tile"><input type="radio" name="preferredContact" value="Text" /><span class="tile-box"><span class="radio-dot"></span><span>Text</span></span></label>
               </div>
             </div>
+
             <div style="display:grid; gap:18px;">
-              <div class="field"><label class="label" for="bestTimeToReach">Best time to reach you</label><input id="bestTimeToReach" name="bestTimeToReach" type="text" placeholder="Morning, afternoon, evenings, etc." /></div>
-              <div class="field"><label class="label" for="preferredLanguage">Preferred language</label><input id="preferredLanguage" name="preferredLanguage" type="text" placeholder="Optional" /></div>
+              <div class="field">
+                <label class="label" for="bestTimeToReach">Best time to reach you</label>
+                <input id="bestTimeToReach" name="bestTimeToReach" type="text" placeholder="Morning, afternoon, evenings, etc." />
+              </div>
+              <div class="field">
+                <label class="label" for="preferredLanguage">Preferred language</label>
+                <input id="preferredLanguage" name="preferredLanguage" type="text" placeholder="Optional" />
+              </div>
             </div>
           </div>
         </section>
@@ -245,9 +708,10 @@
         <section class="step hidden" data-step="2">
           <div class="section-head">
             <h2>Case type</h2>
-            <p>Select the case type that best fits the incident.</p>
-            <div class="section-aside">Use the closest fit if you are not sure. The intake will open the questions that matter most for that type of case.</div>
+            <p>Select the case type that fits best.</p>
+            <div class="section-aside">Choose the closest option if you are not sure. The intake will open the questions that matter most for that type of case.</div>
           </div>
+
           <div class="tile-group">
             <div class="label-row"><div class="group-label">Case type</div><span class="req">Required</span></div>
             <div class="tile-grid two">
@@ -257,122 +721,205 @@
               <label class="tile"><input type="radio" name="caseType" value="Other personal injury" /><span class="tile-box"><span class="radio-dot"></span><span>Other personal injury</span></span></label>
             </div>
           </div>
+
           <div class="field hidden" id="otherCaseWrap" style="margin-top:18px;">
-            <label class="label" for="otherCaseText">If other, briefly describe the case type.</label>
+            <label class="label" for="otherCaseText">If something else happened, tell us briefly what it was.</label>
             <textarea id="otherCaseText" name="otherCaseText" placeholder="A short explanation is enough."></textarea>
           </div>
         </section>
 
         <section class="step hidden" data-step="3">
           <div class="section-head">
-            <h2>Incident facts</h2>
-            <p>Identify where, when, and how the incident happened.</p>
+            <h2>Incident</h2>
+            <p>Use this section to capture where, when, and how the incident happened.</p>
             <div class="section-aside">Chronology and location matter. Best estimates are okay.</div>
           </div>
+
           <div class="two-col">
-            <div class="field"><label class="label" for="incidentDate">Incident date</label><input id="incidentDate" name="incidentDate" type="date" /></div>
-            <div class="field"><label class="label" for="incidentTime">Approximate time</label><input id="incidentTime" name="incidentTime" type="text" placeholder="Morning, afternoon, evening, or approximate time" /></div>
-            <div class="field"><label class="label" for="incidentLocation">Incident location</label><input id="incidentLocation" name="incidentLocation" type="text" placeholder="Street, business, property, parking lot, intersection, etc." /></div>
-            <div class="field"><label class="label" for="incidentIslandCounty">County / island</label><input id="incidentIslandCounty" name="incidentIslandCounty" type="text" placeholder="County in California or island/county in Hawai'i" /></div>
+            <div class="field">
+              <label class="label" for="incidentDate">Incident date</label>
+              <input id="incidentDate" name="incidentDate" type="date" />
+            </div>
+            <div class="field">
+              <label class="label" for="incidentTime">Approximate time</label>
+              <input id="incidentTime" name="incidentTime" type="text" placeholder="Morning, afternoon, evening, or approximate time" />
+            </div>
+            <div class="field">
+              <label class="label" for="incidentLocation">Incident location</label>
+              <input id="incidentLocation" name="incidentLocation" type="text" placeholder="Street, business, property, parking lot, intersection, etc." />
+            </div>
+            <div class="field">
+              <label class="label" for="incidentCountyIsland">County / island</label>
+              <input id="incidentCountyIsland" name="incidentCountyIsland" type="text" placeholder="County in California or island/county in Hawai'i" />
+            </div>
           </div>
-          <div class="field" style="margin-top:18px;"><label class="label" for="incidentSummary">In a few sentences, how did the incident happen?</label><textarea id="incidentSummary" name="incidentSummary" placeholder="State what happened first, what caused the impact or fall, and what happened immediately after."></textarea></div>
+
+          <div class="field" style="margin-top:18px;">
+            <label class="label" for="incidentSummary">In a few sentences, how did the incident happen?</label>
+            <textarea id="incidentSummary" name="incidentSummary" placeholder="State what happened first, what caused the impact or fall, and what happened immediately after."></textarea>
+          </div>
 
           <div class="panel hidden" id="autoIncidentPanel">
             <h3>Collision details</h3>
             <p>These questions help identify mechanism, fault, witnesses, and available coverage.</p>
+
             <div class="two-col" style="margin-top:16px;">
-              <div class="tile-group"><div class="group-label">Your role</div><div class="tile-grid three">
-                <label class="tile"><input type="radio" name="autoRole" value="Driver" /><span class="tile-box"><span class="radio-dot"></span><span>Driver</span></span></label>
-                <label class="tile"><input type="radio" name="autoRole" value="Passenger" /><span class="tile-box"><span class="radio-dot"></span><span>Passenger</span></span></label>
-                <label class="tile"><input type="radio" name="autoRole" value="Pedestrian" /><span class="tile-box"><span class="radio-dot"></span><span>Pedestrian</span></span></label>
-                <label class="tile"><input type="radio" name="autoRole" value="Bicyclist" /><span class="tile-box"><span class="radio-dot"></span><span>Bicyclist</span></span></label>
-                <label class="tile"><input type="radio" name="autoRole" value="Motorcyclist" /><span class="tile-box"><span class="radio-dot"></span><span>Motorcyclist</span></span></label>
-                <label class="tile"><input type="radio" name="autoRole" value="Other" /><span class="tile-box"><span class="radio-dot"></span><span>Other</span></span></label>
-              </div></div>
-              <div class="tile-group"><div class="group-label">Type of collision</div><div class="tile-grid two">
-                <label class="tile"><input type="checkbox" name="collisionType" value="Rear-end" /><span class="tile-box"><span class="check-dot">✓</span><span>Rear-end</span></span></label>
-                <label class="tile"><input type="checkbox" name="collisionType" value="Intersection" /><span class="tile-box"><span class="check-dot">✓</span><span>Intersection</span></span></label>
-                <label class="tile"><input type="checkbox" name="collisionType" value="Lane change or sideswipe" /><span class="tile-box"><span class="check-dot">✓</span><span>Lane change or sideswipe</span></span></label>
-                <label class="tile"><input type="checkbox" name="collisionType" value="Left turn" /><span class="tile-box"><span class="check-dot">✓</span><span>Left turn</span></span></label>
-                <label class="tile"><input type="checkbox" name="collisionType" value="Parked vehicle" /><span class="tile-box"><span class="check-dot">✓</span><span>Parked vehicle</span></span></label>
-                <label class="tile"><input type="checkbox" name="collisionType" value="Hit and run" /><span class="tile-box"><span class="check-dot">✓</span><span>Hit and run</span></span></label>
-              </div></div>
+              <div class="tile-group">
+                <div class="group-label">Your role</div>
+                <div class="tile-grid three">
+                  <label class="tile"><input type="radio" name="autoRole" value="Driver" /><span class="tile-box"><span class="radio-dot"></span><span>Driver</span></span></label>
+                  <label class="tile"><input type="radio" name="autoRole" value="Passenger" /><span class="tile-box"><span class="radio-dot"></span><span>Passenger</span></span></label>
+                  <label class="tile"><input type="radio" name="autoRole" value="Pedestrian" /><span class="tile-box"><span class="radio-dot"></span><span>Pedestrian</span></span></label>
+                  <label class="tile"><input type="radio" name="autoRole" value="Bicyclist" /><span class="tile-box"><span class="radio-dot"></span><span>Bicyclist</span></span></label>
+                  <label class="tile"><input type="radio" name="autoRole" value="Motorcyclist" /><span class="tile-box"><span class="radio-dot"></span><span>Motorcyclist</span></span></label>
+                  <label class="tile"><input type="radio" name="autoRole" value="Other" /><span class="tile-box"><span class="radio-dot"></span><span>Other</span></span></label>
+                </div>
+              </div>
+
+              <div class="tile-group">
+                <div class="group-label">Type of collision</div>
+                <div class="tile-grid two">
+                  <label class="tile"><input type="checkbox" name="collisionType" value="Rear-end" /><span class="tile-box"><span class="check-dot">✓</span><span>Rear-end</span></span></label>
+                  <label class="tile"><input type="checkbox" name="collisionType" value="Intersection" /><span class="tile-box"><span class="check-dot">✓</span><span>Intersection</span></span></label>
+                  <label class="tile"><input type="checkbox" name="collisionType" value="Lane change or sideswipe" /><span class="tile-box"><span class="check-dot">✓</span><span>Lane change or sideswipe</span></span></label>
+                  <label class="tile"><input type="checkbox" name="collisionType" value="Left turn" /><span class="tile-box"><span class="check-dot">✓</span><span>Left turn</span></span></label>
+                  <label class="tile"><input type="checkbox" name="collisionType" value="Parked vehicle" /><span class="tile-box"><span class="check-dot">✓</span><span>Parked vehicle</span></span></label>
+                  <label class="tile"><input type="checkbox" name="collisionType" value="Hit and run" /><span class="tile-box"><span class="check-dot">✓</span><span>Hit and run</span></span></label>
+                </div>
+              </div>
             </div>
+
             <div class="two-col" style="margin-top:18px;">
-              <div class="field"><label class="label" for="vehiclesInvolved">Vehicles involved</label><input id="vehiclesInvolved" name="vehiclesInvolved" type="text" placeholder="How many vehicles and what type" /></div>
-              <div class="field"><label class="label" for="pointOfImpact">Point of impact</label><input id="pointOfImpact" name="pointOfImpact" type="text" placeholder="Front, rear, passenger side, driver side, etc." /></div>
-              <div class="field"><label class="label" for="policeAgency">Police or responding agency</label><input id="policeAgency" name="policeAgency" type="text" placeholder="CHP, HPD, local police, sheriff, none, etc." /></div>
-              <div class="field"><label class="label" for="reportNumber">Report number</label><input id="reportNumber" name="reportNumber" type="text" placeholder="If known" /></div>
+              <div class="field">
+                <label class="label" for="vehiclesInvolved">Vehicles involved</label>
+                <input id="vehiclesInvolved" name="vehiclesInvolved" type="text" placeholder="How many vehicles and what type" />
+              </div>
+              <div class="field">
+                <label class="label" for="pointOfImpact">Point of impact</label>
+                <input id="pointOfImpact" name="pointOfImpact" type="text" placeholder="Front, rear, passenger side, driver side, etc." />
+              </div>
+              <div class="field">
+                <label class="label" for="policeAgency">Police or responding agency</label>
+                <input id="policeAgency" name="policeAgency" type="text" placeholder="CHP, HPD, local police, sheriff, none, etc." />
+              </div>
+              <div class="field">
+                <label class="label" for="reportNumber">Report number</label>
+                <input id="reportNumber" name="reportNumber" type="text" placeholder="If known" />
+              </div>
             </div>
           </div>
 
           <div class="panel hidden" id="premisesIncidentPanel">
             <h3>Dangerous condition details</h3>
             <p>These questions help identify the condition, notice, photographs, and who controlled the property.</p>
+
             <div class="two-col" style="margin-top:16px;">
-              <div class="tile-group"><div class="group-label">Type of condition</div><div class="tile-grid two">
-                <label class="tile"><input type="checkbox" name="conditionType" value="Wet or slippery floor" /><span class="tile-box"><span class="check-dot">✓</span><span>Wet or slippery floor</span></span></label>
-                <label class="tile"><input type="checkbox" name="conditionType" value="Uneven surface or broken pavement" /><span class="tile-box"><span class="check-dot">✓</span><span>Uneven surface or broken pavement</span></span></label>
-                <label class="tile"><input type="checkbox" name="conditionType" value="Poor lighting" /><span class="tile-box"><span class="check-dot">✓</span><span>Poor lighting</span></span></label>
-                <label class="tile"><input type="checkbox" name="conditionType" value="Stairs or handrail issue" /><span class="tile-box"><span class="check-dot">✓</span><span>Stairs or handrail issue</span></span></label>
-                <label class="tile"><input type="checkbox" name="conditionType" value="Object in walkway" /><span class="tile-box"><span class="check-dot">✓</span><span>Object in walkway</span></span></label>
-                <label class="tile"><input type="checkbox" name="conditionType" value="Other dangerous condition" /><span class="tile-box"><span class="check-dot">✓</span><span>Other dangerous condition</span></span></label>
-              </div></div>
-              <div class="field"><label class="label" for="propertyType">Property type</label><input id="propertyType" name="propertyType" type="text" placeholder="Store, apartment, hotel, sidewalk, parking lot, public property, etc." /></div>
+              <div class="tile-group">
+                <div class="group-label">Type of condition</div>
+                <div class="tile-grid two">
+                  <label class="tile"><input type="checkbox" name="conditionType" value="Wet or slippery floor" /><span class="tile-box"><span class="check-dot">✓</span><span>Wet or slippery floor</span></span></label>
+                  <label class="tile"><input type="checkbox" name="conditionType" value="Uneven surface or broken pavement" /><span class="tile-box"><span class="check-dot">✓</span><span>Uneven surface or broken pavement</span></span></label>
+                  <label class="tile"><input type="checkbox" name="conditionType" value="Poor lighting" /><span class="tile-box"><span class="check-dot">✓</span><span>Poor lighting</span></span></label>
+                  <label class="tile"><input type="checkbox" name="conditionType" value="Stairs or handrail issue" /><span class="tile-box"><span class="check-dot">✓</span><span>Stairs or handrail issue</span></span></label>
+                  <label class="tile"><input type="checkbox" name="conditionType" value="Object in walkway" /><span class="tile-box"><span class="check-dot">✓</span><span>Object in walkway</span></span></label>
+                  <label class="tile"><input type="checkbox" name="conditionType" value="Other dangerous condition" /><span class="tile-box"><span class="check-dot">✓</span><span>Other dangerous condition</span></span></label>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label" for="propertyType">Property type</label>
+                <input id="propertyType" name="propertyType" type="text" placeholder="Store, apartment, hotel, sidewalk, parking lot, public property, etc." />
+              </div>
             </div>
+
             <div class="two-col" style="margin-top:18px;">
-              <div class="field"><label class="label" for="propertyOwnerOccupant">Property owner or business</label><input id="propertyOwnerOccupant" name="propertyOwnerOccupant" type="text" placeholder="If known" /></div>
-              <div class="field"><label class="label" for="conditionHowLong">How long had the condition been there?</label><input id="conditionHowLong" name="conditionHowLong" type="text" placeholder="If known or best estimate" /></div>
+              <div class="field">
+                <label class="label" for="propertyOwnerOccupant">Property owner or business</label>
+                <input id="propertyOwnerOccupant" name="propertyOwnerOccupant" type="text" placeholder="If known" />
+              </div>
+              <div class="field">
+                <label class="label" for="conditionHowLong">How long had the condition been there?</label>
+                <input id="conditionHowLong" name="conditionHowLong" type="text" placeholder="If known or best estimate" />
+              </div>
             </div>
           </div>
         </section>
 
         <section class="step hidden" data-step="4">
           <div class="section-head">
-            <h2>Liability facts</h2>
-            <p>Capture the facts that point to fault, notice, and potential defenses.</p>
-            <div class="section-aside">This section is built to surface comparative-fault, notice, and property-control issues early.</div>
+            <h2>Liability</h2>
+            <p>Use this section to surface fault, notice, witnesses, and likely defenses.</p>
+            <div class="section-aside">This section is built to surface comparative-fault, notice, and control issues early.</div>
           </div>
+
           <div class="panel hidden" id="autoLiabilityPanel">
             <h3>Auto liability and fault</h3>
             <div class="two-col" style="margin-top:16px;">
-              <div class="tile-group"><div class="group-label">What do you think caused the collision?</div><div class="tile-grid two">
-                <label class="tile"><input type="checkbox" name="autoCause" value="Speeding" /><span class="tile-box"><span class="check-dot">✓</span><span>Speeding</span></span></label>
-                <label class="tile"><input type="checkbox" name="autoCause" value="Failure to yield" /><span class="tile-box"><span class="check-dot">✓</span><span>Failure to yield</span></span></label>
-                <label class="tile"><input type="checkbox" name="autoCause" value="Distracted driving" /><span class="tile-box"><span class="check-dot">✓</span><span>Distracted driving</span></span></label>
-                <label class="tile"><input type="checkbox" name="autoCause" value="Unsafe lane change" /><span class="tile-box"><span class="check-dot">✓</span><span>Unsafe lane change</span></span></label>
-                <label class="tile"><input type="checkbox" name="autoCause" value="Following too closely" /><span class="tile-box"><span class="check-dot">✓</span><span>Following too closely</span></span></label>
-                <label class="tile"><input type="checkbox" name="autoCause" value="Traffic signal or stop sign violation" /><span class="tile-box"><span class="check-dot">✓</span><span>Signal or stop sign violation</span></span></label>
-              </div></div>
-              <div class="tile-group"><div class="group-label">Did the other driver receive a citation?</div><div class="tile-grid three">
-                <label class="tile"><input type="radio" name="citationIssued" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
-                <label class="tile"><input type="radio" name="citationIssued" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
-                <label class="tile"><input type="radio" name="citationIssued" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
-              </div></div>
+              <div class="tile-group">
+                <div class="group-label">What do you think caused the collision?</div>
+                <div class="tile-grid two">
+                  <label class="tile"><input type="checkbox" name="autoCause" value="Speeding" /><span class="tile-box"><span class="check-dot">✓</span><span>Speeding</span></span></label>
+                  <label class="tile"><input type="checkbox" name="autoCause" value="Failure to yield" /><span class="tile-box"><span class="check-dot">✓</span><span>Failure to yield</span></span></label>
+                  <label class="tile"><input type="checkbox" name="autoCause" value="Distracted driving" /><span class="tile-box"><span class="check-dot">✓</span><span>Distracted driving</span></span></label>
+                  <label class="tile"><input type="checkbox" name="autoCause" value="Unsafe lane change" /><span class="tile-box"><span class="check-dot">✓</span><span>Unsafe lane change</span></span></label>
+                  <label class="tile"><input type="checkbox" name="autoCause" value="Following too closely" /><span class="tile-box"><span class="check-dot">✓</span><span>Following too closely</span></span></label>
+                  <label class="tile"><input type="checkbox" name="autoCause" value="Traffic signal or stop sign violation" /><span class="tile-box"><span class="check-dot">✓</span><span>Traffic signal or stop sign violation</span></span></label>
+                </div>
+              </div>
+
+              <div class="tile-group">
+                <div class="group-label">Did the other driver receive a citation?</div>
+                <div class="tile-grid three">
+                  <label class="tile"><input type="radio" name="citationIssued" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
+                  <label class="tile"><input type="radio" name="citationIssued" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
+                  <label class="tile"><input type="radio" name="citationIssued" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
+                </div>
+              </div>
             </div>
+
             <div class="two-col" style="margin-top:18px;">
-              <div class="field"><label class="label" for="otherDriverInfo">Other driver / owner information</label><input id="otherDriverInfo" name="otherDriverInfo" type="text" placeholder="Name, company, plate, owner, employer, or best known information" /></div>
-              <div class="field"><label class="label" for="witnessInfo">Witnesses</label><input id="witnessInfo" name="witnessInfo" type="text" placeholder="Names, phone numbers, or best known information" /></div>
+              <div class="field">
+                <label class="label" for="otherDriverInfo">Other driver / owner information</label>
+                <input id="otherDriverInfo" name="otherDriverInfo" type="text" placeholder="Name, company, plate, owner, employer, or best known information" />
+              </div>
+              <div class="field">
+                <label class="label" for="witnessInfo">Witnesses</label>
+                <input id="witnessInfo" name="witnessInfo" type="text" placeholder="Names, phone numbers, or best known information" />
+              </div>
             </div>
           </div>
 
           <div class="panel hidden" id="premisesLiabilityPanel">
             <h3>Premises liability and notice</h3>
             <div class="two-col" style="margin-top:16px;">
-              <div class="tile-group"><div class="group-label">Was the condition reported to anyone?</div><div class="tile-grid three">
-                <label class="tile"><input type="radio" name="conditionReported" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
-                <label class="tile"><input type="radio" name="conditionReported" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
-                <label class="tile"><input type="radio" name="conditionReported" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
-              </div></div>
-              <div class="tile-group"><div class="group-label">Were there warning signs or cones?</div><div class="tile-grid three">
-                <label class="tile"><input type="radio" name="warningSigns" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
-                <label class="tile"><input type="radio" name="warningSigns" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
-                <label class="tile"><input type="radio" name="warningSigns" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
-              </div></div>
+              <div class="tile-group">
+                <div class="group-label">Was the condition reported to anyone?</div>
+                <div class="tile-grid three">
+                  <label class="tile"><input type="radio" name="conditionReported" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
+                  <label class="tile"><input type="radio" name="conditionReported" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
+                  <label class="tile"><input type="radio" name="conditionReported" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
+                </div>
+              </div>
+
+              <div class="tile-group">
+                <div class="group-label">Were there warning signs or cones?</div>
+                <div class="tile-grid three">
+                  <label class="tile"><input type="radio" name="warningSigns" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
+                  <label class="tile"><input type="radio" name="warningSigns" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
+                  <label class="tile"><input type="radio" name="warningSigns" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
+                </div>
+              </div>
             </div>
+
             <div class="two-col" style="margin-top:18px;">
-              <div class="field"><label class="label" for="reportedToWhom">Who was it reported to?</label><input id="reportedToWhom" name="reportedToWhom" type="text" placeholder="Manager, employee, property owner, security, etc." /></div>
-              <div class="field"><label class="label" for="noticeFacts">Why do you think the property owner or business should have known?</label><input id="noticeFacts" name="noticeFacts" type="text" placeholder="Recurring issue, visible spill, employee nearby, prior complaints, camera coverage, etc." /></div>
+              <div class="field">
+                <label class="label" for="reportedToWhom">Who was it reported to?</label>
+                <input id="reportedToWhom" name="reportedToWhom" type="text" placeholder="Manager, employee, property owner, security, etc." />
+              </div>
+              <div class="field">
+                <label class="label" for="noticeFacts">Why do you think the property owner or business should have known?</label>
+                <input id="noticeFacts" name="noticeFacts" type="text" placeholder="Recurring issue, visible spill, employee nearby, prior complaints, camera coverage, etc." />
+              </div>
             </div>
           </div>
 
@@ -395,6 +942,7 @@
             <p>Identify body parts, immediate symptoms, and what changed after the incident.</p>
             <div class="section-aside">Use plain language. Medical terminology is not required.</div>
           </div>
+
           <div class="tile-group">
             <div class="group-label">Body areas injured</div>
             <div class="tile-grid three">
@@ -409,11 +957,22 @@
               <label class="tile"><input type="checkbox" name="bodyParts" value="Other" /><span class="tile-box"><span class="check-dot">✓</span><span>Other</span></span></label>
             </div>
           </div>
+
           <div class="two-col" style="margin-top:18px;">
-            <div class="field"><label class="label" for="immediateSymptoms">Immediate symptoms</label><input id="immediateSymptoms" name="immediateSymptoms" type="text" placeholder="Pain, headache, dizziness, swelling, bleeding, numbness, etc." /></div>
-            <div class="field"><label class="label" for="currentSymptoms">Current symptoms</label><input id="currentSymptoms" name="currentSymptoms" type="text" placeholder="What still hurts or limits you now" /></div>
+            <div class="field">
+              <label class="label" for="immediateSymptoms">Immediate symptoms</label>
+              <input id="immediateSymptoms" name="immediateSymptoms" type="text" placeholder="Pain, headache, dizziness, swelling, bleeding, numbness, etc." />
+            </div>
+            <div class="field">
+              <label class="label" for="currentSymptoms">Current symptoms</label>
+              <input id="currentSymptoms" name="currentSymptoms" type="text" placeholder="What still hurts or limits you now" />
+            </div>
           </div>
-          <div class="field" style="margin-top:18px;"><label class="label" for="activityImpact">How have the injuries affected work or daily life?</label><textarea id="activityImpact" name="activityImpact" placeholder="Missed work, lifting limits, driving limits, sleep issues, household limits, exercise limits, etc."></textarea></div>
+
+          <div class="field" style="margin-top:18px;">
+            <label class="label" for="activityImpact">How have the injuries affected work or daily life?</label>
+            <textarea id="activityImpact" name="activityImpact" placeholder="Missed work, lifting limits, driving limits, sleep issues, household limits, exercise limits, etc."></textarea>
+          </div>
         </section>
 
         <section class="step hidden" data-step="6">
@@ -422,10 +981,491 @@
             <p>Identify where you went first and what treatment has followed.</p>
             <div class="section-aside">Gaps in treatment matter, but you do not need every provider before submitting.</div>
           </div>
+
           <div class="two-col">
-            <div class="tile-group"><div class="group-label">First treatment after incident</div><div class="tile-grid three">
-              <label class="tile"><input type="radio" name="firstTreatment" value="None same day" /><span class="tile-box"><span class="radio-dot"></span><span>None same day</span></span></label>
-              <label class="tile"><input type="radio" name="firstTreatment" value="ER or urgent care" /><span class="tile-box"><span class="radio-dot"></span><span>ER or urgent care</span></span></label>
-              <label class="tile"><input type="radio" name="firstTreatment" value="Primary care" /><span class="tile-box"><span class="radio-dot"></span><span>Primary care</span></span></label>
-              <label class="tile"><input type="radio" name="firstTreatment" value="Ambulance" /><span class="tile-box"><span class="radio-dot"></span><span>Ambulance</span></span></label>
-              <label class="tile"><input type="radio" name="firstTreatment" value="Chirop
+            <div class="tile-group">
+              <div class="group-label">First treatment after incident</div>
+              <div class="tile-grid three">
+                <label class="tile"><input type="radio" name="firstTreatment" value="None same day" /><span class="tile-box"><span class="radio-dot"></span><span>None same day</span></span></label>
+                <label class="tile"><input type="radio" name="firstTreatment" value="ER or urgent care" /><span class="tile-box"><span class="radio-dot"></span><span>ER or urgent care</span></span></label>
+                <label class="tile"><input type="radio" name="firstTreatment" value="Primary care" /><span class="tile-box"><span class="radio-dot"></span><span>Primary care</span></span></label>
+                <label class="tile"><input type="radio" name="firstTreatment" value="Ambulance" /><span class="tile-box"><span class="radio-dot"></span><span>Ambulance</span></span></label>
+                <label class="tile"><input type="radio" name="firstTreatment" value="Chiropractic" /><span class="tile-box"><span class="radio-dot"></span><span>Chiropractic</span></span></label>
+                <label class="tile"><input type="radio" name="firstTreatment" value="Other" /><span class="tile-box"><span class="radio-dot"></span><span>Other</span></span></label>
+              </div>
+            </div>
+
+            <div class="tile-group">
+              <div class="group-label">Treatment received</div>
+              <div class="tile-grid two">
+                <label class="tile"><input type="checkbox" name="treatmentType" value="ER or urgent care" /><span class="tile-box"><span class="check-dot">✓</span><span>ER or urgent care</span></span></label>
+                <label class="tile"><input type="checkbox" name="treatmentType" value="Primary care" /><span class="tile-box"><span class="check-dot">✓</span><span>Primary care</span></span></label>
+                <label class="tile"><input type="checkbox" name="treatmentType" value="Physical therapy" /><span class="tile-box"><span class="check-dot">✓</span><span>Physical therapy</span></span></label>
+                <label class="tile"><input type="checkbox" name="treatmentType" value="Chiropractic" /><span class="tile-box"><span class="check-dot">✓</span><span>Chiropractic</span></span></label>
+                <label class="tile"><input type="checkbox" name="treatmentType" value="Orthopedic" /><span class="tile-box"><span class="check-dot">✓</span><span>Orthopedic</span></span></label>
+                <label class="tile"><input type="checkbox" name="treatmentType" value="Imaging" /><span class="tile-box"><span class="check-dot">✓</span><span>Imaging</span></span></label>
+                <label class="tile"><input type="checkbox" name="treatmentType" value="Surgery recommended or performed" /><span class="tile-box"><span class="check-dot">✓</span><span>Surgery recommended or performed</span></span></label>
+                <label class="tile"><input type="checkbox" name="treatmentType" value="Mental health treatment" /><span class="tile-box"><span class="check-dot">✓</span><span>Mental health treatment</span></span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-col" style="margin-top:18px;">
+            <div class="field">
+              <label class="label" for="currentTreatmentStatus">Are you still treating?</label>
+              <input id="currentTreatmentStatus" name="currentTreatmentStatus" type="text" placeholder="Yes, no, paused, discharge, referrals pending, etc." />
+            </div>
+            <div class="field">
+              <label class="label" for="treatmentGaps">Any gaps in treatment?</label>
+              <input id="treatmentGaps" name="treatmentGaps" type="text" placeholder="If yes, briefly explain" />
+            </div>
+          </div>
+        </section>
+
+        <section class="step hidden" data-step="7">
+          <div class="section-head">
+            <h2>Coverage</h2>
+            <p>Use this section to identify the insurance or claim channels that may apply.</p>
+            <div class="section-aside">Hawai'i auto cases require early PIP screening. California auto cases generally do not use mandatory no-fault PIP.</div>
+          </div>
+
+          <div class="panel hidden" id="autoCoveragePanel">
+            <h3>Auto coverage and claims</h3>
+
+            <div class="two-col" style="margin-top:16px;">
+              <div class="field">
+                <label class="label" for="yourInsurance">Your auto insurance</label>
+                <input id="yourInsurance" name="yourInsurance" type="text" placeholder="Carrier, claim number, adjuster, if known" />
+              </div>
+              <div class="field">
+                <label class="label" for="otherInsurance">Other driver or owner insurance</label>
+                <input id="otherInsurance" name="otherInsurance" type="text" placeholder="Carrier, claim number, adjuster, if known" />
+              </div>
+            </div>
+
+            <div class="tile-group" style="margin-top:18px;">
+              <div class="group-label">Available coverages you know about</div>
+              <div class="tile-grid three">
+                <label class="tile"><input type="checkbox" name="coverageKnown" value="Bodily injury liability" /><span class="tile-box"><span class="check-dot">✓</span><span>Bodily injury liability</span></span></label>
+                <label class="tile"><input type="checkbox" name="coverageKnown" value="UM or UIM" /><span class="tile-box"><span class="check-dot">✓</span><span>UM or UIM</span></span></label>
+                <label class="tile"><input type="checkbox" name="coverageKnown" value="MedPay" /><span class="tile-box"><span class="check-dot">✓</span><span>MedPay</span></span></label>
+                <label class="tile"><input type="checkbox" name="coverageKnown" value="PIP" /><span class="tile-box"><span class="check-dot">✓</span><span>PIP</span></span></label>
+                <label class="tile"><input type="checkbox" name="coverageKnown" value="Commercial policy" /><span class="tile-box"><span class="check-dot">✓</span><span>Commercial policy</span></span></label>
+                <label class="tile"><input type="checkbox" name="coverageKnown" value="Not sure" /><span class="tile-box"><span class="check-dot">✓</span><span>Not sure</span></span></label>
+              </div>
+            </div>
+
+            <div class="panel hidden" id="hawaiiPipPanel" style="margin-top:18px;">
+              <h3>Hawai'i no-fault / PIP screening</h3>
+              <p>Use this section for Hawai'i auto or pedestrian/bicycle cases.</p>
+
+              <div class="two-col" style="margin-top:16px;">
+                <div class="tile-group">
+                  <div class="group-label">Was a PIP claim opened?</div>
+                  <div class="tile-grid three">
+                    <label class="tile"><input type="radio" name="pipOpened" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
+                    <label class="tile"><input type="radio" name="pipOpened" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
+                    <label class="tile"><input type="radio" name="pipOpened" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="label" for="pipCarrier">PIP carrier / claim information</label>
+                  <input id="pipCarrier" name="pipCarrier" type="text" placeholder="Carrier, claim number, adjuster, if known" />
+                </div>
+              </div>
+
+              <div class="two-col" style="margin-top:18px;">
+                <div class="field">
+                  <label class="label" for="pipBenefitsUsed">PIP benefits used so far</label>
+                  <input id="pipBenefitsUsed" name="pipBenefitsUsed" type="text" placeholder="Approximate amount or unknown" />
+                </div>
+                <div class="field">
+                  <label class="label" for="hawaiiThresholdFacts">Any facts suggesting the case is beyond no-fault only?</label>
+                  <input id="hawaiiThresholdFacts" name="hawaiiThresholdFacts" type="text" placeholder="Hospitalization, serious/permanent injury, surgery, major medicals, death, etc." />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel hidden" id="premisesCoveragePanel">
+            <h3>Property / premises claim information</h3>
+
+            <div class="two-col" style="margin-top:16px;">
+              <div class="field">
+                <label class="label" for="incidentReportMade">Incident report made?</label>
+                <input id="incidentReportMade" name="incidentReportMade" type="text" placeholder="Yes, no, not sure, and with whom" />
+              </div>
+              <div class="field">
+                <label class="label" for="propertyInsurer">Known property insurer or claims administrator</label>
+                <input id="propertyInsurer" name="propertyInsurer" type="text" placeholder="If known" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step hidden" data-step="8">
+          <div class="section-head">
+            <h2>Records</h2>
+            <p>Let us know what you have now. You can still submit even if you do not have everything yet.</p>
+            <div class="section-aside">Choose anything you already have or believe can be obtained.</div>
+          </div>
+
+          <div class="tile-group">
+            <div class="group-label">Available records or evidence</div>
+            <div class="tile-grid three">
+              <label class="tile"><input type="checkbox" name="evidence" value="Photos of scene" /><span class="tile-box"><span class="check-dot">✓</span><span>Photos of scene</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Vehicle photos" /><span class="tile-box"><span class="check-dot">✓</span><span>Vehicle photos</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Police report" /><span class="tile-box"><span class="check-dot">✓</span><span>Police report</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Incident report" /><span class="tile-box"><span class="check-dot">✓</span><span>Incident report</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Medical records" /><span class="tile-box"><span class="check-dot">✓</span><span>Medical records</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Medical bills" /><span class="tile-box"><span class="check-dot">✓</span><span>Medical bills</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Insurance correspondence" /><span class="tile-box"><span class="check-dot">✓</span><span>Insurance correspondence</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Witness information" /><span class="tile-box"><span class="check-dot">✓</span><span>Witness information</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Surveillance or dashcam" /><span class="tile-box"><span class="check-dot">✓</span><span>Surveillance or dashcam</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Wage loss records" /><span class="tile-box"><span class="check-dot">✓</span><span>Wage loss records</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Employer disability note" /><span class="tile-box"><span class="check-dot">✓</span><span>Employer disability note</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="None yet" /><span class="tile-box"><span class="check-dot">✓</span><span>None yet</span></span></label>
+            </div>
+          </div>
+        </section>
+
+        <section class="step hidden" data-step="9">
+          <div class="section-head">
+            <h2>Review and submit</h2>
+            <p>Provide a concise summary. The submission email will be organized by section so the intake can be reviewed quickly.</p>
+            <div class="section-aside">Submitting this intake does not create an attorney-client relationship.</div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="shortNarrative">In a few sentences, what happened?</label>
+            <textarea id="shortNarrative" name="shortNarrative" placeholder="State how the incident happened, what injuries followed, and what you want us to know first."></textarea>
+          </div>
+
+          <div class="two-col" style="margin-top:18px;">
+            <div class="field">
+              <label class="label" for="missedWork">Missed work or wage loss</label>
+              <input id="missedWork" name="missedWork" type="text" placeholder="Days missed, restrictions, wage loss, or unknown" />
+            </div>
+            <div class="field">
+              <label class="label" for="urgentNotes">Anything urgent we should know?</label>
+              <input id="urgentNotes" name="urgentNotes" type="text" placeholder="Deadlines, surgery dates, insurer pressure, liens, etc." />
+            </div>
+          </div>
+
+          <label class="check-row" style="margin-top:18px;">
+            <input type="checkbox" id="agreeNoRepresentation" name="agreeNoRepresentation" />
+            <span>I understand that submitting this intake does not create an attorney-client relationship and does not mean the firm has agreed to represent me.</span>
+          </label>
+
+          <div class="status success hidden" id="successMessage">Intake sent successfully.</div>
+          <div class="status error hidden" id="errorMessage">There was a problem sending the intake. Please try again.</div>
+        </section>
+
+        <div class="nav-row">
+          <div class="nav-text">State, case type, and contact information are required. Most other questions can be answered later or with a best estimate.</div>
+          <div class="btns">
+            <button type="button" class="btn btn-secondary hidden" id="backBtn">Back</button>
+            <button type="button" class="btn btn-primary" id="nextBtn">Continue</button>
+            <button type="submit" class="btn btn-primary hidden" id="submitBtn">Submit Intake</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function () {
+      const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+      const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+      const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+      const form = document.getElementById('piIntakeForm');
+      const steps = Array.from(document.querySelectorAll('.step'));
+      const stepItems = Array.from(document.querySelectorAll('.step-item'));
+      const progressBar = document.getElementById('progressBar');
+      const progressPercent = document.getElementById('progressPercent');
+      const backBtn = document.getElementById('backBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const submitBtn = document.getElementById('submitBtn');
+      const successMessage = document.getElementById('successMessage');
+      const errorMessage = document.getElementById('errorMessage');
+
+      const otherCaseWrap = document.getElementById('otherCaseWrap');
+      const autoIncidentPanel = document.getElementById('autoIncidentPanel');
+      const premisesIncidentPanel = document.getElementById('premisesIncidentPanel');
+      const autoLiabilityPanel = document.getElementById('autoLiabilityPanel');
+      const premisesLiabilityPanel = document.getElementById('premisesLiabilityPanel');
+      const autoCoveragePanel = document.getElementById('autoCoveragePanel');
+      const premisesCoveragePanel = document.getElementById('premisesCoveragePanel');
+      const hawaiiPipPanel = document.getElementById('hawaiiPipPanel');
+
+      let currentStep = 0;
+      const totalSteps = steps.length;
+
+      function getCheckedValues(name) {
+        return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map((el) => el.value);
+      }
+
+      function readRadio(name) {
+        const checked = document.querySelector('input[name="' + name + '"]:checked');
+        return checked ? checked.value : '';
+      }
+
+      function readField(id) {
+        const el = document.getElementById(id);
+        return el ? el.value.trim() : '';
+      }
+
+      function escapeHtml(value) {
+        return String(value || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function renderLines(lines) {
+        return lines
+          .filter((line) => line && line.value)
+          .map((line) => '<li><strong>' + escapeHtml(line.label) + ':</strong> ' + escapeHtml(line.value) + '</li>')
+          .join('');
+      }
+
+      function buildEmailBody() {
+        const sections = [
+          {
+            title: 'Contact Information',
+            lines: [
+              { label: 'State', value: readRadio('matterState') },
+              { label: 'Full name', value: readField('fullName') },
+              { label: 'Phone', value: readField('phone') },
+              { label: 'Email', value: readField('email') },
+              { label: 'City / county', value: readField('cityCounty') },
+              { label: 'Preferred contact method', value: readRadio('preferredContact') },
+              { label: 'Best time to reach', value: readField('bestTimeToReach') },
+              { label: 'Preferred language', value: readField('preferredLanguage') }
+            ]
+          },
+          {
+            title: 'Case Type',
+            lines: [
+              { label: 'Case type', value: readRadio('caseType') },
+              { label: 'Other case details', value: readField('otherCaseText') }
+            ]
+          },
+          {
+            title: 'Incident',
+            lines: [
+              { label: 'Incident date', value: readField('incidentDate') },
+              { label: 'Approximate time', value: readField('incidentTime') },
+              { label: 'Incident location', value: readField('incidentLocation') },
+              { label: 'County / island', value: readField('incidentCountyIsland') },
+              { label: 'Incident summary', value: readField('incidentSummary') }
+            ]
+          },
+          {
+            title: 'Collision Details',
+            lines: [
+              { label: 'Role', value: readRadio('autoRole') },
+              { label: 'Collision type', value: getCheckedValues('collisionType').join(', ') },
+              { label: 'Vehicles involved', value: readField('vehiclesInvolved') },
+              { label: 'Point of impact', value: readField('pointOfImpact') },
+              { label: 'Police or agency', value: readField('policeAgency') },
+              { label: 'Report number', value: readField('reportNumber') }
+            ]
+          },
+          {
+            title: 'Dangerous Condition Details',
+            lines: [
+              { label: 'Condition type', value: getCheckedValues('conditionType').join(', ') },
+              { label: 'Property type', value: readField('propertyType') },
+              { label: 'Property owner or business', value: readField('propertyOwnerOccupant') },
+              { label: 'How long condition existed', value: readField('conditionHowLong') }
+            ]
+          },
+          {
+            title: 'Liability',
+            lines: [
+              { label: 'Auto cause factors', value: getCheckedValues('autoCause').join(', ') },
+              { label: 'Citation issued', value: readRadio('citationIssued') },
+              { label: 'Other driver / owner information', value: readField('otherDriverInfo') },
+              { label: 'Witnesses', value: readField('witnessInfo') },
+              { label: 'Condition reported', value: readRadio('conditionReported') },
+              { label: 'Warning signs', value: readRadio('warningSigns') },
+              { label: 'Reported to whom', value: readField('reportedToWhom') },
+              { label: 'Notice facts', value: readField('noticeFacts') },
+              { label: 'Comparative fault facts', value: getCheckedValues('comparativeFacts').join(', ') }
+            ]
+          },
+          {
+            title: 'Injuries',
+            lines: [
+              { label: 'Body parts', value: getCheckedValues('bodyParts').join(', ') },
+              { label: 'Immediate symptoms', value: readField('immediateSymptoms') },
+              { label: 'Current symptoms', value: readField('currentSymptoms') },
+              { label: 'Impact on daily life or work', value: readField('activityImpact') }
+            ]
+          },
+          {
+            title: 'Treatment',
+            lines: [
+              { label: 'First treatment', value: readRadio('firstTreatment') },
+              { label: 'Treatment received', value: getCheckedValues('treatmentType').join(', ') },
+              { label: 'Current treatment status', value: readField('currentTreatmentStatus') },
+              { label: 'Treatment gaps', value: readField('treatmentGaps') }
+            ]
+          },
+          {
+            title: 'Coverage',
+            lines: [
+              { label: 'Your insurance', value: readField('yourInsurance') },
+              { label: 'Other insurance', value: readField('otherInsurance') },
+              { label: 'Known coverage', value: getCheckedValues('coverageKnown').join(', ') },
+              { label: 'PIP opened', value: readRadio('pipOpened') },
+              { label: 'PIP carrier', value: readField('pipCarrier') },
+              { label: 'PIP benefits used', value: readField('pipBenefitsUsed') },
+              { label: 'Hawai\\'i threshold facts', value: readField('hawaiiThresholdFacts') },
+              { label: 'Incident report made', value: readField('incidentReportMade') },
+              { label: 'Property insurer', value: readField('propertyInsurer') }
+            ]
+          },
+          {
+            title: 'Records and Review',
+            lines: [
+              { label: 'Evidence available', value: getCheckedValues('evidence').join(', ') },
+              { label: 'Client summary', value: readField('shortNarrative') },
+              { label: 'Missed work or wage loss', value: readField('missedWork') },
+              { label: 'Urgent notes', value: readField('urgentNotes') },
+              { label: 'No attorney-client relationship acknowledgment', value: document.getElementById('agreeNoRepresentation').checked ? 'Yes' : 'No' }
+            ]
+          }
+        ];
+
+        return sections
+          .map((section) => {
+            const items = renderLines(section.lines);
+            return items ? '<h3>' + escapeHtml(section.title) + '</h3><ul>' + items + '</ul>' : '';
+          })
+          .filter(Boolean)
+          .join('');
+      }
+
+      function updateConditionalSections() {
+        const state = readRadio('matterState');
+        const caseType = readRadio('caseType');
+        const isAuto = caseType === 'Auto collision' || caseType === 'Pedestrian or bicycle collision';
+        const isPremises = caseType === 'Slip and fall or dangerous condition';
+
+        otherCaseWrap.classList.toggle('hidden', caseType !== 'Other personal injury');
+        autoIncidentPanel.classList.toggle('hidden', !isAuto);
+        premisesIncidentPanel.classList.toggle('hidden', !isPremises);
+        autoLiabilityPanel.classList.toggle('hidden', !isAuto);
+        premisesLiabilityPanel.classList.toggle('hidden', !isPremises);
+        autoCoveragePanel.classList.toggle('hidden', !isAuto);
+        premisesCoveragePanel.classList.toggle('hidden', isAuto);
+        hawaiiPipPanel.classList.toggle('hidden', !(isAuto && state === "Hawai'i"));
+      }
+
+      function validateStep(index) {
+        if (index === 1) {
+          return !!(readRadio('matterState') && readField('fullName') && readField('phone') && readField('email'));
+        }
+        if (index === 2) {
+          return !!readRadio('caseType');
+        }
+        if (index === 9) {
+          return document.getElementById('agreeNoRepresentation').checked;
+        }
+        return true;
+      }
+
+      function updateButtons() {
+        backBtn.classList.toggle('hidden', currentStep === 0);
+        nextBtn.classList.toggle('hidden', currentStep === totalSteps - 1);
+        submitBtn.classList.toggle('hidden', currentStep !== totalSteps - 1);
+        nextBtn.disabled = !validateStep(currentStep);
+      }
+
+      function updateProgress() {
+        const pct = Math.round(((currentStep + 1) / totalSteps) * 100);
+        progressBar.style.width = pct + '%';
+        progressPercent.textContent = pct + '%';
+
+        stepItems.forEach((item, index) => {
+          item.classList.toggle('active', index === currentStep);
+          item.classList.toggle('done', index < currentStep);
+          item.querySelector('.step-badge').textContent = index < currentStep ? '✓' : String(index + 1);
+        });
+      }
+
+      function showStep(index) {
+        currentStep = index;
+        steps.forEach((stepEl, i) => stepEl.classList.toggle('hidden', i !== currentStep));
+        updateProgress();
+        updateButtons();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      form.addEventListener('input', function () {
+        updateConditionalSections();
+        updateButtons();
+      });
+
+      form.addEventListener('change', function () {
+        updateConditionalSections();
+        updateButtons();
+      });
+
+      nextBtn.addEventListener('click', function () {
+        if (!validateStep(currentStep)) return;
+        if (currentStep < totalSteps - 1) showStep(currentStep + 1);
+      });
+
+      backBtn.addEventListener('click', function () {
+        if (currentStep > 0) showStep(currentStep - 1);
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!validateStep(9)) return;
+
+        successMessage.classList.add('hidden');
+        errorMessage.classList.add('hidden');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        const templateParams = {
+          to_email: 'intake@stoltzlawcorp.com',
+          reply_to: readField('email'),
+          subject: 'Personal Injury Intake - ' + (readField('fullName') || 'New Submission'),
+          client_name: readField('fullName') || 'New Submission',
+          message_html: buildEmailBody()
+        };
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+          .then(function () {
+            successMessage.classList.remove('hidden');
+            form.reset();
+            updateConditionalSections();
+            showStep(0);
+          })
+          .catch(function () {
+            errorMessage.classList.remove('hidden');
+          })
+          .finally(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Intake';
+          });
+      });
+
+      updateConditionalSections();
+      showStep(0);
+    })();
+  </script>
+</body>
+</html>
