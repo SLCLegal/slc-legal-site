@@ -20,7 +20,6 @@
       --muted2:rgba(247,248,251,.58);
       --gold:#d5a548;
       --gold2:#c7932b;
-      --gold-soft:rgba(213,165,72,.12);
       --max:1180px;
       --shadow:0 24px 64px rgba(0,0,0,.34);
     }
@@ -29,7 +28,7 @@
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: Georgia, "Times New Roman", Times, serif;
+      font-family:Georgia,"Times New Roman",Times,serif;
       color:var(--text);
       background:
         radial-gradient(circle at top, rgba(213,165,72,.14), transparent 24%),
@@ -38,6 +37,7 @@
     }
 
     a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
     .container{width:min(var(--max), calc(100% - 40px));margin:0 auto}
 
     .topbar{
@@ -49,20 +49,26 @@
       backdrop-filter:blur(10px);
     }
     .topbar-inner{
-      min-height:82px;
+      min-height:88px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:24px;
     }
-    .brand{display:flex;align-items:center;gap:14px}
-    .mark{
-      width:48px;height:48px;border-radius:14px;
-      border:1px solid rgba(213,165,72,.38);
-      background:rgba(255,255,255,.04);
-      display:flex;align-items:center;justify-content:center;
-      color:var(--gold);font-size:22px;font-weight:700;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      min-width:0;
+    }
+    .brand-logo{
+      height:58px;
+      width:auto;
+      display:block;
+      flex:0 0 auto;
+    }
+    .brand-text{
+      min-width:0;
     }
     .brand-kicker{
       font-size:11px;
@@ -75,6 +81,7 @@
       font-size:20px;
       font-weight:700;
       letter-spacing:.06em;
+      line-height:1.1;
     }
 
     .nav{
@@ -259,38 +266,65 @@
       box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
     }
 
-    .cred-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:16px;
-      margin-top:28px;
-    }
-
-    .card{
-      border:1px solid var(--border);
-      border-radius:20px;
-      background:var(--panel);
-      padding:20px;
-    }
-
-    .card-label{
-      font-size:11px;
-      letter-spacing:.28em;
-      text-transform:uppercase;
-      color:var(--muted2);
-    }
-
-    .card-value{
-      margin-top:12px;
-      font-size:18px;
-      font-weight:700;
-      line-height:1.55;
-    }
-
     .about-grid{
       display:grid;
       grid-template-columns:.92fr 1.08fr;
       gap:42px;
+    }
+
+    .meet-card{
+      border:1px solid var(--border);
+      border-radius:24px;
+      background:var(--panel);
+      padding:24px;
+      margin-top:24px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .meet-card h3{
+      font-size:24px;
+      margin-bottom:10px;
+    }
+
+    .meet-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.82;
+    }
+
+    .meet-accent{
+      margin-top:16px;
+      color:var(--gold);
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .meet-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      align-items:flex-start;
+      margin-top:18px;
+    }
+
+    .badge-shell{
+      width:180px;
+      min-height:150px;
+      overflow:hidden;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.1);
+      background:#fff;
+      flex:0 0 auto;
+    }
+
+    .badge-fallback{
+      margin-top:6px;
+      font-family:Arial, sans-serif;
+      color:#666;
+      text-align:center;
     }
 
     .pill-row{
@@ -344,6 +378,7 @@
       font-size:22px;
       line-height:1;
       flex:0 0 auto;
+      transition:transform .16s ease;
     }
 
     details[open] .summary-plus{
@@ -360,6 +395,13 @@
       margin:14px 0 0;
       line-height:1.85;
       font-size:16px;
+    }
+
+    .footnote{
+      margin-top:16px;
+      color:var(--muted2);
+      font-size:13px;
+      line-height:1.7;
     }
 
     .practice-head{
@@ -472,14 +514,14 @@
       margin-top:28px;
     }
 
-    .info-box,.disclaimer,.badge-box{
+    .info-box,.disclaimer{
       border:1px solid var(--border);
       border-radius:18px;
       background:rgba(11,18,32,.72);
       padding:18px;
     }
 
-    .disclaimer,.badge-box,.info-box + .info-box{
+    .disclaimer,.info-box + .info-box{
       margin-top:14px;
     }
 
@@ -500,30 +542,6 @@
       font-size:14px;
     }
 
-    .badge-wrap{
-      display:flex;
-      flex-wrap:wrap;
-      gap:16px;
-      align-items:flex-start;
-    }
-
-    .badge-shell{
-      width:180px;
-      min-height:150px;
-      overflow:hidden;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.1);
-      background:#fff;
-      flex:0 0 auto;
-    }
-
-    .badge-fallback{
-      margin-top:6px;
-      font-family:Arial, sans-serif;
-      color:#666;
-      text-align:center;
-    }
-
     @media (max-width:1080px){
       .hero-grid,
       .split,
@@ -532,7 +550,6 @@
         grid-template-columns:1fr;
       }
 
-      .cred-grid,
       .practice-columns,
       .why-grid{
         grid-template-columns:repeat(2, minmax(0,1fr));
@@ -551,7 +568,6 @@
 
       .hero-split,
       .takeback-grid,
-      .cred-grid,
       .practice-columns,
       .why-grid{
         grid-template-columns:1fr;
@@ -560,6 +576,10 @@
       .practice-head{
         flex-direction:column;
         align-items:flex-start;
+      }
+
+      .brand-logo{
+        height:48px;
       }
     }
 
@@ -574,8 +594,9 @@
       }
 
       .hero-card,
-      .contact-card{
-        padding:24px;
+      .contact-card,
+      .meet-card{
+        padding:22px;
       }
 
       .btn{
@@ -591,6 +612,10 @@
       .brand-name{
         font-size:18px;
       }
+
+      .brand-logo{
+        height:42px;
+      }
     }
   </style>
 </head>
@@ -598,8 +623,12 @@
   <header class="topbar">
     <div class="container topbar-inner">
       <a class="brand" href="#top" aria-label="SLC Legal home">
-        <div class="mark">§</div>
-        <div>
+        <img
+          class="brand-logo"
+          src="/images/color-logo-no-background.png"
+          alt="SLC Legal, Inc."
+        />
+        <div class="brand-text">
           <div class="brand-kicker">California and Hawai'i</div>
           <div class="brand-name">SLC Legal, Inc.</div>
         </div>
@@ -679,39 +708,13 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="container section-inner">
-        <div class="eyebrow">Admissions and recognition</div>
-        <h2>California and Hawai'i representation, with plaintiff-side focus.</h2>
-
-        <div class="cred-grid">
-          <div class="card">
-            <div class="card-label">Licenses</div>
-            <div class="card-value">Licensed to practice law in the State of California and the State of Hawai'i.</div>
-          </div>
-          <div class="card">
-            <div class="card-label">Federal Courts</div>
-            <div class="card-value">Admitted in federal courts including the Central District of California, Northern District of California, and U.S. Bankruptcy Court for the Central District of California.</div>
-          </div>
-          <div class="card">
-            <div class="card-label">Recognition</div>
-            <div class="card-value">Recognized by Super Lawyers, including Rising Stars and selection to Super Lawyers in 2026.</div>
-          </div>
-          <div class="card">
-            <div class="card-label">Attorney</div>
-            <div class="card-value">Representation led by Zac Stoltz in plaintiff-side employment and personal injury matters.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="about">
       <div class="container section-inner about-grid">
         <div>
-          <div class="eyebrow">About Zac Stoltz</div>
-          <h2>Zac Stoltz</h2>
+          <div class="eyebrow">Meet Zachary Stoltz</div>
+          <h2>Zachary Stoltz</h2>
           <p class="lead-copy">
-            Zac Stoltz represents plaintiffs in employment and personal injury matters in California and Hawai'i. His practice is built around facts, records, chronology, and disciplined case development from the start.
+            Zachary Stoltz represents plaintiffs in employment and personal injury matters in California and Hawai'i. His practice is built around facts, records, chronology, and disciplined case development from the start.
           </p>
 
           <div class="pill-row">
@@ -722,26 +725,48 @@
             <span class="pill">Car Crashes</span>
             <span class="pill">Slip and Fall</span>
           </div>
+
+          <div class="meet-card">
+            <h3>Recognition</h3>
+            <p>
+              Recognized by Super Lawyers, including Rising Stars and selection to Super Lawyers in 2026.
+            </p>
+            <div class="meet-accent">Super Lawyers</div>
+            <div class="meet-badges">
+              <div class="badge-shell">
+                <div data-slbadge="v2-rsbadge-blue" style="width:180px;height:150px;">
+                  <a
+                    class="slbadge_profileurl"
+                    title="View the profile of Southern California Employment &amp; Labor Attorney Zachary Stoltz"
+                    href="https://profiles.superlawyers.com/california/los-angeles/lawyer/zachary-stoltz/77cb55f1-0e50-4daa-af20-105c766a56ff.html?npcmp=rsb:badge:sl_badge:77cb55f1-0e50-4daa-af20-105c766a56ff:main&utm_source=77cb55f1-0e50-4daa-af20-105c766a56ff&utm_campaign=v2-rsbadge-blue&utm_content=profile"
+                  >Zachary Stoltz</a>
+                  <div class="badge-fallback">Rated by Super Lawyers<br><br><br>loading ...</div>
+                </div>
+              </div>
+
+              <div class="badge-shell">
+                <div data-slbadge="v2-slbadge-gray" data-text1="Selected in 2026" style="width:180px;height:150px;">
+                  <a
+                    class="slbadge_profileurl"
+                    title="View the profile of Southern California Employment &amp; Labor Attorney Zachary Stoltz"
+                    href="https://profiles.superlawyers.com/california/los-angeles/lawyer/zachary-stoltz/77cb55f1-0e50-4daa-af20-105c766a56ff.html?npcmp=slb:badge:sl_badge:77cb55f1-0e50-4daa-af20-105c766a56ff:year&utm_source=77cb55f1-0e50-4daa-af20-105c766a56ff&utm_campaign=v2-slbadge-gray&utm_content=profile"
+                  >Zachary Stoltz</a>
+                  <div class="badge-fallback">Rated by Super Lawyers<br><br><br>loading ...</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="accordion-group">
           <details open>
             <summary>
-              <span class="summary-text">Licenses and Admissions</span>
+              <span class="summary-text">Licensure</span>
               <span class="summary-plus">+</span>
             </summary>
             <div class="detail-body">
               <p>Licensed to practice law in the State of California.</p>
               <p>Licensed to practice law in the State of Hawai'i.</p>
-            </div>
-          </details>
-
-          <details>
-            <summary>
-              <span class="summary-text">Federal Court Admissions</span>
-              <span class="summary-plus">+</span>
-            </summary>
-            <div class="detail-body">
               <p>Admitted to practice in the U.S. District Court for the Central District of California.</p>
               <p>Admitted to practice in the U.S. District Court for the Northern District of California.</p>
               <p>Admitted to practice in the U.S. Bankruptcy Court for the Central District of California.</p>
@@ -750,23 +775,16 @@
 
           <details>
             <summary>
-              <span class="summary-text">Recognition</span>
+              <span class="summary-text">Academic Background</span>
               <span class="summary-plus">+</span>
             </summary>
             <div class="detail-body">
-              <p>Recognized by Super Lawyers Rising Stars.</p>
-              <p>Selected to Super Lawyers in 2026.</p>
-            </div>
-          </details>
-
-          <details>
-            <summary>
-              <span class="summary-text">Professional Background</span>
-              <span class="summary-plus">+</span>
-            </summary>
-            <div class="detail-body">
-              <p>Hollywood Foreign Press Fellow.</p>
-              <p>Plaintiff-side representation focused on employment litigation and serious injury matters.</p>
+              <p>B.A., California State University, Northridge.*</p>
+              <p>J.D., Southwestern (SCALE).**</p>
+              <div class="footnote">
+                * Academic recognition: Hollywood Foreign Press Fellow.<br />
+                ** Academic recognition: Entertainment and The Arts Clinician.
+              </div>
             </div>
           </details>
         </div>
@@ -898,34 +916,7 @@
               <div class="disclaimer">
                 Attorney advertising. This website is for general information only and does not create an attorney-client relationship. Prior results do not guarantee a similar outcome.
               </div>
-
-              <div class="badge-box">
-                <div class="badge-wrap">
-                  <div class="badge-shell">
-                    <div data-slbadge="v2-rsbadge-blue" style="width:180px;height:150px;">
-                      <a
-                        class="slbadge_profileurl"
-                        title="View the profile of Southern California Employment &amp; Labor Attorney Zachary Stoltz"
-                        href="https://profiles.superlawyers.com/california/los-angeles/lawyer/zachary-stoltz/77cb55f1-0e50-4daa-af20-105c766a56ff.html?npcmp=rsb:badge:sl_badge:77cb55f1-0e50-4daa-af20-105c766a56ff:main&utm_source=77cb55f1-0e50-4daa-af20-105c766a56ff&utm_campaign=v2-rsbadge-blue&utm_content=profile"
-                      >Zachary Stoltz</a>
-                      <div class="badge-fallback">Rated by Super Lawyers<br><br><br>loading ...</div>
-                    </div>
-                  </div>
-
-                  <div class="badge-shell">
-                    <div data-slbadge="v2-slbadge-gray" data-text1="Selected in 2026" style="width:180px;height:150px;">
-                      <a
-                        class="slbadge_profileurl"
-                        title="View the profile of Southern California Employment &amp; Labor Attorney Zachary Stoltz"
-                        href="https://profiles.superlawyers.com/california/los-angeles/lawyer/zachary-stoltz/77cb55f1-0e50-4daa-af20-105c766a56ff.html?npcmp=slb:badge:sl_badge:77cb55f1-0e50-4daa-af20-105c766a56ff:year&utm_source=77cb55f1-0e50-4daa-af20-105c766a56ff&utm_campaign=v2-slbadge-gray&utm_content=profile"
-                      >Zachary Stoltz</a>
-                      <div class="badge-fallback">Rated by Super Lawyers<br><br><br>loading ...</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-
           </div>
         </div>
       </div>
