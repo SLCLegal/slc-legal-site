@@ -1,32 +1,70 @@
 "use client";
 
 import { useEffect } from "react";
-import { Scale, ArrowRight, MapPin, ShieldCheck, Gavel, Briefcase, BadgeCheck, Phone, Mail, ChevronRight } from "lucide-react";
+import {
+  Scale,
+  ArrowRight,
+  BadgeCheck,
+  Gavel,
+  Briefcase,
+  Mail,
+  ChevronRight,
+} from "lucide-react";
 
-function SuperLawyersBadge() {
+const SUPERLAWYERS_SCRIPT =
+  "https://www.superlawyers.com/static/sl-badge/v2/load.min.js";
+
+function loadSuperLawyersScript() {
+  if (typeof document === "undefined") return;
+
+  const existing = document.querySelector(
+    `script[src="${SUPERLAWYERS_SCRIPT}"]`
+  );
+
+  if (!existing) {
+    const script = document.createElement("script");
+    script.src = SUPERLAWYERS_SCRIPT;
+    script.async = true;
+    document.body.appendChild(script);
+  }
+}
+
+function SuperLawyersBadge({
+  badgeType,
+  text1,
+  href,
+}: {
+  badgeType: "v2-rsbadge-blue" | "v2-slbadge-gray";
+  text1?: string;
+  href: string;
+}) {
   useEffect(() => {
-    const scriptSrc = "https://www.superlawyers.com/static/sl-badge/v2/load.min.js";
-    const existing = document.querySelector(`script[src=\"${scriptSrc}\"]`);
-
-    if (!existing) {
-      const script = document.createElement("script");
-      script.src = scriptSrc;
-      script.async = true;
-      document.body.appendChild(script);
-    }
+    loadSuperLawyersScript();
   }, []);
 
   return (
-    <div className="w-[180px] min-h-[150px] overflow-hidden rounded-xl border border-white/10 bg-white">
-      <div data-slbadge="v2-rsbadge-blue" style={{ width: "180px", height: "150px" }}>
+    <div className="w-[180px] min-h-[150px] overflow-hidden rounded-xl border border-white/10 bg-white shadow-sm">
+      <div
+        data-slbadge={badgeType}
+        data-text1={text1}
+        style={{ width: "180px", height: "150px" }}
+      >
         <a
           className="slbadge_profileurl"
           title="View the profile of Southern California Employment & Labor Attorney Zachary Stoltz"
-          href="https://profiles.superlawyers.com/california/los-angeles/lawyer/zachary-stoltz/77cb55f1-0e50-4daa-af20-105c766a56ff.html?npcmp=rsb:badge:sl_badge:77cb55f1-0e50-4daa-af20-105c766a56ff:main&utm_source=77cb55f1-0e50-4daa-af20-105c766a56ff&utm_campaign=v2-rsbadge-blue&utm_content=profile"
+          href={href}
         >
           Zachary Stoltz
         </a>
-        <div style={{ marginTop: "6px", fontFamily: "Arial, sans-serif", color: "#666", textAlign: "center" }}>
+
+        <div
+          style={{
+            marginTop: "6px",
+            fontFamily: "Arial, sans-serif",
+            color: "#666",
+            textAlign: "center",
+          }}
+        >
           Rated by Super Lawyers
           <br />
           <br />
@@ -46,7 +84,15 @@ function SectionEyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
-function CTAButton({ href, children, primary = false }: { href: string; children: React.ReactNode; primary?: boolean }) {
+function CTAButton({
+  href,
+  children,
+  primary = false,
+}: {
+  href: string;
+  children: React.ReactNode;
+  primary?: boolean;
+}) {
   return (
     <a
       href={href}
@@ -68,23 +114,23 @@ const practiceAreas = [
   },
   {
     title: "Discrimination and Harassment",
-    text: "Claims involving sex, pregnancy, disability, race, national origin, religion, age, sexual orientation, gender identity, and other protected categories.",
+    text: "Claims involving protected categories and documented workplace conduct that gives rise to liability.",
   },
   {
     title: "Wage and Hour",
-    text: "Unpaid wages, overtime, meal and rest break violations, final pay, misclassification, wage statement issues, and broader pay-practice claims.",
+    text: "Unpaid wages, overtime, meal and rest break violations, final pay issues, misclassification, and wage statement claims.",
   },
   {
     title: "Leave and Accommodation",
-    text: "Cases involving disability, medical condition, pregnancy, restrictions, leave requests, return-to-work issues, or interactive-process failures.",
+    text: "Cases involving disability, pregnancy, medical condition, restrictions, leave requests, return-to-work disputes, or interactive-process failures.",
   },
   {
     title: "Whistleblower and Retaliation",
-    text: "Matters involving internal complaints, safety reports, patient-care concerns, fraud reports, Labor Code complaints, and discipline that follows.",
+    text: "Claims involving internal complaints, safety concerns, labor complaints, compliance reports, and adverse action that follows.",
   },
   {
     title: "Select Personal Injury",
-    text: "A secondary practice for serious injury matters where documentation, treatment sequence, liability proof, and damages presentation matter from the outset.",
+    text: "A secondary practice for serious injury matters where liability proof, treatment record, and damages presentation matter from the outset.",
   },
 ];
 
@@ -95,31 +141,44 @@ const credentials = [
   "U.S. District Court, Northern District of California",
   "U.S. Bankruptcy Court, Central District of California",
   "Super Lawyers Rising Stars",
+  "Selected to Super Lawyers 2026",
   "Hollywood Foreign Press Fellow",
 ];
 
-export default function SLCLegalHomepageRedesign() {
+export default function HomePage() {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(180,138,58,0.16),transparent_28%)] pointer-events-none" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(180,138,58,0.16),transparent_28%)]" />
 
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/90 backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
           <a href="#top" className="group flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-amber-500/40 bg-white/5 text-amber-400">
               <Scale className="h-5 w-5" />
             </div>
             <div>
-              <div className="text-[11px] uppercase tracking-[0.34em] text-white/55">California and Hawai'i</div>
-              <div className="text-lg font-semibold tracking-[0.08em] text-white">SLC Legal, Inc.</div>
+              <div className="text-[11px] uppercase tracking-[0.34em] text-white/55">
+                California and Hawai'i
+              </div>
+              <div className="text-lg font-semibold tracking-[0.08em] text-white">
+                SLC Legal, Inc.
+              </div>
             </div>
           </a>
 
           <nav className="hidden items-center gap-8 text-sm text-white/75 lg:flex">
-            <a href="#practice-areas" className="transition hover:text-white">Practice Areas</a>
-            <a href="#attorney" className="transition hover:text-white">Attorney</a>
-            <a href="#credentials" className="transition hover:text-white">Credentials</a>
-            <a href="#contact" className="transition hover:text-white">Contact</a>
+            <a href="#practice-areas" className="transition hover:text-white">
+              Practice Areas
+            </a>
+            <a href="#attorney" className="transition hover:text-white">
+              Attorney
+            </a>
+            <a href="#credentials" className="transition hover:text-white">
+              Credentials
+            </a>
+            <a href="#contact" className="transition hover:text-white">
+              Contact
+            </a>
           </nav>
 
           <div className="hidden lg:block">
@@ -135,13 +194,16 @@ export default function SLCLegalHomepageRedesign() {
           <div className="mx-auto grid max-w-7xl gap-16 px-6 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:py-28">
             <div className="max-w-3xl">
               <SectionEyebrow>Plaintiff-side employment law</SectionEyebrow>
+
               <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] tracking-[-0.04em] text-white md:text-6xl xl:text-7xl">
                 A litigation-forward law firm for serious workplace disputes.
               </h1>
+
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72 md:text-xl">
-                SLC Legal represents employees across California and Hawai'i in wrongful termination, retaliation,
-                discrimination, harassment, wage and hour, leave, accommodation, and related disputes, with select
-                personal injury matters handled on a secondary basis.
+                SLC Legal represents employees across California and Hawai'i in
+                wrongful termination, retaliation, discrimination, harassment,
+                wage and hour, leave, accommodation, and related disputes, with
+                select personal injury matters handled on a secondary basis.
               </p>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -155,16 +217,28 @@ export default function SLCLegalHomepageRedesign() {
 
               <div className="mt-10 grid gap-6 border-t border-white/10 pt-8 md:grid-cols-3">
                 <div>
-                  <div className="text-[11px] uppercase tracking-[0.28em] text-white/45">Attorney</div>
-                  <div className="mt-2 text-lg font-medium text-white">Zac Stoltz</div>
+                  <div className="text-[11px] uppercase tracking-[0.28em] text-white/45">
+                    Attorney
+                  </div>
+                  <div className="mt-2 text-lg font-medium text-white">
+                    Zac Stoltz
+                  </div>
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-[0.28em] text-white/45">Jurisdictions</div>
-                  <div className="mt-2 text-lg font-medium text-white">California and Hawai'i</div>
+                  <div className="text-[11px] uppercase tracking-[0.28em] text-white/45">
+                    Jurisdictions
+                  </div>
+                  <div className="mt-2 text-lg font-medium text-white">
+                    California and Hawai'i
+                  </div>
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-[0.28em] text-white/45">Focus</div>
-                  <div className="mt-2 text-lg font-medium text-white">Employment litigation</div>
+                  <div className="text-[11px] uppercase tracking-[0.28em] text-white/45">
+                    Focus
+                  </div>
+                  <div className="mt-2 text-lg font-medium text-white">
+                    Employment litigation
+                  </div>
                 </div>
               </div>
             </div>
@@ -173,35 +247,52 @@ export default function SLCLegalHomepageRedesign() {
               <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 shadow-2xl shadow-black/30 lg:p-8">
                 <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-6">
                   <div>
-                    <div className="text-[11px] uppercase tracking-[0.28em] text-amber-500">Authority</div>
-                    <div className="mt-2 text-2xl font-semibold text-white">Built around facts, records, and timing.</div>
+                    <div className="text-[11px] uppercase tracking-[0.28em] text-amber-500">
+                      Authority
+                    </div>
+                    <div className="mt-2 text-2xl font-semibold text-white">
+                      Built around facts, records, and timing.
+                    </div>
                   </div>
                   <div className="hidden rounded-2xl border border-white/10 bg-white/5 p-3 text-amber-400 sm:block">
-                    <ShieldCheck className="h-6 w-6" />
+                    <Gavel className="h-6 w-6" />
                   </div>
                 </div>
 
                 <div className="mt-6 space-y-5 text-sm leading-7 text-white/72">
                   <p>
-                    The visual tone should convey structure, discipline, and trust. This design removes soft wellness cues
-                    and replaces them with high-contrast typography, restrained color, and a credibility-first hierarchy.
+                    The page leads with identity, practice focus, and
+                    credibility. The goal is to present a disciplined legal
+                    brand rather than a soft intake experience.
                   </p>
                   <p>
-                    Instead of repeated reassurance language, the page leads with identity, practice focus, admissions,
-                    and one controlled intake path.
+                    Employment remains the primary identity. Personal injury is
+                    present, but clearly secondary.
                   </p>
                 </div>
 
                 <div className="mt-8 grid gap-4 border-t border-white/10 pt-6 sm:grid-cols-2">
                   <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-4">
-                    <div className="text-[11px] uppercase tracking-[0.28em] text-white/45">Primary CTA</div>
-                    <div className="mt-2 font-medium text-white">Employment intake</div>
-                    <div className="mt-1 text-sm text-white/65">Primary funnel for the consumer audience.</div>
+                    <div className="text-[11px] uppercase tracking-[0.28em] text-white/45">
+                      Primary CTA
+                    </div>
+                    <div className="mt-2 font-medium text-white">
+                      Employment intake
+                    </div>
+                    <div className="mt-1 text-sm text-white/65">
+                      Primary consumer-facing path.
+                    </div>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-4">
-                    <div className="text-[11px] uppercase tracking-[0.28em] text-white/45">Secondary practice</div>
-                    <div className="mt-2 font-medium text-white">Select personal injury</div>
-                    <div className="mt-1 text-sm text-white/65">Present, but clearly subordinate to employment.</div>
+                    <div className="text-[11px] uppercase tracking-[0.28em] text-white/45">
+                      Secondary practice
+                    </div>
+                    <div className="mt-2 font-medium text-white">
+                      Select personal injury
+                    </div>
+                    <div className="mt-1 text-sm text-white/65">
+                      Included without diluting the main brand.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -209,41 +300,58 @@ export default function SLCLegalHomepageRedesign() {
           </div>
         </section>
 
-        <section id="credentials" className="border-b border-white/10 bg-slate-900/60">
+        <section
+          id="credentials"
+          className="border-b border-white/10 bg-slate-900/60"
+        >
           <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10">
-            <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                  <div className="flex items-center gap-3 text-amber-400">
-                    <BadgeCheck className="h-5 w-5" />
-                    <span className="text-[11px] uppercase tracking-[0.28em] text-white/55">Recognition</span>
-                  </div>
-                  <div className="mt-3 text-base font-medium text-white">Super Lawyers Rising Stars</div>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                <div className="flex items-center gap-3 text-amber-400">
+                  <BadgeCheck className="h-5 w-5" />
+                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/55">
+                    Recognition
+                  </span>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                  <div className="flex items-center gap-3 text-amber-400">
-                    <MapPin className="h-5 w-5" />
-                    <span className="text-[11px] uppercase tracking-[0.28em] text-white/55">Admitted</span>
-                  </div>
-                  <div className="mt-3 text-base font-medium text-white">California and Hawai'i</div>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                  <div className="flex items-center gap-3 text-amber-400">
-                    <Gavel className="h-5 w-5" />
-                    <span className="text-[11px] uppercase tracking-[0.28em] text-white/55">Court Admissions</span>
-                  </div>
-                  <div className="mt-3 text-base font-medium text-white">Federal court admissions listed below</div>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                  <div className="flex items-center gap-3 text-amber-400">
-                    <Briefcase className="h-5 w-5" />
-                    <span className="text-[11px] uppercase tracking-[0.28em] text-white/55">Focus</span>
-                  </div>
-                  <div className="mt-3 text-base font-medium text-white">Plaintiff-side employment litigation</div>
+                <div className="mt-3 text-base font-medium text-white">
+                  Super Lawyers and Rising Stars
                 </div>
               </div>
-              <div className="flex justify-center lg:justify-end">
-                <SuperLawyersBadge />
+
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                <div className="flex items-center gap-3 text-amber-400">
+                  <Briefcase className="h-5 w-5" />
+                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/55">
+                    Focus
+                  </span>
+                </div>
+                <div className="mt-3 text-base font-medium text-white">
+                  Plaintiff-side employment litigation
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                <div className="flex items-center gap-3 text-amber-400">
+                  <Gavel className="h-5 w-5" />
+                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/55">
+                    Admissions
+                  </span>
+                </div>
+                <div className="mt-3 text-base font-medium text-white">
+                  California and Hawai'i
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                <div className="flex items-center gap-3 text-amber-400">
+                  <Scale className="h-5 w-5" />
+                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/55">
+                    Positioning
+                  </span>
+                </div>
+                <div className="mt-3 text-base font-medium text-white">
+                  Premium, litigation-forward consumer practice
+                </div>
               </div>
             </div>
           </div>
@@ -253,24 +361,41 @@ export default function SLCLegalHomepageRedesign() {
           <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[0.8fr_1.2fr] lg:px-10">
             <div>
               <SectionEyebrow>Attorney</SectionEyebrow>
-              <h2 className="text-4xl font-semibold tracking-[-0.03em] text-white md:text-5xl">Zac Stoltz</h2>
+              <h2 className="text-4xl font-semibold tracking-[-0.03em] text-white md:text-5xl">
+                Zac Stoltz
+              </h2>
               <p className="mt-5 max-w-xl text-base leading-8 text-white/72">
-                Zac Stoltz represents clients in employment disputes where the record, the sequence of events, and the
-                documented explanation matter. The presentation here is intentionally direct: clients should understand
-                what the firm handles, why it is credible, and how to begin.
+                Zac Stoltz represents clients in employment disputes where the
+                chronology, the employer record, and the stated explanation
+                matter. The visual and copy direction here is intentionally
+                direct: clients should understand what the firm handles, why it
+                is credible, and how to begin.
               </p>
               <div className="mt-8 flex flex-wrap gap-3 text-sm text-white/70">
-                <span className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">Wrongful Termination</span>
-                <span className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">Retaliation</span>
-                <span className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">Discrimination</span>
-                <span className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">Wage and Hour</span>
-                <span className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">Leave and Accommodation</span>
+                <span className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">
+                  Wrongful Termination
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">
+                  Retaliation
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">
+                  Discrimination
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">
+                  Wage and Hour
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">
+                  Leave and Accommodation
+                </span>
               </div>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               {credentials.map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-white/82">
+                <div
+                  key={item}
+                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-white/82"
+                >
                   <div className="flex items-start gap-3">
                     <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                     <span className="leading-7">{item}</span>
@@ -281,25 +406,38 @@ export default function SLCLegalHomepageRedesign() {
           </div>
         </section>
 
-        <section id="practice-areas" className="border-b border-white/10 bg-slate-900/45">
+        <section
+          id="practice-areas"
+          className="border-b border-white/10 bg-slate-900/45"
+        >
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
             <SectionEyebrow>Practice Areas</SectionEyebrow>
+
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <h2 className="max-w-3xl text-4xl font-semibold tracking-[-0.03em] text-white md:text-5xl">
-                The homepage should read like a law firm, not a therapy intake page.
+                Structured for serious legal representation.
               </h2>
               <p className="max-w-xl text-base leading-8 text-white/70">
-                These tiles are intentionally structured with short, hard-edged summaries. They clarify scope without
-                drifting into emotional coaching language.
+                Short, consumer-facing summaries clarify scope without drifting
+                into soft reassurance language or generic AI-style prose.
               </p>
             </div>
 
             <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {practiceAreas.map((area) => (
-                <div key={area.title} className="group rounded-[24px] border border-white/10 bg-slate-950/70 p-7 transition hover:-translate-y-1 hover:border-amber-500/40 hover:bg-slate-950">
-                  <div className="text-[11px] uppercase tracking-[0.28em] text-amber-500">Practice Area</div>
-                  <h3 className="mt-4 text-2xl font-semibold tracking-[-0.02em] text-white">{area.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-white/68">{area.text}</p>
+                <div
+                  key={area.title}
+                  className="group rounded-[24px] border border-white/10 bg-slate-950/70 p-7 transition hover:-translate-y-1 hover:border-amber-500/40 hover:bg-slate-950"
+                >
+                  <div className="text-[11px] uppercase tracking-[0.28em] text-amber-500">
+                    Practice Area
+                  </div>
+                  <h3 className="mt-4 text-2xl font-semibold tracking-[-0.02em] text-white">
+                    {area.title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-7 text-white/68">
+                    {area.text}
+                  </p>
                 </div>
               ))}
             </div>
@@ -309,32 +447,59 @@ export default function SLCLegalHomepageRedesign() {
         <section className="border-b border-white/10">
           <div className="mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-[1fr_0.9fr] lg:px-10">
             <div>
-              <SectionEyebrow>Why this visual system works</SectionEyebrow>
+              <SectionEyebrow>Why this structure works</SectionEyebrow>
               <h2 className="max-w-3xl text-4xl font-semibold tracking-[-0.03em] text-white md:text-5xl">
-                A credibility-first hierarchy surfaces the branding instead of burying it.
+                A clearer hierarchy surfaces the branding instead of burying it.
               </h2>
+
               <div className="mt-8 grid gap-4 md:grid-cols-2">
                 {[
-                  "The firm name appears in a restrained, premium masthead instead of being visually crowded by repeated intake prompts.",
-                  "The hero leads with practice identity and geography, which reads as a law firm positioning statement rather than a slogan-heavy landing page.",
-                  "The palette uses deep slate, ivory white, and restrained gold accents to signal authority without looking cliché or gaudy.",
-                  "The page reduces soft reassurance copy and repeated buttons, which makes the brand feel more disciplined and intentional.",
+                  "The firm name and jurisdictions sit in a restrained, premium masthead instead of competing with repeated intake prompts.",
+                  "The hero opens with positioning, not a generic slogan or wellness-adjacent reassurance language.",
+                  "Employment remains primary, with personal injury present but clearly secondary.",
+                  "The page uses fewer, better-placed calls to action so the brand feels more expensive and controlled.",
                 ].map((item) => (
-                  <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-white/72">
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-white/72"
+                  >
                     {item}
                   </div>
                 ))}
               </div>
             </div>
+
             <div className="rounded-[28px] border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.02] p-8">
-              <div className="text-[11px] uppercase tracking-[0.28em] text-amber-500">Homepage outline</div>
+              <div className="text-[11px] uppercase tracking-[0.28em] text-amber-500">
+                Homepage outline
+              </div>
               <ol className="mt-6 space-y-5 text-sm leading-7 text-white/75">
-                <li><span className="font-semibold text-white">1.</span> Premium masthead with SLC Legal, jurisdictions, and one primary intake action.</li>
-                <li><span className="font-semibold text-white">2.</span> Hero with direct positioning line and disciplined supporting copy.</li>
-                <li><span className="font-semibold text-white">3.</span> Compact authority strip with admissions, focus, and Super Lawyers badge.</li>
-                <li><span className="font-semibold text-white">4.</span> Attorney section that surfaces Zac Stoltz early and clearly.</li>
-                <li><span className="font-semibold text-white">5.</span> Practice-area grid with concise consumer-facing descriptions.</li>
-                <li><span className="font-semibold text-white">6.</span> Controlled intake footer instead of repeated CTA clutter throughout the page.</li>
+                <li>
+                  <span className="font-semibold text-white">1.</span> Premium
+                  masthead with SLC Legal, jurisdictions, and one primary intake
+                  action.
+                </li>
+                <li>
+                  <span className="font-semibold text-white">2.</span> Hero with
+                  direct positioning line and disciplined supporting copy.
+                </li>
+                <li>
+                  <span className="font-semibold text-white">3.</span> Compact
+                  credibility strip with admissions, practice focus, and
+                  recognition.
+                </li>
+                <li>
+                  <span className="font-semibold text-white">4.</span> Attorney
+                  section that surfaces Zac Stoltz early and clearly.
+                </li>
+                <li>
+                  <span className="font-semibold text-white">5.</span>{" "}
+                  Practice-area grid with concise consumer-facing summaries.
+                </li>
+                <li>
+                  <span className="font-semibold text-white">6.</span> Contact
+                  close with both Super Lawyers badges placed at the bottom.
+                </li>
               </ol>
             </div>
           </div>
@@ -347,41 +512,58 @@ export default function SLCLegalHomepageRedesign() {
                 <div>
                   <SectionEyebrow>Contact</SectionEyebrow>
                   <h2 className="max-w-3xl text-4xl font-semibold tracking-[-0.03em] text-white md:text-5xl">
-                    Start with the facts, not a long narrative.
+                    Start with the facts.
                   </h2>
                   <p className="mt-5 max-w-2xl text-base leading-8 text-white/74">
-                    The contact section should feel controlled and premium. One primary path for employment matters, one
-                    secondary path for select personal injury matters, and clear contact details for consumers who want to
-                    reach the office directly.
+                    One primary path for employment matters, one secondary path
+                    for select personal injury matters, and direct firm contact
+                    for consumers who prefer to reach out by email.
                   </p>
+
                   <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                     <CTAButton href="/employment-intake" primary>
-                      Start Employment Intake <ArrowRight className="ml-2 h-4 w-4" />
+                      Start Employment Intake{" "}
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </CTAButton>
                     <CTAButton href="/personal-injury-intake">
                       Start Personal Injury Intake
                     </CTAButton>
                   </div>
-                </div>
 
-                <div className="grid gap-4">
-                  <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-5">
-                    <div className="flex items-center gap-3 text-white">
-                      <Phone className="h-4 w-4 text-amber-500" />
-                      <span className="text-sm font-medium">Office phone</span>
-                    </div>
-                    <div className="mt-2 text-white/70">(Add firm phone number)</div>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-5">
+                  <div className="mt-8 rounded-2xl border border-white/10 bg-slate-950/70 p-5">
                     <div className="flex items-center gap-3 text-white">
                       <Mail className="h-4 w-4 text-amber-500" />
                       <span className="text-sm font-medium">Email</span>
                     </div>
-                    <div className="mt-2 text-white/70">zstoltz@stoltzlawcorp.com</div>
+                    <div className="mt-2 text-white/70">
+                      zstoltz@stoltzlawcorp.com
+                    </div>
                   </div>
+                </div>
+
+                <div className="space-y-4">
                   <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-5 text-sm leading-7 text-white/65">
-                    Attorney advertising. This website is for general information only and does not create an
-                    attorney-client relationship. Prior results do not guarantee a similar outcome.
+                    Attorney advertising. This website is for general
+                    information only and does not create an attorney-client
+                    relationship. Prior results do not guarantee a similar
+                    outcome.
+                  </div>
+
+                  <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-5">
+                    <div className="mb-4 text-[11px] uppercase tracking-[0.28em] text-amber-500">
+                      Recognition
+                    </div>
+                    <div className="flex flex-wrap items-start gap-4">
+                      <SuperLawyersBadge
+                        badgeType="v2-rsbadge-blue"
+                        href="https://profiles.superlawyers.com/california/los-angeles/lawyer/zachary-stoltz/77cb55f1-0e50-4daa-af20-105c766a56ff.html?npcmp=rsb:badge:sl_badge:77cb55f1-0e50-4daa-af20-105c766a56ff:main&utm_source=77cb55f1-0e50-4daa-af20-105c766a56ff&utm_campaign=v2-rsbadge-blue&utm_content=profile"
+                      />
+                      <SuperLawyersBadge
+                        badgeType="v2-slbadge-gray"
+                        text1="Selected in 2026"
+                        href="https://profiles.superlawyers.com/california/los-angeles/lawyer/zachary-stoltz/77cb55f1-0e50-4daa-af20-105c766a56ff.html?npcmp=slb:badge:sl_badge:77cb55f1-0e50-4daa-af20-105c766a56ff:year&utm_source=77cb55f1-0e50-4daa-af20-105c766a56ff&utm_campaign=v2-slbadge-gray&utm_content=profile"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
