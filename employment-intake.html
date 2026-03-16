@@ -69,12 +69,6 @@
       width: auto;
       display: block;
     }
-    .brand-fallback {
-      color: #fff;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      font-size: 1rem;
-    }
     .brand-text {
       display: flex;
       flex-direction: column;
@@ -576,6 +570,7 @@
               <g transform="matrix(0.11245863256346549,0,0,0.11245863256346549,16.00660377159346,14.402642490560734)" fill="#123f57"><g transform="translate(0.000000,600.000000) scale(0.100000,-0.100000)" fill="#123f57" stroke="none"><path d="M2983 5664 c-145 -21 -253 -50 -354 -95 -52 -23 -101 -41 -109 -41 -8 0 -49 8 -90 17 -109 25 -328 16 -467 -19 -189 -47 -375 -133 -559 -257 -457 -308 -820 -859 -875 -1330 -12 -103 -12 -104 -56 -149 -266 -269 -364 -809 -247 -1355 89 -417 370 -890 653 -1098 93 -68 99 -74 110 -122 6 -27 31 -91 56 -141 139 -287 454 -553 840 -709 464 -187 1056 -204 1443 -40 l109 45 69 -17 c105 -26 310 -24 443 6 410 90 815 361 1096 736 142 188 209 306 288 505 56 140 84 246 95 365 9 89 10 90 57 139 133 137 230 356 275 621 20 114 22 154 17 325 -7 284 -43 463 -142 716 -133 341 -338 630 -571 805 -60 45 -94 77 -94 89 0 33 -46 146 -91 226 -193 338 -651 640 -1126 744 -228 50 -563 65 -770 34z"></path></g></g>
               <g transform="matrix(2.4861879239010025,0,0,2.4861879239010025,113.027624152198,17.922650951237472)" fill="#16254b"><path d="M4.5 15.4 c0 1.04 0.74 1.86 1.76 1.86 c0.98 0 1.74 -0.82 1.74 -1.86 l0 -0.24 c0 -1.12 -0.76 -1.9 -1.74 -1.9 c-2.32 0 -4.02 -1.7 -4.02 -3.9 l0 -0.26 c0 -2.2 1.7 -3.84 4.02 -3.84 c2.28 0 3.98 1.64 3.98 3.84 l-0.98 0 c0 -1.6 -1.32 -2.86 -3 -2.86 c-1.72 0 -3 1.26 -3 2.86 l0 0.26 c0 1.64 1.28 2.88 3 2.88 c1.54 0 2.74 1.26 2.74 2.92 l0 0.24 c0 1.6 -1.2 2.84 -2.74 2.84 c-1.56 0 -2.76 -1.24 -2.76 -2.84 l1 0 z"></path></g>
               <g transform="matrix(2.319587560449554,0,0,2.319587560449554,146.3608248791009,20.005154388315034)" fill="#a4886e"><path d="M5.5 5 l0 11.5 l4.5 0 l0 3.5 l-8 0 l0 -15 l3.5 0 z M20 10.26 c0 -1.2 -0.6 -2 -1.5 -2 s-1.5 0.8 -1.5 2 l0 4.5 c0 1.2 0.6 1.98 1.5 1.98 s1.5 -0.78 1.5 -1.98 l0 -0.5 l3.5 0 l0 0.5 c0 3.3 -2 5.5 -5 5.5 s-5 -2.2 -5 -5.5 l0 -4.5 c0 -3.3 2 -5.52 5 -5.52 s5 2.22 5 5.52 l0 0.48 l-3.5 0 l0 -0.48 z"></path></g>
+            </g>
           </svg>
         </span>
         <span class="brand-text">
@@ -584,8 +579,8 @@
         </span>
       </a>
       <nav class="main-nav">
-        <a href="index.html#employment">Employment</a>
-        <a href="index.html#personal-injury">Personal Injury</a>
+        <a href="employment-intake.html" class="active">Employment</a>
+        <a href="personal-injury-intake.html">Personal Injury</a>
         <a href="index.html#about">About</a>
         <a href="index.html#contact">Contact</a>
       </nav>
@@ -596,9 +591,9 @@
     <div class="wrap hero-inner">
       <p class="eyebrow">California and Hawai'i</p>
       <h1>Serious Facts. Serious Representation.</h1>
-      <div class="tagline">Start Employment Intake.</div>
+      <div class="tagline">Take it Back. Start Employment Intake.</div>
       <p class="lead">Employment claims are built on facts, timing, records, and follow-through. This intake keeps the process direct so the important information is captured early and in the right order.</p>
-      <div class="hero-note">Simple selections first. Best estimates are okay. We will not contact your employer unless and until you retain our firm and authorize us to act on your behalf.</div>
+      <div class="hero-note">Take it Back. Simple selections first. Best estimates are okay. We will not contact your employer unless and until you retain our firm and authorize us to act on your behalf.</div>
     </div>
   </section>
 
@@ -628,7 +623,7 @@
       <form class="card" id="employmentIntakeForm">
         <section class="step" data-step="0">
           <div class="section-head">
-            <h2>Start with the issue.</h2>
+            <h2>Take it Back. Start with the issue.</h2>
             <p>Plaintiff-side employment cases turn on what happened, when it happened, who was involved, and what records exist. This intake is designed to get those facts in one place quickly.</p>
             <div class="section-aside">You do not need perfect dates, complete records, or every detail before you submit. Move through the selections, answer what you can, and keep going.</div>
           </div>
@@ -1031,12 +1026,13 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     (function () {
-      // Replace these with your actual EmailJS values.
       const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
       const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
       const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 
-      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+      if (window.emailjs && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+      }
 
       const form = document.getElementById('employmentIntakeForm');
       const steps = Array.from(document.querySelectorAll('.step'));
@@ -1295,6 +1291,14 @@
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending...';
 
+        if (!window.emailjs || EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY' || EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' || EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID') {
+          errorMessage.textContent = 'Email sending is not configured yet. Add your EmailJS keys and try again.';
+          errorMessage.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Intake';
+          return;
+        }
+
         const templateParams = {
           to_email: 'intake@stoltzlawcorp.com',
           reply_to: readField('email'),
@@ -1311,6 +1315,7 @@
             showStep(0);
           })
           .catch(function () {
+            errorMessage.textContent = 'There was a problem sending the intake. Please try again.';
             errorMessage.classList.remove('hidden');
           })
           .finally(function () {
