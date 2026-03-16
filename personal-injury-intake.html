@@ -1,852 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SLC Legal | Employment Intake</title>
-    <meta name="theme-color" content="#10283d" />
-    <style>
-      :root {
-        --navy: #10283d;
-        --navy-2: #163752;
-        --teal: #1f7078;
-        --aqua: #7fd7da;
-        --bg: #f6f2eb;
-        --paper: #ffffff;
-        --paper-2: #fbf8f3;
-        --text: #1c2730;
-        --muted: #5b6874;
-        --line: #d7e0e7;
-        --shadow: 0 18px 44px rgba(16, 40, 61, 0.1);
-        --soft: 0 8px 24px rgba(16, 40, 61, 0.06);
-        --r-xl: 28px;
-        --r-lg: 22px;
-        --r-md: 16px;
-        --maxw: 1020px;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: var(--text);
-        background: var(--bg);
-        line-height: 1.55;
-        letter-spacing: -0.01em;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .container {
-        width: min(var(--maxw), calc(100% - 28px));
-        margin: 0 auto;
-      }
-
-      .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 40;
-        background: rgba(246, 242, 235, 0.92);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--line);
-      }
-
-      .topbar-inner {
-        min-height: 74px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-      }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .brand-mark {
-        width: 44px;
-        height: 44px;
-        flex: 0 0 auto;
-      }
-
-      .brand-title {
-        margin: 0;
-        font-size: 1.08rem;
-        font-weight: 700;
-        color: var(--navy);
-      }
-
-      .brand-sub {
-        margin-top: 2px;
-        font-size: 0.72rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 14px 22px;
-        border-radius: 999px;
-        border: 1px solid transparent;
-        cursor: pointer;
-        font: inherit;
-        font-weight: 600;
-      }
-
-      .btn-primary {
-        background: var(--navy);
-        color: #fff;
-      }
-
-      .btn-secondary {
-        background: #fff;
-        color: var(--navy);
-        border-color: var(--line);
-      }
-
-      .hero {
-        padding: 52px 0 24px;
-      }
-
-      .eyebrow {
-        margin: 0 0 10px;
-        color: var(--teal);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-      }
-
-      .title {
-        margin: 0;
-        font-family: "Iowan Old Style", Georgia, serif;
-        font-size: clamp(2.2rem, 5vw, 4rem);
-        line-height: 0.96;
-        letter-spacing: -0.05em;
-        color: var(--navy);
-      }
-
-      .copy {
-        margin-top: 14px;
-        max-width: 780px;
-        color: var(--muted);
-        font-size: 1rem;
-      }
-
-      .panel {
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.92));
-        border: 1px solid var(--line);
-        border-radius: var(--r-xl);
-        box-shadow: var(--shadow);
-      }
-
-      .intake {
-        padding: 24px;
-      }
-
-      .section-card {
-        margin-top: 18px;
-        padding: 18px;
-        border-radius: var(--r-md);
-        border: 1px solid var(--line);
-        background: var(--paper-2);
-      }
-
-      .section-card h4 {
-        margin: 0;
-        color: var(--navy);
-        font-size: 1rem;
-      }
-
-      .section-card p {
-        margin: 8px 0 0;
-        color: var(--muted);
-      }
-
-      .form-grid {
-        margin-top: 18px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-      }
-
-      .full {
-        grid-column: 1 / -1;
-      }
-
-      label {
-        display: block;
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: var(--navy);
-      }
-
-      input,
-      select,
-      textarea {
-        width: 100%;
-        margin-top: 8px;
-        padding: 14px 15px;
-        border-radius: 16px;
-        border: 1px solid var(--line);
-        background: white;
-        color: var(--text);
-        font: inherit;
-      }
-
-      textarea {
-        min-height: 110px;
-        resize: vertical;
-      }
-
-      .small-textarea {
-        min-height: 90px;
-      }
-
-      .bubble-grid {
-        margin-top: 10px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-
-      .bubble-grid.three {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .bubble-grid.four {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .bubble {
-        position: relative;
-      }
-
-      .bubble input {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .bubble label {
-        margin: 0;
-        min-height: 62px;
-        display: flex;
-        align-items: center;
-        padding: 14px 16px;
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        background: var(--paper-2);
-        cursor: pointer;
-        font-weight: 600;
-      }
-
-      .bubble input:checked + label {
-        background: rgba(31, 112, 120, 0.1);
-        border-color: rgba(31, 112, 120, 0.28);
-      }
-
-      .helper {
-        margin-top: 6px;
-        color: var(--muted);
-        font-size: 0.86rem;
-      }
-
-      .hidden {
-        display: none !important;
-      }
-
-      .subsection {
-        margin-top: 18px;
-        padding: 18px;
-        border: 1px solid var(--line);
-        border-radius: var(--r-md);
-        background: #fff;
-      }
-
-      .subsection h5 {
-        margin: 0;
-        font-size: 1rem;
-        color: var(--navy);
-      }
-
-      .subsection p {
-        margin: 8px 0 0;
-        color: var(--muted);
-      }
-
-      .rule-note {
-        margin-top: 14px;
-        padding: 14px 16px;
-        border-radius: 16px;
-        background: rgba(16, 40, 61, 0.04);
-        border: 1px solid var(--line);
-        color: var(--muted);
-        font-size: 0.92rem;
-      }
-
-      .actions {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-top: 24px;
-      }
-
-      .footer {
-        padding: 24px 0 40px;
-        color: var(--muted);
-      }
-
-      .success-note {
-        display: none;
-        margin-top: 18px;
-        padding: 14px 16px;
-        border-radius: 16px;
-        background: rgba(31, 112, 120, 0.1);
-        border: 1px solid rgba(31, 112, 120, 0.28);
-        color: var(--navy);
-        font-weight: 600;
-      }
-
-      @media (max-width: 900px) {
-        .bubble-grid.four {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (max-width: 820px) {
-        .topbar-inner,
-        .form-grid,
-        .bubble-grid,
-        .bubble-grid.three,
-        .bubble-grid.four {
-          display: grid;
-          grid-template-columns: 1fr;
-        }
-
-        .btn {
-          width: 100%;
-        }
-
-        .actions {
-          flex-direction: column;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header class="topbar">
-      <div class="container topbar-inner">
-        <div class="brand">
-          <svg class="brand-mark" viewBox="0 0 120 120" aria-hidden="true">
-            <circle cx="60" cy="60" r="54" fill="none" stroke="#7FD7DA" stroke-width="4" />
-            <circle cx="60" cy="60" r="48" fill="none" stroke="#7FD7DA" stroke-width="2.5" />
-            <circle cx="60" cy="60" r="31" fill="none" stroke="#10283D" stroke-width="1.8" opacity="0.9" />
-            <path d="M60 28 C76 28, 90 42, 90 58 C90 69, 85 77, 77 83" fill="none" stroke="#10283D" stroke-width="5" stroke-linecap="round" />
-            <path d="M30 57 C30 42, 43 29, 58 29 C68 29, 76 33, 83 40" fill="none" stroke="#10283D" stroke-width="5" stroke-linecap="round" />
-            <path d="M42 86 C33 80, 28 72, 28 60 C28 49, 33 41, 41 35" fill="none" stroke="#10283D" stroke-width="5" stroke-linecap="round" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Injury Intake | SLC Legal, Inc.</title>
+  <meta name="description" content="Personal injury intake for SLC Legal, Inc. Facts, timing, treatment, coverage, and liability details captured early and clearly." />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --muted-2: #64748b;
+      --line: #e2e8f0;
+      --panel: #f8fafc;
+      --panel-2: #f1f5f9;
+      --brand: #0f172a;
+      --brand-2: #1e293b;
+      --white: #ffffff;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --success-text: #065f46;
+      --danger: #b91c1c;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 20px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { color: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    .site-header { background: #fff; border-bottom: 1px solid var(--line); }
+    .site-header .wrap { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:16px 0; }
+    .brand-link { display:inline-flex; align-items:center; gap:14px; text-decoration:none; min-width:0; }
+    .brand-mark { display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; min-width:0; }
+    .brand-mark svg { height:46px; width:auto; display:block; }
+    .brand-text { display:flex; flex-direction:column; gap:4px; min-width:0; }
+    .brand-kicker { font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted-2); font-weight:700; }
+    .brand-name { font-size:1.1rem; font-weight:700; color:var(--text); line-height:1.1; white-space:nowrap; }
+    .main-nav { display:flex; gap:20px; flex-wrap:wrap; align-items:center; font-size:14px; color:var(--muted); }
+    .main-nav a { text-decoration:none; }
+    .hero { background:linear-gradient(180deg,var(--brand) 0%,var(--brand-2) 100%); color:#fff; border-bottom:1px solid rgba(255,255,255,.08); }
+    .hero-inner { padding:64px 0 56px; max-width:860px; }
+    .eyebrow { margin:0 0 14px; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.72); font-weight:700; }
+    .hero h1 { margin:0; font-size:clamp(2.3rem,4vw,4.5rem); line-height:1.03; letter-spacing:-.04em; font-weight:700; }
+    .hero .tagline { margin:12px 0 0; font-size:1.2rem; color:#fff; font-weight:600; }
+    .hero .lead { margin:18px 0 0; max-width:760px; font-size:1.06rem; line-height:1.8; color:rgba(255,255,255,.82); }
+    .hero-note { margin-top:24px; display:inline-block; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius); padding:14px 18px; font-size:.96rem; color:rgba(255,255,255,.92); line-height:1.7; }
+    main { padding:34px 0 56px; }
+    .grid { display:grid; grid-template-columns:300px minmax(0,1fr); gap:28px; align-items:start; }
+    .sidebar { position:sticky; top:24px; background:var(--panel); border:1px solid var(--line); border-radius:28px; padding:22px; }
+    .progress-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted-2); font-weight:700; }
+    .bar { margin-top:10px; height:10px; border-radius:999px; background:#e5e7eb; overflow:hidden; }
+    .bar > span { display:block; height:100%; width:11.1%; background:var(--brand); transition:width .25s ease; }
+    .step-list { margin:22px 0 0; padding:0; list-style:none; display:grid; gap:10px; }
+    .step-item { display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:var(--radius); color:var(--muted); font-size:.95rem; }
+    .step-item.active { background:var(--white); color:var(--text); box-shadow:var(--shadow); }
+    .step-item.done { color:var(--text); }
+    .step-badge { width:30px; height:30px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; border:1px solid #cbd5e1; color:var(--muted); background:transparent; flex:0 0 auto; }
+    .step-item.active .step-badge, .step-item.done .step-badge { background:var(--brand); border-color:var(--brand); color:#fff; }
+    .sidebar-note { margin-top:22px; padding:14px 16px; border:1px solid var(--line); background:#fff; border-radius:var(--radius); color:var(--muted); font-size:.92rem; line-height:1.7; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:28px; box-shadow:var(--shadow); padding:28px; }
+    .section-head { border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:24px; }
+    .section-head h2 { margin:0; font-size:clamp(1.7rem,2.5vw,2.4rem); line-height:1.1; letter-spacing:-.03em; }
+    .section-head p { margin:12px 0 0; color:var(--muted); max-width:760px; font-size:1rem; line-height:1.8; }
+    .section-aside { margin-top:14px; padding:14px 16px; border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); color:var(--muted); font-size:.95rem; line-height:1.75; }
+    .two-col,.three-col { display:grid; gap:18px; }
+    .two-col { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .three-col { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .field { display:grid; gap:8px; }
+    .label-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    label.label,.group-label { font-size:.97rem; font-weight:600; color:var(--text); }
+    .req { color:var(--danger); font-size:11px; text-transform:uppercase; letter-spacing:.1em; font-weight:700; }
+    .hint { font-size:12px; color:var(--muted-2); line-height:1.7; margin-top:-2px; }
+    input[type="text"],input[type="email"],input[type="tel"],input[type="date"],textarea,select { width:100%; border:1px solid #cbd5e1; background:#fff; color:var(--text); border-radius:var(--radius); padding:14px 16px; font:inherit; font-size:16px; outline:none; transition:border-color .18s ease, box-shadow .18s ease; }
+    textarea { min-height:130px; resize:vertical; }
+    input:focus,textarea:focus,select:focus { border-color:var(--brand); box-shadow:0 0 0 4px rgba(15,23,42,.08); }
+    .tile-group { display:grid; gap:12px; }
+    .tile-grid.two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .tile-grid.three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .tile-grid { display:grid; gap:12px; }
+    .tile { position:relative; }
+    .tile input { position:absolute; opacity:0; inset:0; pointer-events:none; }
+    .tile-box { display:flex; align-items:flex-start; gap:12px; border:1px solid #cbd5e1; background:#fff; border-radius:var(--radius); padding:15px 16px; min-height:62px; cursor:pointer; transition:border-color .18s ease, background .18s ease; color:var(--text); font-size:.97rem; line-height:1.55; }
+    .tile-box:hover { border-color:#64748b; }
+    .tile input:checked + .tile-box { border-color:var(--brand); background:var(--panel-2); }
+    .radio-dot,.check-dot { width:20px; height:20px; border-radius:999px; border:1.5px solid #94a3b8; flex:0 0 auto; margin-top:1px; display:inline-flex; align-items:center; justify-content:center; background:#fff; }
+    .radio-dot::after { content:""; width:10px; height:10px; border-radius:999px; background:transparent; }
+    .tile input:checked + .tile-box .radio-dot::after { background:var(--brand); }
+    .check-dot { border-radius:6px; font-size:12px; color:transparent; font-weight:700; }
+    .tile input:checked + .tile-box .check-dot { background:var(--brand); border-color:var(--brand); color:#fff; }
+    .panel { border:1px solid var(--line); background:var(--panel); border-radius:26px; padding:22px; margin-top:24px; }
+    .panel h3 { margin:0; font-size:1.2rem; letter-spacing:-.02em; }
+    .panel p { margin:10px 0 0; color:var(--muted); line-height:1.75; font-size:.98rem; }
+    .intro-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    .intro-box { border:1px solid var(--line); background:var(--panel); border-radius:24px; padding:20px; }
+    .intro-box h3 { margin:0; font-size:.84rem; text-transform:uppercase; letter-spacing:.16em; color:var(--muted); }
+    .intro-box ul { margin:12px 0 0; padding-left:18px; color:var(--muted); line-height:1.8; }
+    .nav-row { margin-top:28px; padding-top:22px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+    .nav-text { color:var(--muted-2); font-size:.84rem; line-height:1.7; max-width:560px; }
+    .btns { display:flex; gap:12px; flex-wrap:wrap; }
+    .btn { appearance:none; border:0; border-radius:18px; padding:14px 20px; font:inherit; font-weight:600; cursor:pointer; transition:background .18s ease, color .18s ease, border-color .18s ease; }
+    .btn-primary { background:var(--brand); color:#fff; }
+    .btn-primary:hover { background:#1f2937; }
+    .btn-primary[disabled] { background:#cbd5e1; color:#64748b; cursor:not-allowed; }
+    .btn-secondary { background:#fff; color:var(--muted); border:1px solid #cbd5e1; }
+    .btn-secondary:hover { border-color:#64748b; color:var(--text); }
+    .hidden { display:none !important; }
+    .status { margin-top:18px; padding:14px 16px; border-radius:18px; font-size:.94rem; line-height:1.7; }
+    .status.success { border:1px solid var(--success-border); background:var(--success-bg); color:var(--success-text); }
+    .status.error { border:1px solid #fecaca; background:#fef2f2; color:#991b1b; }
+    .check-row { display:flex; align-items:flex-start; gap:12px; border:1px solid var(--line); background:var(--panel); border-radius:var(--radius); padding:16px; font-size:.95rem; color:var(--muted); line-height:1.7; }
+    .check-row input { margin-top:4px; width:16px; height:16px; accent-color:var(--brand); flex:0 0 auto; }
+    @media (max-width:980px){ .grid { grid-template-columns:1fr; } .sidebar { position:static; } .site-header .wrap { flex-direction:column; align-items:flex-start; } }
+    @media (max-width:760px){ .wrap { width:min(var(--max), calc(100% - 22px)); } .hero-inner { padding:52px 0 44px; } .card { padding:20px; } .two-col,.three-col,.intro-grid,.tile-grid.two,.tile-grid.three { grid-template-columns:1fr; } .btns { width:100%; } .btns .btn { width:100%; } .brand-name { white-space:normal; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand-link" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3298.6989680319793 1768.8723321876826" role="img" aria-label="SLC Legal logo">
+            <g transform="scale(14.934948401598968) translate(10, 10)">
+              <g transform="matrix(0.481714998583872,0,0,0.481714998583872,0,0)" fill="#64d7d6"><path d="M102.174 199.588c53.8 0 97.413-43.613 97.413-97.413S155.974 4.762 102.174 4.762 4.761 48.375 4.761 102.175s43.614 97.413 97.413 97.413zm0-189.826c50.957 0 92.413 41.457 92.413 92.413s-41.456 92.413-92.413 92.413c-50.957 0-92.413-41.457-92.413-92.413S51.218 9.762 102.174 9.762z"></path><path d="M102.174 191.585c49.38 0 89.41-40.03 89.41-89.41s-40.03-89.41-89.41-89.41c-49.38 0-89.41 40.03-89.41 89.41s40.03 89.41 89.41 89.41zm0-176.82c48.198 0 87.41 39.212 87.41 87.41s-39.212 87.41-87.41 87.41c-48.198 0-87.41-39.212-87.41-87.41s39.212-87.41 87.41-87.41z"></path><path d="M102.174 204.35c56.339 0 102.174-45.835 102.174-102.175S158.513 0 102.174 0C45.835 0 0 45.835 0 102.175S45.835 204.35 102.174 204.35zm0-202.35c55.236 0 100.174 44.938 100.174 100.175S157.411 202.35 102.174 202.35C46.938 202.35 2 157.411 2 102.175S46.938 2 102.174 2z"></path></g>
+              <g transform="matrix(0.11245863256346549,0,0,0.11245863256346549,16.00660377159346,14.402642490560734)" fill="#123f57"><g transform="translate(0.000000,600.000000) scale(0.100000,-0.100000)" fill="#123f57" stroke="none"><path d="M2983 5664 c-145 -21 -253 -50 -354 -95 -52 -23 -101 -41 -109 -41 -8 0 -49 8 -90 17 -109 25 -328 16 -467 -19 -189 -47 -375 -133 -559 -257 -457 -308 -820 -859 -875 -1330 -12 -103 -12 -104 -56 -149 -266 -269 -364 -809 -247 -1355 89 -417 370 -890 653 -1098 93 -68 99 -74 110 -122 6 -27 31 -91 56 -141 139 -287 454 -553 840 -709 464 -187 1056 -204 1443 -40 l109 45 69 -17 c105 -26 310 -24 443 6 410 90 815 361 1096 736 142 188 209 306 288 505 56 140 84 246 95 365 9 89 10 90 57 139 133 137 230 356 275 621 20 114 22 154 17 325 -7 284 -43 463 -142 716 -133 341 -338 630 -571 805 -60 45 -94 77 -94 89 0 33 -46 146 -91 226 -193 338 -651 640 -1126 744 -228 50 -563 65 -770 34z"></path></g></g>
+              <g transform="matrix(2.4861879239010025,0,0,2.4861879239010025,113.027624152198,17.922650951237472)" fill="#16254b"><path d="M4.5 15.4 c0 1.04 0.74 1.86 1.76 1.86 c0.98 0 1.74 -0.82 1.74 -1.86 l0 -0.24 c0 -1.12 -0.76 -1.9 -1.74 -1.9 c-2.32 0 -4.02 -1.7 -4.02 -3.9 l0 -0.26 c0 -2.2 1.7 -3.84 4.02 -3.84 c2.28 0 3.98 1.64 3.98 3.84 l-0.98 0 c0 -1.6 -1.32 -2.86 -3 -2.86 c-1.72 0 -3 1.26 -3 2.86 l0 0.26 c0 1.64 1.28 2.88 3 2.88 c1.54 0 2.74 1.26 2.74 2.92 l0 0.24 c0 1.6 -1.2 2.84 -2.74 2.84 c-1.56 0 -2.76 -1.24 -2.76 -2.84 l1 0 z"></path></g>
+              <g transform="matrix(2.319587560449554,0,0,2.319587560449554,146.3608248791009,20.005154388315034)" fill="#a4886e"><path d="M5.5 5 l0 11.5 l4.5 0 l0 3.5 l-8 0 l0 -15 l3.5 0 z M20 10.26 c0 -1.2 -0.6 -2 -1.5 -2 s-1.5 0.8 -1.5 2 l0 4.5 c0 1.2 0.6 1.98 1.5 1.98 s1.5 -0.78 1.5 -1.98 l0 -0.5 l3.5 0 l0 0.5 c0 3.3 -2 5.5 -5 5.5 s-5 -2.2 -5 -5.5 l0 -4.5 c0 -3.3 2 -5.52 5 -5.52 s5 2.22 5 5.52 l0 0.48 l-3.5 0 l0 -0.48 z"></path></g>
+            </g>
           </svg>
-          <div>
-            <p class="brand-title">SLC Legal</p>
-            <div class="brand-sub">Employment Intake</div>
+        </span>
+        <span class="brand-text">
+          <span class="brand-kicker">California and Hawai'i</span>
+          <span class="brand-name">SLC Legal, Inc.</span>
+        </span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html#employment">Employment</a>
+        <a href="index.html#personal-injury">Personal Injury</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">California and Hawai'i</p>
+      <h1>Serious Facts. Serious Representation.</h1>
+      <div class="tagline">Start Personal Injury Intake.</div>
+      <p class="lead">Personal injury cases turn on the incident, the mechanism of injury, treatment, records, coverage, and liability facts. This intake keeps the process direct so the important information is captured early and in the right order.</p>
+      <div class="hero-note">Simple selections first. Best estimates are okay. Use this intake for auto collisions, pedestrian or bicycle collisions, and slip-and-fall or dangerous-condition cases.</div>
+    </div>
+  </section>
+
+  <main>
+    <div class="wrap grid">
+      <aside class="sidebar">
+        <div class="progress-meta"><span>Personal Injury Intake</span><span id="progressPercent">11%</span></div>
+        <div class="bar"><span id="progressBar"></span></div>
+        <ul class="step-list">
+          <li class="step-item active"><span class="step-badge">1</span><span>Start</span></li>
+          <li class="step-item"><span class="step-badge">2</span><span>Contact</span></li>
+          <li class="step-item"><span class="step-badge">3</span><span>Case Type</span></li>
+          <li class="step-item"><span class="step-badge">4</span><span>Incident</span></li>
+          <li class="step-item"><span class="step-badge">5</span><span>Liability</span></li>
+          <li class="step-item"><span class="step-badge">6</span><span>Injuries</span></li>
+          <li class="step-item"><span class="step-badge">7</span><span>Treatment</span></li>
+          <li class="step-item"><span class="step-badge">8</span><span>Coverage</span></li>
+          <li class="step-item"><span class="step-badge">9</span><span>Records</span></li>
+          <li class="step-item"><span class="step-badge">10</span><span>Review</span></li>
+        </ul>
+        <div class="sidebar-note">State, case type, and contact information are required so the matter can be sorted correctly. Most other answers can be completed with a best estimate or left for later.</div>
+      </aside>
+
+      <form class="card" id="piIntakeForm">
+        <section class="step" data-step="0">
+          <div class="section-head">
+            <h2>Start with the incident.</h2>
+            <p>Use this intake to capture the facts that matter most at the outset: where the incident happened, what type of case it is, what mechanism caused injury, what treatment followed, and what insurance or coverage may apply.</p>
+            <div class="section-aside">California and Hawai'i cases share many core questions, but Hawai'i auto cases need early no-fault and PIP screening. That is built into this intake.</div>
           </div>
-        </div>
-        <a class="btn btn-secondary" href="index.html">Back to Home</a>
-      </div>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="container">
-          <p class="eyebrow">Employment intake</p>
-          <h1 class="title">Tell us your story, from start to finish.</h1>
-          <p class="copy">
-            Start with the claim type that best fits what happened. You can keep tapping through short choices and only explain where it helps.
-          </p>
-          <div id="successNote" class="success-note">
-            Your intake was submitted. We received it and it is on its way to review.
+          <div class="intro-grid">
+            <div class="intro-box">
+              <h3>What matters early</h3>
+              <ul>
+                <li>Clear incident facts and chronology</li>
+                <li>Clear liability and notice details</li>
+                <li>Clear injury, treatment, and coverage information</li>
+              </ul>
+            </div>
+            <div class="intro-box">
+              <h3>What clients do not need</h3>
+              <ul>
+                <li>Perfect medical terminology</li>
+                <li>Exact insurance information before starting</li>
+                <li>Every record before submitting the intake</li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="container panel intake">
-        <div class="section-card">
-          <h4>This intake is built to narrow the issue quickly.</h4>
-          <p>
-            Start with what happened, choose the basis or type of claim, then tell us who did it, whether you reported it, and what changed after that.
-          </p>
-        </div>
-
-        <form
-          id="employmentForm"
-          action="https://formsubmit.co/intake@stoltzlawcorp.com"
-          method="POST"
-          enctype="multipart/form-data"
-        >
-          <input type="hidden" name="_subject" value="New Employment Intake" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_next" value="https://www.stoltzlawcorp.com/employment-intake.html?submitted=1" />
-          <input type="hidden" name="_captcha" value="true" />
-          <input type="hidden" name="_autoresponse" value="Thank you. Your intake was received by SLC Legal." />
-
-          <div class="form-grid">
-            <label>Full name<input name="Full name" required /></label>
-            <label>Phone<input name="Phone" required /></label>
-            <label>Email<input name="Email" type="email" required /></label>
-            <label>Employer name<input name="Employer name" required /></label>
-
-            <label>Job title<input name="Job title" /></label>
-            <label>Employment start date<input name="Employment start date" type="date" /></label>
-
-            <label>Are you still employed?
-              <select name="Still employed">
-                <option value="">Select</option>
-                <option>Yes</option>
-                <option>No</option>
-              </select>
-            </label>
-
-            <label>Hourly rate or salary
-              <input name="Hourly rate or salary" placeholder="Example: $28/hour or $82,000 salary" />
-            </label>
-
-            <label class="full">Work schedule
-              <textarea class="small-textarea" name="Work schedule" placeholder="Examples: Monday through Friday, 8:30 a.m. to 5:30 p.m.; rotating shifts; six days a week; overnight shifts; often missed lunch; often stayed late."></textarea>
-            </label>
-
-            <label class="full">Job duties
-              <textarea class="small-textarea" name="Job duties" placeholder="Examples: supervising employees, handling payroll, customer service, scheduling, sales, patient care, administrative work, driving, warehouse work, food service, production, bookkeeping, or technical work."></textarea>
-            </label>
-
-            <label>Union or non-union?
-              <select name="Union status">
-                <option value="">Select</option>
-                <option>Union</option>
-                <option>Non-union</option>
-              </select>
-            </label>
-
-            <label>Government or private employer?
-              <select name="Government or private employer">
-                <option value="">Select</option>
-                <option>Government</option>
-                <option>Private / non-government</option>
-              </select>
-            </label>
-
-            <label>Approximate number of employees
-              <select name="Approximate number of employees">
-                <option value="">Select</option>
-                <option>1-4</option>
-                <option>5-14</option>
-                <option>15-49</option>
-                <option>50+</option>
-                <option>Not sure</option>
-              </select>
-            </label>
-
-            <label>Employer phone number<input name="Employer phone number" /></label>
-
-            <label class="full">Employer address
-              <textarea class="small-textarea" name="Employer address"></textarea>
-            </label>
-
-            <div class="full subsection">
-              <h5>1. Which issue fits best?</h5>
-              <p>Pick every category that applies.</p>
-
-              <div class="bubble-grid">
-                <div class="bubble"><input id="claim_retaliation" type="checkbox" name="Claim type" value="Retaliation" /><label for="claim_retaliation">Retaliation</label></div>
-                <div class="bubble"><input id="claim_discrimination" type="checkbox" name="Claim type" value="Discrimination" /><label for="claim_discrimination">Discrimination</label></div>
-                <div class="bubble"><input id="claim_harassment" type="checkbox" name="Claim type" value="Harassment" /><label for="claim_harassment">Harassment</label></div>
-                <div class="bubble"><input id="claim_wrongful_termination" type="checkbox" name="Claim type" value="Wrongful termination" /><label for="claim_wrongful_termination">Wrongful termination</label></div>
-                <div class="bubble"><input id="claim_accommodation" type="checkbox" name="Claim type" value="Accommodation / interactive process" /><label for="claim_accommodation">Accommodation / interactive process</label></div>
-                <div class="bubble"><input id="claim_leave" type="checkbox" name="Claim type" value="Leave / CFRA / FMLA / Paid Family Leave" /><label for="claim_leave">Leave / CFRA / FMLA / Paid Family Leave</label></div>
-                <div class="bubble"><input id="claim_whistleblower" type="checkbox" name="Claim type" value="Whistleblower / 1102.5" /><label for="claim_whistleblower">Whistleblower / 1102.5</label></div>
-                <div class="bubble"><input id="claim_wage_retaliation" type="checkbox" name="Claim type" value="Wage retaliation / 98.6" /><label for="claim_wage_retaliation">Wage retaliation / 98.6</label></div>
-                <div class="bubble"><input id="claim_wages" type="checkbox" name="Claim type" value="Wages / overtime / breaks / statements / PAGA" /><label for="claim_wages">Wages / overtime / breaks / statements / PAGA</label></div>
-                <div class="bubble"><input id="claim_other" type="checkbox" name="Claim type" value="Other employment issue" /><label for="claim_other">Other employment issue</label></div>
+        <section class="step hidden" data-step="1">
+          <div class="section-head">
+            <h2>Contact information</h2>
+            <p>This is the only section that must be completed in full so we can follow up.</p>
+            <div class="section-aside">Start by selecting the state that applies to the incident so the intake can branch correctly from the outset.</div>
+          </div>
+          <div class="tile-group" style="margin-bottom:18px;">
+            <div class="label-row"><div class="group-label">State</div><span class="req">Required</span></div>
+            <div class="tile-grid two">
+              <label class="tile"><input type="radio" name="matterState" value="California" /><span class="tile-box"><span class="radio-dot"></span><span>California</span></span></label>
+              <label class="tile"><input type="radio" name="matterState" value="Hawai'i" /><span class="tile-box"><span class="radio-dot"></span><span>Hawai'i</span></span></label>
+            </div>
+          </div>
+          <div class="two-col">
+            <div class="field"><div class="label-row"><label class="label" for="fullName">Full name</label><span class="req">Required</span></div><input id="fullName" name="fullName" type="text" placeholder="Your full name" required /></div>
+            <div class="field"><div class="label-row"><label class="label" for="phone">Phone</label><span class="req">Required</span></div><input id="phone" name="phone" type="tel" placeholder="Best phone number" required /></div>
+            <div class="field"><div class="label-row"><label class="label" for="email">Email</label><span class="req">Required</span></div><input id="email" name="email" type="email" placeholder="you@example.com" required /></div>
+            <div class="field"><label class="label" for="cityCounty">City / county</label><input id="cityCounty" name="cityCounty" type="text" placeholder="City and county" /></div>
+          </div>
+          <div class="two-col" style="margin-top:18px;">
+            <div class="tile-group">
+              <div class="group-label">Preferred contact method</div>
+              <div class="tile-grid three">
+                <label class="tile"><input type="radio" name="preferredContact" value="Phone" checked /><span class="tile-box"><span class="radio-dot"></span><span>Phone</span></span></label>
+                <label class="tile"><input type="radio" name="preferredContact" value="Email" /><span class="tile-box"><span class="radio-dot"></span><span>Email</span></span></label>
+                <label class="tile"><input type="radio" name="preferredContact" value="Text" /><span class="tile-box"><span class="radio-dot"></span><span>Text</span></span></label>
               </div>
             </div>
-
-            <div class="full hidden" id="protectedBasisBlock">
-              <div class="subsection">
-                <h5>2. If this involved harassment, discrimination, or retaliation, what was it based on?</h5>
-                <p>Select every basis that applies.</p>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="basis_race" type="checkbox" name="Protected basis" value="Race" /><label for="basis_race">Race</label></div>
-                  <div class="bubble"><input id="basis_color" type="checkbox" name="Protected basis" value="Color" /><label for="basis_color">Color</label></div>
-                  <div class="bubble"><input id="basis_ancestry" type="checkbox" name="Protected basis" value="Ancestry" /><label for="basis_ancestry">Ancestry</label></div>
-                  <div class="bubble"><input id="basis_national_origin" type="checkbox" name="Protected basis" value="National origin" /><label for="basis_national_origin">National origin</label></div>
-                  <div class="bubble"><input id="basis_religion" type="checkbox" name="Protected basis" value="Religion / creed" /><label for="basis_religion">Religion / creed</label></div>
-                  <div class="bubble"><input id="basis_sex_gender" type="checkbox" name="Protected basis" value="Sex / gender" /><label for="basis_sex_gender">Sex / gender</label></div>
-                  <div class="bubble"><input id="basis_gender_identity" type="checkbox" name="Protected basis" value="Gender identity / gender expression" /><label for="basis_gender_identity">Gender identity / expression</label></div>
-                  <div class="bubble"><input id="basis_orientation" type="checkbox" name="Protected basis" value="Sexual orientation" /><label for="basis_orientation">Sexual orientation</label></div>
-                  <div class="bubble"><input id="basis_age" type="checkbox" name="Protected basis" value="Age 40+" /><label for="basis_age">Age 40+</label></div>
-                  <div class="bubble"><input id="basis_marital" type="checkbox" name="Protected basis" value="Marital status" /><label for="basis_marital">Marital status</label></div>
-                  <div class="bubble"><input id="basis_medical" type="checkbox" name="Protected basis" value="Medical condition" /><label for="basis_medical">Medical condition</label></div>
-                  <div class="bubble"><input id="basis_physical_disability" type="checkbox" name="Protected basis" value="Physical disability" /><label for="basis_physical_disability">Physical disability</label></div>
-                  <div class="bubble"><input id="basis_mental_disability" type="checkbox" name="Protected basis" value="Mental disability" /><label for="basis_mental_disability">Mental disability</label></div>
-                  <div class="bubble"><input id="basis_pregnancy" type="checkbox" name="Protected basis" value="Pregnancy / childbirth / breastfeeding" /><label for="basis_pregnancy">Pregnancy / childbirth / breastfeeding</label></div>
-                  <div class="bubble"><input id="basis_genetic" type="checkbox" name="Protected basis" value="Genetic information" /><label for="basis_genetic">Genetic information</label></div>
-                  <div class="bubble"><input id="basis_military" type="checkbox" name="Protected basis" value="Military / veteran status" /><label for="basis_military">Military / veteran status</label></div>
-                  <div class="bubble"><input id="basis_other" type="checkbox" name="Protected basis" value="Other protected basis" /><label for="basis_other">Other protected basis</label></div>
-                  <div class="bubble"><input id="basis_unknown" type="checkbox" name="Protected basis" value="Not sure" /><label for="basis_unknown">Not sure</label></div>
-                </div>
-
-                <label class="full">If you selected a protected basis, explain briefly
-                  <textarea class="small-textarea" name="Protected basis explanation" placeholder="Example: My supervisor made repeated comments about my pregnancy and cut my schedule after I told HR."></textarea>
-                </label>
-              </div>
+            <div style="display:grid; gap:18px;">
+              <div class="field"><label class="label" for="bestTimeToReach">Best time to reach you</label><input id="bestTimeToReach" name="bestTimeToReach" type="text" placeholder="Morning, afternoon, evenings, etc." /></div>
+              <div class="field"><label class="label" for="preferredLanguage">Preferred language</label><input id="preferredLanguage" name="preferredLanguage" type="text" placeholder="Optional" /></div>
             </div>
+          </div>
+        </section>
 
-            <div class="full hidden" id="retaliationBlock">
-              <div class="subsection">
-                <h5>3. Retaliation</h5>
-                <p>What did you do before things changed?</p>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="ret_hr" type="checkbox" name="Retaliation activity" value="Complained to HR or management" /><label for="ret_hr">Complained to HR / management</label></div>
-                  <div class="bubble"><input id="ret_harass" type="checkbox" name="Retaliation activity" value="Reported discrimination or harassment" /><label for="ret_harass">Reported discrimination / harassment</label></div>
-                  <div class="bubble"><input id="ret_leave" type="checkbox" name="Retaliation activity" value="Requested leave" /><label for="ret_leave">Requested leave</label></div>
-                  <div class="bubble"><input id="ret_accom" type="checkbox" name="Retaliation activity" value="Requested accommodation" /><label for="ret_accom">Requested accommodation</label></div>
-                  <div class="bubble"><input id="ret_wages" type="checkbox" name="Retaliation activity" value="Complained about pay / breaks / overtime" /><label for="ret_wages">Complained about pay / breaks / overtime</label></div>
-                  <div class="bubble"><input id="ret_whistle" type="checkbox" name="Retaliation activity" value="Reported unlawful conduct" /><label for="ret_whistle">Reported unlawful conduct</label></div>
-                  <div class="bubble"><input id="ret_refuse" type="checkbox" name="Retaliation activity" value="Refused something you believed was unlawful" /><label for="ret_refuse">Refused unlawful conduct</label></div>
-                  <div class="bubble"><input id="ret_other" type="checkbox" name="Retaliation activity" value="Other protected activity" /><label for="ret_other">Other protected activity</label></div>
-                </div>
-
-                <label class="full">What happened after that?
-                  <textarea name="Retaliation - what happened after that" placeholder="Examples: write-up, demotion, schedule cut, suspension, transfer, hostility, termination, investigation, exclusion from meetings, or reduced duties."></textarea>
-                </label>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="ret_reported_yes" type="radio" name="Retaliation reported" value="Yes" /><label for="ret_reported_yes">I reported it</label></div>
-                  <div class="bubble"><input id="ret_reported_no" type="radio" name="Retaliation reported" value="No" /><label for="ret_reported_no">I did not report it</label></div>
-                  <div class="bubble"><input id="ret_reported_unsure" type="radio" name="Retaliation reported" value="Not sure" /><label for="ret_reported_unsure">Not sure</label></div>
-                </div>
-
-                <label class="full">If you reported it, to whom and when?
-                  <textarea class="small-textarea" name="Retaliation report details" placeholder="Examples: HR manager on March 4 by email; supervisor in person; hotline report; owner by text."></textarea>
-                </label>
-              </div>
+        <section class="step hidden" data-step="2">
+          <div class="section-head">
+            <h2>Case type</h2>
+            <p>Select the case type that best fits the incident.</p>
+            <div class="section-aside">Use the closest fit if you are not sure. The intake will open the questions that matter most for that type of case.</div>
+          </div>
+          <div class="tile-group">
+            <div class="label-row"><div class="group-label">Case type</div><span class="req">Required</span></div>
+            <div class="tile-grid two">
+              <label class="tile"><input type="radio" name="caseType" value="Auto collision" /><span class="tile-box"><span class="radio-dot"></span><span>Auto collision</span></span></label>
+              <label class="tile"><input type="radio" name="caseType" value="Pedestrian or bicycle collision" /><span class="tile-box"><span class="radio-dot"></span><span>Pedestrian or bicycle collision</span></span></label>
+              <label class="tile"><input type="radio" name="caseType" value="Slip and fall or dangerous condition" /><span class="tile-box"><span class="radio-dot"></span><span>Slip and fall or dangerous condition</span></span></label>
+              <label class="tile"><input type="radio" name="caseType" value="Other personal injury" /><span class="tile-box"><span class="radio-dot"></span><span>Other personal injury</span></span></label>
             </div>
+          </div>
+          <div class="field hidden" id="otherCaseWrap" style="margin-top:18px;">
+            <label class="label" for="otherCaseText">If other, briefly describe the case type.</label>
+            <textarea id="otherCaseText" name="otherCaseText" placeholder="A short explanation is enough."></textarea>
+          </div>
+        </section>
 
-            <div class="full hidden" id="discriminationBlock">
-              <div class="subsection">
-                <h5>4. Discrimination</h5>
-                <p>What specific action happened to you?</p>
+        <section class="step hidden" data-step="3">
+          <div class="section-head">
+            <h2>Incident facts</h2>
+            <p>Identify where, when, and how the incident happened.</p>
+            <div class="section-aside">Chronology and location matter. Best estimates are okay.</div>
+          </div>
+          <div class="two-col">
+            <div class="field"><label class="label" for="incidentDate">Incident date</label><input id="incidentDate" name="incidentDate" type="date" /></div>
+            <div class="field"><label class="label" for="incidentTime">Approximate time</label><input id="incidentTime" name="incidentTime" type="text" placeholder="Morning, afternoon, evening, or approximate time" /></div>
+            <div class="field"><label class="label" for="incidentLocation">Incident location</label><input id="incidentLocation" name="incidentLocation" type="text" placeholder="Street, business, property, parking lot, intersection, etc." /></div>
+            <div class="field"><label class="label" for="incidentIslandCounty">County / island</label><input id="incidentIslandCounty" name="incidentIslandCounty" type="text" placeholder="County in California or island/county in Hawai'i" /></div>
+          </div>
+          <div class="field" style="margin-top:18px;"><label class="label" for="incidentSummary">In a few sentences, how did the incident happen?</label><textarea id="incidentSummary" name="incidentSummary" placeholder="State what happened first, what caused the impact or fall, and what happened immediately after."></textarea></div>
 
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="disc_fired" type="checkbox" name="Discrimination action" value="Fired / forced out" /><label for="disc_fired">Fired / forced out</label></div>
-                  <div class="bubble"><input id="disc_demoted" type="checkbox" name="Discrimination action" value="Demoted" /><label for="disc_demoted">Demoted</label></div>
-                  <div class="bubble"><input id="disc_cut_hours" type="checkbox" name="Discrimination action" value="Hours or pay cut" /><label for="disc_cut_hours">Hours / pay cut</label></div>
-                  <div class="bubble"><input id="disc_denied_promo" type="checkbox" name="Discrimination action" value="Denied promotion" /><label for="disc_denied_promo">Denied promotion</label></div>
-                  <div class="bubble"><input id="disc_writeups" type="checkbox" name="Discrimination action" value="Write-ups / discipline" /><label for="disc_writeups">Write-ups / discipline</label></div>
-                  <div class="bubble"><input id="disc_assignment" type="checkbox" name="Discrimination action" value="Bad assignment / transfer" /><label for="disc_assignment">Bad assignment / transfer</label></div>
-                  <div class="bubble"><input id="disc_hiring" type="checkbox" name="Discrimination action" value="Not hired / not selected" /><label for="disc_hiring">Not hired / not selected</label></div>
-                  <div class="bubble"><input id="disc_benefits" type="checkbox" name="Discrimination action" value="Benefits / leave denied" /><label for="disc_benefits">Benefits / leave denied</label></div>
-                  <div class="bubble"><input id="disc_other" type="checkbox" name="Discrimination action" value="Other adverse action" /><label for="disc_other">Other adverse action</label></div>
-                </div>
-
-                <label class="full">What happened, how did it happen, how many times, and by whom?
-                  <textarea name="Discrimination details" placeholder="Example: My supervisor reduced my hours after learning I was pregnant. It happened twice in one month. My store manager approved it."></textarea>
-                </label>
-
-                <label class="full">What was the job title of the person or people involved?
-                  <textarea class="small-textarea" name="Discrimination actor titles" placeholder="Examples: supervisor, HR manager, regional manager, owner, lead, department head."></textarea>
-                </label>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="disc_reported_yes" type="radio" name="Discrimination reported" value="Yes" /><label for="disc_reported_yes">I reported it</label></div>
-                  <div class="bubble"><input id="disc_reported_no" type="radio" name="Discrimination reported" value="No" /><label for="disc_reported_no">I did not report it</label></div>
-                  <div class="bubble"><input id="disc_reported_unsure" type="radio" name="Discrimination reported" value="Not sure" /><label for="disc_reported_unsure">Not sure</label></div>
-                </div>
-
-                <label class="full">If you reported it, to whom and when?
-                  <textarea class="small-textarea" name="Discrimination report details" placeholder="Examples: HR by email on June 10; my district manager in person; hotline complaint."></textarea>
-                </label>
-              </div>
+          <div class="panel hidden" id="autoIncidentPanel">
+            <h3>Collision details</h3>
+            <p>These questions help identify mechanism, fault, witnesses, and available coverage.</p>
+            <div class="two-col" style="margin-top:16px;">
+              <div class="tile-group"><div class="group-label">Your role</div><div class="tile-grid three">
+                <label class="tile"><input type="radio" name="autoRole" value="Driver" /><span class="tile-box"><span class="radio-dot"></span><span>Driver</span></span></label>
+                <label class="tile"><input type="radio" name="autoRole" value="Passenger" /><span class="tile-box"><span class="radio-dot"></span><span>Passenger</span></span></label>
+                <label class="tile"><input type="radio" name="autoRole" value="Pedestrian" /><span class="tile-box"><span class="radio-dot"></span><span>Pedestrian</span></span></label>
+                <label class="tile"><input type="radio" name="autoRole" value="Bicyclist" /><span class="tile-box"><span class="radio-dot"></span><span>Bicyclist</span></span></label>
+                <label class="tile"><input type="radio" name="autoRole" value="Motorcyclist" /><span class="tile-box"><span class="radio-dot"></span><span>Motorcyclist</span></span></label>
+                <label class="tile"><input type="radio" name="autoRole" value="Other" /><span class="tile-box"><span class="radio-dot"></span><span>Other</span></span></label>
+              </div></div>
+              <div class="tile-group"><div class="group-label">Type of collision</div><div class="tile-grid two">
+                <label class="tile"><input type="checkbox" name="collisionType" value="Rear-end" /><span class="tile-box"><span class="check-dot">✓</span><span>Rear-end</span></span></label>
+                <label class="tile"><input type="checkbox" name="collisionType" value="Intersection" /><span class="tile-box"><span class="check-dot">✓</span><span>Intersection</span></span></label>
+                <label class="tile"><input type="checkbox" name="collisionType" value="Lane change or sideswipe" /><span class="tile-box"><span class="check-dot">✓</span><span>Lane change or sideswipe</span></span></label>
+                <label class="tile"><input type="checkbox" name="collisionType" value="Left turn" /><span class="tile-box"><span class="check-dot">✓</span><span>Left turn</span></span></label>
+                <label class="tile"><input type="checkbox" name="collisionType" value="Parked vehicle" /><span class="tile-box"><span class="check-dot">✓</span><span>Parked vehicle</span></span></label>
+                <label class="tile"><input type="checkbox" name="collisionType" value="Hit and run" /><span class="tile-box"><span class="check-dot">✓</span><span>Hit and run</span></span></label>
+              </div></div>
             </div>
-
-            <div class="full hidden" id="harassmentBlock">
-              <div class="subsection">
-                <h5>5. Harassment</h5>
-                <p>What kind of harassment happened?</p>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="har_verbal" type="checkbox" name="Harassment type" value="Verbal comments" /><label for="har_verbal">Verbal comments</label></div>
-                  <div class="bubble"><input id="har_texts" type="checkbox" name="Harassment type" value="Texts / messages / emails" /><label for="har_texts">Texts / messages / emails</label></div>
-                  <div class="bubble"><input id="har_touching" type="checkbox" name="Harassment type" value="Touching / physical conduct" /><label for="har_touching">Touching / physical conduct</label></div>
-                  <div class="bubble"><input id="har_jokes" type="checkbox" name="Harassment type" value="Jokes / slurs / mocking" /><label for="har_jokes">Jokes / slurs / mocking</label></div>
-                  <div class="bubble"><input id="har_images" type="checkbox" name="Harassment type" value="Images / gestures" /><label for="har_images">Images / gestures</label></div>
-                  <div class="bubble"><input id="har_other" type="checkbox" name="Harassment type" value="Other conduct" /><label for="har_other">Other conduct</label></div>
-                </div>
-
-                <label class="full">What happened, how often did it happen, who did it, and what was their job title?
-                  <textarea name="Harassment details" placeholder="Example: My supervisor repeatedly made sexual comments over three months and texted me after work."></textarea>
-                </label>
-
-                <label class="full">Did it affect your work, schedule, health, or willingness to come to work?
-                  <textarea class="small-textarea" name="Harassment effect" placeholder="Examples: anxiety, avoided shifts, asked to be moved, missed work, sought treatment, felt unsafe, or feared losing the job."></textarea>
-                </label>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="har_reported_yes" type="radio" name="Harassment reported" value="Yes" /><label for="har_reported_yes">I reported it</label></div>
-                  <div class="bubble"><input id="har_reported_no" type="radio" name="Harassment reported" value="No" /><label for="har_reported_no">I did not report it</label></div>
-                  <div class="bubble"><input id="har_reported_unsure" type="radio" name="Harassment reported" value="Not sure" /><label for="har_reported_unsure">Not sure</label></div>
-                </div>
-
-                <label class="full">If you reported it, to whom and when?
-                  <textarea class="small-textarea" name="Harassment report details" placeholder="Examples: reported to HR by email, supervisor, hotline, owner, or manager."></textarea>
-                </label>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="har_relationship_yes" type="radio" name="Prior relationship" value="Yes" /><label for="har_relationship_yes">There was a prior relationship</label></div>
-                  <div class="bubble"><input id="har_relationship_no" type="radio" name="Prior relationship" value="No" /><label for="har_relationship_no">No prior relationship</label></div>
-                  <div class="bubble"><input id="har_relationship_na" type="radio" name="Prior relationship" value="Not applicable" /><label for="har_relationship_na">Not applicable</label></div>
-                </div>
-
-                <label class="full">If there was a prior relationship, when did it end and how was that communicated?
-                  <textarea class="small-textarea" name="Prior relationship details" placeholder="Example: It ended in May. I told him by text and again in person that I wanted no further relationship."></textarea>
-                </label>
-              </div>
+            <div class="two-col" style="margin-top:18px;">
+              <div class="field"><label class="label" for="vehiclesInvolved">Vehicles involved</label><input id="vehiclesInvolved" name="vehiclesInvolved" type="text" placeholder="How many vehicles and what type" /></div>
+              <div class="field"><label class="label" for="pointOfImpact">Point of impact</label><input id="pointOfImpact" name="pointOfImpact" type="text" placeholder="Front, rear, passenger side, driver side, etc." /></div>
+              <div class="field"><label class="label" for="policeAgency">Police or responding agency</label><input id="policeAgency" name="policeAgency" type="text" placeholder="CHP, HPD, local police, sheriff, none, etc." /></div>
+              <div class="field"><label class="label" for="reportNumber">Report number</label><input id="reportNumber" name="reportNumber" type="text" placeholder="If known" /></div>
             </div>
-
-            <div class="full hidden" id="accommodationBlock">
-              <div class="subsection">
-                <h5>6. Accommodation / interactive process</h5>
-                <p>Use this section for disability, medical condition, pregnancy, or work restrictions.</p>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="acc_disability" type="checkbox" name="Accommodation type" value="Disability / medical condition" /><label for="acc_disability">Disability / medical condition</label></div>
-                  <div class="bubble"><input id="acc_pregnancy" type="checkbox" name="Accommodation type" value="Pregnancy-related need" /><label for="acc_pregnancy">Pregnancy-related need</label></div>
-                  <div class="bubble"><input id="acc_work_restriction" type="checkbox" name="Accommodation type" value="Work restriction / light duty" /><label for="acc_work_restriction">Work restriction / light duty</label></div>
-                </div>
-
-                <label class="full">What was the condition or limitation?
-                  <textarea class="small-textarea" name="Accommodation condition" placeholder="A short description is enough. Example: lifting restriction, anxiety, back injury, pregnancy-related restriction, standing limitation."></textarea>
-                </label>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="acc_note_yes" type="radio" name="Doctor note" value="Yes" /><label for="acc_note_yes">I had a doctor’s note</label></div>
-                  <div class="bubble"><input id="acc_note_no" type="radio" name="Doctor note" value="No" /><label for="acc_note_no">No doctor’s note</label></div>
-                  <div class="bubble"><input id="acc_note_unsure" type="radio" name="Doctor note" value="Not sure" /><label for="acc_note_unsure">Not sure</label></div>
-                </div>
-
-                <label class="full">What accommodation did you request?
-                  <textarea class="small-textarea" name="Accommodation requested" placeholder="Examples: leave, reduced schedule, stool, remote work, transfer, no heavy lifting, extra breaks, time off for treatment."></textarea>
-                </label>
-
-                <label class="full">When and how did you tell the employer?
-                  <textarea class="small-textarea" name="Accommodation notice" placeholder="Examples: emailed HR, gave doctor’s note to supervisor, texted manager, discussed in a meeting."></textarea>
-                </label>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="acc_interactive_yes" type="radio" name="Interactive process" value="Yes" /><label for="acc_interactive_yes">They discussed options with me</label></div>
-                  <div class="bubble"><input id="acc_interactive_no" type="radio" name="Interactive process" value="No" /><label for="acc_interactive_no">They did not discuss options</label></div>
-                  <div class="bubble"><input id="acc_interactive_unsure" type="radio" name="Interactive process" value="Not sure" /><label for="acc_interactive_unsure">Not sure</label></div>
-                </div>
-
-                <label class="full">What happened after the request?
-                  <textarea name="Accommodation - what happened after request" placeholder="Examples: denied, ignored, delayed, forced leave, write-up, termination, reduced hours, transferred, or partially granted."></textarea>
-                </label>
-              </div>
-            </div>
-
-            <div class="full hidden" id="leaveBlock">
-              <div class="subsection">
-                <h5>7. Leave / CFRA / FMLA / Paid Family Leave</h5>
-                <p>This section helps screen leave-related claims and retaliation after leave requests or leave use.</p>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="leave_self" type="checkbox" name="Leave reason type" value="My own health condition" /><label for="leave_self">My own health condition</label></div>
-                  <div class="bubble"><input id="leave_family" type="checkbox" name="Leave reason type" value="Family member’s condition" /><label for="leave_family">Family member’s condition</label></div>
-                  <div class="bubble"><input id="leave_bonding" type="checkbox" name="Leave reason type" value="Baby bonding / parental leave" /><label for="leave_bonding">Baby bonding / parental leave</label></div>
-                </div>
-
-                <label>Approximate leave start<input name="Approximate leave start" type="date" /></label>
-                <label>Approximate leave end<input name="Approximate leave end" type="date" /></label>
-
-                <label>How long had you worked there before leave?
-                  <input name="Leave tenure before leave" placeholder="Example: 14 months" />
-                </label>
-
-                <label>Hours worked in the 12 months before leave
-                  <input name="Hours worked in 12 months before leave" placeholder="Example: full-time / 1,250+ / not sure" />
-                </label>
-
-                <label class="full">How was leave requested?
-                  <textarea class="small-textarea" name="How leave was requested" placeholder="Examples: email to HR, doctor’s note, manager conversation, leave portal, text message."></textarea>
-                </label>
-
-                <label class="full">What happened after the leave request or after leave was taken?
-                  <textarea name="Leave - what happened after request or leave" placeholder="Examples: denied, discouraged, delayed, forced to return early, replaced, demoted, written up, terminated, or cut off from work."></textarea>
-                </label>
-              </div>
-            </div>
-
-            <div class="full hidden" id="whistleblowerBlock">
-              <div class="subsection">
-                <h5>8. Whistleblower / 1102.5</h5>
-                <p>Use this if you reported unlawful conduct, safety issues, fraud, patient care problems, or other legal violations.</p>
-
-                <label class="full">What did you report?
-                  <textarea class="small-textarea" name="Whistleblower - what was reported" placeholder="Examples: wage theft, safety violations, fraud, patient care issues, discrimination, falsified records, or other legal violations."></textarea>
-                </label>
-
-                <label class="full">To whom did you report it, and when?
-                  <textarea class="small-textarea" name="Whistleblower - reported to whom and when" placeholder="Examples: supervisor, HR, owner, agency, hotline, compliance officer, or government entity."></textarea>
-                </label>
-
-                <label class="full">What happened after the report?
-                  <textarea name="Whistleblower - what happened after report" placeholder="Examples: suspension, write-up, hostility, transfer, schedule cuts, investigation, isolation, or termination."></textarea>
-                </label>
-              </div>
-            </div>
-
-            <div class="full hidden" id="wageRetaliationBlock">
-              <div class="subsection">
-                <h5>9. Wage retaliation / 98.6</h5>
-                <p>Use this if you complained about pay, breaks, overtime, or wage statements and then the employer turned against you.</p>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="wr_overtime" type="checkbox" name="Wage complaint type" value="Unpaid overtime" /><label for="wr_overtime">Unpaid overtime</label></div>
-                  <div class="bubble"><input id="wr_breaks" type="checkbox" name="Wage complaint type" value="Missed meal or rest breaks" /><label for="wr_breaks">Missed meal or rest breaks</label></div>
-                  <div class="bubble"><input id="wr_wages" type="checkbox" name="Wage complaint type" value="Unpaid wages / final pay" /><label for="wr_wages">Unpaid wages / final pay</label></div>
-                  <div class="bubble"><input id="wr_statements" type="checkbox" name="Wage complaint type" value="Wage statement problems" /><label for="wr_statements">Wage statement problems</label></div>
-                  <div class="bubble"><input id="wr_other" type="checkbox" name="Wage complaint type" value="Other wage issue" /><label for="wr_other">Other wage issue</label></div>
-                </div>
-
-                <label class="full">What did you complain about, to whom, and when?
-                  <textarea class="small-textarea" name="Wage complaint details" placeholder="Examples: told payroll by email, complained to HR, texted supervisor about missed breaks, asked owner about overtime."></textarea>
-                </label>
-
-                <label class="full">What happened after the complaint?
-                  <textarea name="Wage retaliation - what happened after complaint" placeholder="Examples: write-up, shift cuts, hostility, suspension, reduced hours, termination, or assignment changes."></textarea>
-                </label>
-              </div>
-            </div>
-
-            <div class="full hidden" id="wagesBlock">
-              <div class="subsection">
-                <h5>10. Wages / overtime / breaks / statements / PAGA</h5>
-                <p>Pick the wage issues that apply and then explain briefly.</p>
-
-                <div class="bubble-grid three">
-                  <div class="bubble"><input id="wg_ot" type="checkbox" name="Wage issue" value="Unpaid overtime" /><label for="wg_ot">Unpaid overtime</label></div>
-                  <div class="bubble"><input id="wg_offclock" type="checkbox" name="Wage issue" value="Off-the-clock work" /><label for="wg_offclock">Off-the-clock work</label></div>
-                  <div class="bubble"><input id="wg_meal" type="checkbox" name="Wage issue" value="Meal break violations" /><label for="wg_meal">Meal break violations</label></div>
-                  <div class="bubble"><input id="wg_rest" type="checkbox" name="Wage issue" value="Rest break violations" /><label for="wg_rest">Rest break violations</label></div>
-                  <div class="bubble"><input id="wg_statements" type="checkbox" name="Wage issue" value="Wage statement violations" /><label for="wg_statements">Wage statement violations</label></div>
-                  <div class="bubble"><input id="wg_final" type="checkbox" name="Wage issue" value="Final pay / unpaid wages" /><label for="wg_final">Final pay / unpaid wages</label></div>
-                  <div class="bubble"><input id="wg_dayrest" type="checkbox" name="Wage issue" value="One in seven day-of-rest" /><label for="wg_dayrest">One in seven day-of-rest</label></div>
-                  <div class="bubble"><input id="wg_class" type="checkbox" name="Wage issue" value="Coworkers had same problem" /><label for="wg_class">Coworkers had same problem</label></div>
-                </div>
-
-                <label class="full">Briefly explain the wage problem
-                  <textarea name="Wage issue details" placeholder="Examples: I regularly worked through lunch, clocked out and kept working, my wage statements missed hours, my final pay was late, or many coworkers had the same issue."></textarea>
-                </label>
-              </div>
-            </div>
-
-            <label class="full">Witnesses who can support your account
-              <textarea class="small-textarea" name="Witnesses" placeholder="Include names, contact information, and what each person can actually confirm. Focus on witnesses who can support important facts."></textarea>
-            </label>
-
-            <label class="full">Records and documents
-              <textarea class="small-textarea" name="Records and documents" placeholder="Examples: paystubs, schedules, emails, texts, leave paperwork, doctor’s notes, complaints, write-ups, arbitration notices, severance offers, or termination paperwork."></textarea>
-            </label>
-
-            <label class="full">Upload supporting documents
-              <input
-                type="file"
-                name="attachment"
-                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.heic"
-              />
-            </label>
-            <p class="helper full">
-              Examples: paystubs, wage statements, screenshots, emails, doctor’s notes, complaints, write-ups, or termination paperwork.
-            </p>
-
-            <label class="full">Your story
-              <textarea name="Your story" placeholder="Start at the beginning. Tell us what changed, who was involved, what you reported or requested, and what happened after that."></textarea>
-            </label>
           </div>
 
-          <div class="rule-note">
-            This intake is designed to screen the facts cleanly and quickly so the right claim signals do not get lost.
+          <div class="panel hidden" id="premisesIncidentPanel">
+            <h3>Dangerous condition details</h3>
+            <p>These questions help identify the condition, notice, photographs, and who controlled the property.</p>
+            <div class="two-col" style="margin-top:16px;">
+              <div class="tile-group"><div class="group-label">Type of condition</div><div class="tile-grid two">
+                <label class="tile"><input type="checkbox" name="conditionType" value="Wet or slippery floor" /><span class="tile-box"><span class="check-dot">✓</span><span>Wet or slippery floor</span></span></label>
+                <label class="tile"><input type="checkbox" name="conditionType" value="Uneven surface or broken pavement" /><span class="tile-box"><span class="check-dot">✓</span><span>Uneven surface or broken pavement</span></span></label>
+                <label class="tile"><input type="checkbox" name="conditionType" value="Poor lighting" /><span class="tile-box"><span class="check-dot">✓</span><span>Poor lighting</span></span></label>
+                <label class="tile"><input type="checkbox" name="conditionType" value="Stairs or handrail issue" /><span class="tile-box"><span class="check-dot">✓</span><span>Stairs or handrail issue</span></span></label>
+                <label class="tile"><input type="checkbox" name="conditionType" value="Object in walkway" /><span class="tile-box"><span class="check-dot">✓</span><span>Object in walkway</span></span></label>
+                <label class="tile"><input type="checkbox" name="conditionType" value="Other dangerous condition" /><span class="tile-box"><span class="check-dot">✓</span><span>Other dangerous condition</span></span></label>
+              </div></div>
+              <div class="field"><label class="label" for="propertyType">Property type</label><input id="propertyType" name="propertyType" type="text" placeholder="Store, apartment, hotel, sidewalk, parking lot, public property, etc." /></div>
+            </div>
+            <div class="two-col" style="margin-top:18px;">
+              <div class="field"><label class="label" for="propertyOwnerOccupant">Property owner or business</label><input id="propertyOwnerOccupant" name="propertyOwnerOccupant" type="text" placeholder="If known" /></div>
+              <div class="field"><label class="label" for="conditionHowLong">How long had the condition been there?</label><input id="conditionHowLong" name="conditionHowLong" type="text" placeholder="If known or best estimate" /></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step hidden" data-step="4">
+          <div class="section-head">
+            <h2>Liability facts</h2>
+            <p>Capture the facts that point to fault, notice, and potential defenses.</p>
+            <div class="section-aside">This section is built to surface comparative-fault, notice, and property-control issues early.</div>
+          </div>
+          <div class="panel hidden" id="autoLiabilityPanel">
+            <h3>Auto liability and fault</h3>
+            <div class="two-col" style="margin-top:16px;">
+              <div class="tile-group"><div class="group-label">What do you think caused the collision?</div><div class="tile-grid two">
+                <label class="tile"><input type="checkbox" name="autoCause" value="Speeding" /><span class="tile-box"><span class="check-dot">✓</span><span>Speeding</span></span></label>
+                <label class="tile"><input type="checkbox" name="autoCause" value="Failure to yield" /><span class="tile-box"><span class="check-dot">✓</span><span>Failure to yield</span></span></label>
+                <label class="tile"><input type="checkbox" name="autoCause" value="Distracted driving" /><span class="tile-box"><span class="check-dot">✓</span><span>Distracted driving</span></span></label>
+                <label class="tile"><input type="checkbox" name="autoCause" value="Unsafe lane change" /><span class="tile-box"><span class="check-dot">✓</span><span>Unsafe lane change</span></span></label>
+                <label class="tile"><input type="checkbox" name="autoCause" value="Following too closely" /><span class="tile-box"><span class="check-dot">✓</span><span>Following too closely</span></span></label>
+                <label class="tile"><input type="checkbox" name="autoCause" value="Traffic signal or stop sign violation" /><span class="tile-box"><span class="check-dot">✓</span><span>Signal or stop sign violation</span></span></label>
+              </div></div>
+              <div class="tile-group"><div class="group-label">Did the other driver receive a citation?</div><div class="tile-grid three">
+                <label class="tile"><input type="radio" name="citationIssued" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
+                <label class="tile"><input type="radio" name="citationIssued" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
+                <label class="tile"><input type="radio" name="citationIssued" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
+              </div></div>
+            </div>
+            <div class="two-col" style="margin-top:18px;">
+              <div class="field"><label class="label" for="otherDriverInfo">Other driver / owner information</label><input id="otherDriverInfo" name="otherDriverInfo" type="text" placeholder="Name, company, plate, owner, employer, or best known information" /></div>
+              <div class="field"><label class="label" for="witnessInfo">Witnesses</label><input id="witnessInfo" name="witnessInfo" type="text" placeholder="Names, phone numbers, or best known information" /></div>
+            </div>
           </div>
 
-          <div class="actions">
-            <button class="btn btn-primary" type="submit">Send Employment Intake</button>
+          <div class="panel hidden" id="premisesLiabilityPanel">
+            <h3>Premises liability and notice</h3>
+            <div class="two-col" style="margin-top:16px;">
+              <div class="tile-group"><div class="group-label">Was the condition reported to anyone?</div><div class="tile-grid three">
+                <label class="tile"><input type="radio" name="conditionReported" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
+                <label class="tile"><input type="radio" name="conditionReported" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
+                <label class="tile"><input type="radio" name="conditionReported" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
+              </div></div>
+              <div class="tile-group"><div class="group-label">Were there warning signs or cones?</div><div class="tile-grid three">
+                <label class="tile"><input type="radio" name="warningSigns" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
+                <label class="tile"><input type="radio" name="warningSigns" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
+                <label class="tile"><input type="radio" name="warningSigns" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
+              </div></div>
+            </div>
+            <div class="two-col" style="margin-top:18px;">
+              <div class="field"><label class="label" for="reportedToWhom">Who was it reported to?</label><input id="reportedToWhom" name="reportedToWhom" type="text" placeholder="Manager, employee, property owner, security, etc." /></div>
+              <div class="field"><label class="label" for="noticeFacts">Why do you think the property owner or business should have known?</label><input id="noticeFacts" name="noticeFacts" type="text" placeholder="Recurring issue, visible spill, employee nearby, prior complaints, camera coverage, etc." /></div>
+            </div>
           </div>
-        </form>
-      </section>
 
-      <div class="container footer">Licensed in the State of California and the State of Hawai'i</div>
-    </main>
+          <div class="tile-group" style="margin-top:24px;">
+            <div class="group-label">Anything that may be used to blame you?</div>
+            <div class="tile-grid two">
+              <label class="tile"><input type="checkbox" name="comparativeFacts" value="Distracted or looking away" /><span class="tile-box"><span class="check-dot">✓</span><span>Distracted or looking away</span></span></label>
+              <label class="tile"><input type="checkbox" name="comparativeFacts" value="Using phone" /><span class="tile-box"><span class="check-dot">✓</span><span>Using phone</span></span></label>
+              <label class="tile"><input type="checkbox" name="comparativeFacts" value="Footwear or carrying items" /><span class="tile-box"><span class="check-dot">✓</span><span>Footwear or carrying items</span></span></label>
+              <label class="tile"><input type="checkbox" name="comparativeFacts" value="Speed or following distance" /><span class="tile-box"><span class="check-dot">✓</span><span>Speed or following distance</span></span></label>
+              <label class="tile"><input type="checkbox" name="comparativeFacts" value="Alcohol or medication issue" /><span class="tile-box"><span class="check-dot">✓</span><span>Alcohol or medication issue</span></span></label>
+              <label class="tile"><input type="checkbox" name="comparativeFacts" value="None known" /><span class="tile-box"><span class="check-dot">✓</span><span>None known</span></span></label>
+            </div>
+          </div>
+        </section>
 
-    <script>
-      const claimMap = {
-        claim_retaliation: "retaliationBlock",
-        claim_discrimination: "discriminationBlock",
-        claim_harassment: "harassmentBlock",
-        claim_accommodation: "accommodationBlock",
-        claim_leave: "leaveBlock",
-        claim_whistleblower: "whistleblowerBlock",
-        claim_wage_retaliation: "wageRetaliationBlock",
-        claim_wages: "wagesBlock"
-      };
+        <section class="step hidden" data-step="5">
+          <div class="section-head">
+            <h2>Injuries</h2>
+            <p>Identify body parts, immediate symptoms, and what changed after the incident.</p>
+            <div class="section-aside">Use plain language. Medical terminology is not required.</div>
+          </div>
+          <div class="tile-group">
+            <div class="group-label">Body areas injured</div>
+            <div class="tile-grid three">
+              <label class="tile"><input type="checkbox" name="bodyParts" value="Head or face" /><span class="tile-box"><span class="check-dot">✓</span><span>Head or face</span></span></label>
+              <label class="tile"><input type="checkbox" name="bodyParts" value="Neck" /><span class="tile-box"><span class="check-dot">✓</span><span>Neck</span></span></label>
+              <label class="tile"><input type="checkbox" name="bodyParts" value="Back" /><span class="tile-box"><span class="check-dot">✓</span><span>Back</span></span></label>
+              <label class="tile"><input type="checkbox" name="bodyParts" value="Shoulder or arm" /><span class="tile-box"><span class="check-dot">✓</span><span>Shoulder or arm</span></span></label>
+              <label class="tile"><input type="checkbox" name="bodyParts" value="Hip or leg" /><span class="tile-box"><span class="check-dot">✓</span><span>Hip or leg</span></span></label>
+              <label class="tile"><input type="checkbox" name="bodyParts" value="Knee or ankle" /><span class="tile-box"><span class="check-dot">✓</span><span>Knee or ankle</span></span></label>
+              <label class="tile"><input type="checkbox" name="bodyParts" value="Hand or wrist" /><span class="tile-box"><span class="check-dot">✓</span><span>Hand or wrist</span></span></label>
+              <label class="tile"><input type="checkbox" name="bodyParts" value="Internal injury" /><span class="tile-box"><span class="check-dot">✓</span><span>Internal injury</span></span></label>
+              <label class="tile"><input type="checkbox" name="bodyParts" value="Other" /><span class="tile-box"><span class="check-dot">✓</span><span>Other</span></span></label>
+            </div>
+          </div>
+          <div class="two-col" style="margin-top:18px;">
+            <div class="field"><label class="label" for="immediateSymptoms">Immediate symptoms</label><input id="immediateSymptoms" name="immediateSymptoms" type="text" placeholder="Pain, headache, dizziness, swelling, bleeding, numbness, etc." /></div>
+            <div class="field"><label class="label" for="currentSymptoms">Current symptoms</label><input id="currentSymptoms" name="currentSymptoms" type="text" placeholder="What still hurts or limits you now" /></div>
+          </div>
+          <div class="field" style="margin-top:18px;"><label class="label" for="activityImpact">How have the injuries affected work or daily life?</label><textarea id="activityImpact" name="activityImpact" placeholder="Missed work, lifting limits, driving limits, sleep issues, household limits, exercise limits, etc."></textarea></div>
+        </section>
 
-      const protectedBasisBlock = document.getElementById("protectedBasisBlock");
-
-      function updateClaimVisibility() {
-        let showProtectedBasis = false;
-
-        Object.entries(claimMap).forEach(([checkboxId, blockId]) => {
-          const checked = document.getElementById(checkboxId).checked;
-          document.getElementById(blockId).classList.toggle("hidden", !checked);
-
-          if (
-            checkboxId === "claim_retaliation" ||
-            checkboxId === "claim_discrimination" ||
-            checkboxId === "claim_harassment"
-          ) {
-            if (checked) showProtectedBasis = true;
-          }
-        });
-
-        protectedBasisBlock.classList.toggle("hidden", !showProtectedBasis);
-      }
-
-      Object.keys(claimMap).forEach((id) => {
-        document.getElementById(id).addEventListener("change", updateClaimVisibility);
-      });
-
-      updateClaimVisibility();
-
-      const params = new URLSearchParams(window.location.search);
-      if (params.get("submitted") === "1") {
-        document.getElementById("successNote").style.display = "block";
-      }
-    </script>
-  </body>
-</html>
+        <section class="step hidden" data-step="6">
+          <div class="section-head">
+            <h2>Treatment</h2>
+            <p>Identify where you went first and what treatment has followed.</p>
+            <div class="section-aside">Gaps in treatment matter, but you do not need every provider before submitting.</div>
+          </div>
+          <div class="two-col">
+            <div class="tile-group"><div class="group-label">First treatment after incident</div><div class="tile-grid three">
+              <label class="tile"><input type="radio" name="firstTreatment" value="None same day" /><span class="tile-box"><span class="radio-dot"></span><span>None same day</span></span></label>
+              <label class="tile"><input type="radio" name="firstTreatment" value="ER or urgent care" /><span class="tile-box"><span class="radio-dot"></span><span>ER or urgent care</span></span></label>
+              <label class="tile"><input type="radio" name="firstTreatment" value="Primary care" /><span class="tile-box"><span class="radio-dot"></span><span>Primary care</span></span></label>
+              <label class="tile"><input type="radio" name="firstTreatment" value="Ambulance" /><span class="tile-box"><span class="radio-dot"></span><span>Ambulance</span></span></label>
+              <label class="tile"><input type="radio" name="firstTreatment" value="Chirop
