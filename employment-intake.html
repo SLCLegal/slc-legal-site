@@ -1,930 +1,1039 @@
-import React, { useMemo, useState } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employment Intake | Stoltz Law Corp</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --muted-2: #64748b;
+      --line: #e2e8f0;
+      --panel: #f8fafc;
+      --panel-2: #f1f5f9;
+      --brand: #0f172a;
+      --brand-2: #1e293b;
+      --white: #ffffff;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --success-text: #065f46;
+      --danger: #b91c1c;
+      --shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --max: 1180px;
+    }
 
-const ISSUE_OPTIONS = [
-  { key: "wageHour", label: "I was not paid correctly" },
-  { key: "termination", label: "I was fired or forced out" },
-  { key: "retaliation", label: "I was punished after speaking up" },
-  { key: "discrimination", label: "I was treated differently because of who I am" },
-  { key: "harassment", label: "I was harassed at work" },
-  { key: "leaveAccommodation", label: "My leave or accommodation request was denied or mishandled" },
-  { key: "whistleblower", label: "I reported illegal conduct" },
-  { key: "other", label: "Something else happened" },
-];
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
 
-const PROTECTED_BASIS_OPTIONS = [
-  "Race or ethnicity",
-  "National origin or ancestry",
-  "Sex or gender",
-  "Pregnancy",
-  "Sexual orientation",
-  "Gender identity or expression",
-  "Disability or medical condition",
-  "Religion",
-  "Age",
-  "Marital status",
-  "Military or veteran status",
-  "Another protected reason",
-  "Not sure",
-];
+    a { color: inherit; }
+    .wrap {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-const WAGE_HOUR_OPTIONS = [
-  { key: "unpaidTime", label: "Unpaid time worked" },
-  { key: "overtime", label: "Unpaid overtime" },
-  { key: "mealBreaks", label: "Missed, late, or interrupted meal breaks" },
-  { key: "restBreaks", label: "Missed or interrupted rest breaks" },
-  { key: "paystubs", label: "Inaccurate paystubs or wage statements" },
-  { key: "finalPay", label: "Late or incomplete final paycheck" },
-  { key: "expenseReimbursement", label: "Unreimbursed work expenses" },
-  { key: "coworkersToo", label: "Coworkers had the same issue" },
-];
+    .hero {
+      background: linear-gradient(180deg, var(--brand) 0%, var(--brand-2) 100%);
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-inner {
+      padding: 64px 0 56px;
+      max-width: 820px;
+    }
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+      font-weight: 600;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 4vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+    .hero p.lead {
+      margin: 18px 0 0;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.82);
+      max-width: 720px;
+    }
+    .hero-note {
+      margin-top: 24px;
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-size: 0.96rem;
+      color: rgba(255,255,255,0.92);
+    }
 
-const EVIDENCE_OPTIONS = [
-  "Paystubs",
-  "Time records",
-  "Schedules",
-  "Emails",
-  "Text messages",
-  "Write-ups",
-  "Termination paperwork",
-  "Doctor's notes",
-  "Complaint to HR or management",
-  "Photos or screenshots",
-  "Witness names",
-  "None yet",
-];
+    main { padding: 34px 0 56px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
 
-const STEP_KEYS = [
-  "intro",
-  "contact",
-  "employment",
-  "issues",
-  "details",
-  "timeline",
-  "evidence",
-  "summary",
-];
+    .sidebar {
+      position: sticky;
+      top: 24px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 22px;
+    }
+    .progress-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      font-weight: 700;
+    }
+    .bar {
+      margin-top: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+    .bar > span {
+      display: block;
+      height: 100%;
+      width: 12.5%;
+      background: var(--brand);
+      transition: width 0.25s ease;
+    }
+    .step-list {
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .step-item.active {
+      background: var(--white);
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+    .step-item.done { color: var(--text); }
+    .step-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid #cbd5e1;
+      color: var(--muted);
+      background: transparent;
+      flex: 0 0 auto;
+    }
+    .step-item.active .step-badge,
+    .step-item.done .step-badge {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: var(--white);
+    }
+    .sidebar-note {
+      margin-top: 22px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
 
-const initialData = {
-  // Contact
-  fullName: "",
-  phone: "",
-  email: "",
-  cityCounty: "",
-  preferredContact: "phone",
-  bestTimeToReach: "",
-  preferredLanguage: "",
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+    .section-head {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 2.5vw, 2.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+    .section-head p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .section-aside {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
 
-  // Employment basics
-  employerName: "",
-  jobTitle: "",
-  workLocation: "",
-  stillEmployed: "",
-  startDate: "",
-  endDate: "",
-  payType: "",
-  exemptStatus: "",
-  supervisorName: "",
+    .two-col, .three-col {
+      display: grid;
+      gap: 18px;
+    }
+    .two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three-col { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-  // Issues
-  issues: [],
-  otherIssueText: "",
+    .field { display: grid; gap: 8px; }
+    .label-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    label.label, .group-label {
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .req {
+      color: var(--danger);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+    .hint {
+      font-size: 12px;
+      color: var(--muted-2);
+      line-height: 1.7;
+      margin-top: -2px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      color: var(--text);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      font: inherit;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.08);
+    }
 
-  // Wage and hour
-  wageHourIssues: [],
-  wageRate: "",
-  typicalSchedule: "",
-  approximateFrequency: "",
-  approximateDuration: "",
-  offClockEstimate: "",
-  coworkersAffected: "",
+    .tile-group { display: grid; gap: 12px; }
+    .tile-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tile-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tile-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .tile {
+      position: relative;
+    }
+    .tile input {
+      position: absolute;
+      opacity: 0;
+      inset: 0;
+      pointer-events: none;
+    }
+    .tile-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 15px 16px;
+      min-height: 62px;
+      cursor: pointer;
+      transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, transform 0.12s ease;
+      color: var(--text);
+      font-size: 0.97rem;
+      line-height: 1.55;
+    }
+    .tile-box:hover {
+      border-color: #64748b;
+    }
+    .tile input:checked + .tile-box {
+      border-color: var(--brand);
+      background: var(--panel-2);
+    }
+    .radio-dot,
+    .check-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 1.5px solid #94a3b8;
+      flex: 0 0 auto;
+      margin-top: 1px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+    }
+    .radio-dot::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: transparent;
+    }
+    .tile input:checked + .tile-box .radio-dot::after {
+      background: var(--brand);
+    }
+    .check-dot {
+      border-radius: 6px;
+      font-size: 12px;
+      color: transparent;
+      font-weight: 700;
+    }
+    .tile input:checked + .tile-box .check-dot {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: var(--white);
+    }
 
-  // Termination / retaliation / discrimination / harassment / leave
-  complainedOrReported: "",
-  reportToWhom: "",
-  whatChangedAfter: "",
-  protectedBases: [],
-  protectedOtherText: "",
-  whoWasInvolved: "",
-  repeatedOrOneTime: "",
-  leaveType: "",
-  leaveOutcome: "",
-  whistleblowerSubject: "",
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 26px;
+      padding: 22px;
+      margin-top: 24px;
+    }
+    .panel h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+    .panel p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.98rem;
+    }
 
-  // Timeline
-  problemStarted: "",
-  complaintDate: "",
-  impactDate: "",
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .intro-box {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 24px;
+      padding: 20px;
+    }
+    .intro-box h3 {
+      margin: 0;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+    .intro-box ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
 
-  // Evidence
-  evidence: [],
-  canUploadNow: "",
+    .nav-row {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .nav-text {
+      color: var(--muted-2);
+      font-size: 0.84rem;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 18px;
+      padding: 14px 20px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--brand);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: #1f2937; }
+    .btn-primary[disabled] {
+      background: #cbd5e1;
+      color: #64748b;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-secondary {
+      background: #fff;
+      color: var(--muted);
+      border: 1px solid #cbd5e1;
+    }
+    .btn-secondary:hover {
+      border-color: #64748b;
+      color: var(--text);
+    }
 
-  // Summary
-  shortNarrative: "",
-  urgentNotes: "",
-  agreeNoRepresentation: false,
-};
+    .hidden { display: none !important; }
+    .success {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--success-border);
+      background: var(--success-bg);
+      color: var(--success-text);
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 16px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .check-row input {
+      margin-top: 4px;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--brand);
+      flex: 0 0 auto;
+    }
 
-function ProgressBar({ current, total }) {
-  const percent = Math.round((current / total) * 100);
-  return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-slate-500">
-        <span>Employment Intake</span>
-        <span>{percent}%</span>
-      </div>
-      <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200">
-        <div
-          className="h-full rounded-full bg-slate-900 transition-all duration-300"
-          style={{ width: `${percent}%` }}
-        />
-      </div>
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static;
+      }
+    }
+    @media (max-width: 760px) {
+      .wrap { width: min(var(--max), calc(100% - 22px)); }
+      .hero-inner { padding: 52px 0 44px; }
+      .card { padding: 20px; }
+      .two-col, .three-col, .intro-grid, .tile-grid.two, .tile-grid.three {
+        grid-template-columns: 1fr;
+      }
+      .nav-row { align-items: stretch; }
+      .btns { width: 100%; }
+      .btns .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Stoltz Law Corp</p>
+      <h1>Start Your Employment Intake</h1>
+      <p class="lead">Short guided questions. Simple selections. Best estimates are okay. You can move forward even if you do not have every detail right now.</p>
+      <div class="hero-note">We will not contact your employer unless and until you retain our firm and authorize us to act on your behalf.</div>
     </div>
-  );
-}
+  </section>
 
-function SectionIntro({ title, description, aside }) {
-  return (
-    <div className="mb-6 space-y-3 border-b border-slate-200 pb-5">
-      <h2 className="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">{title}</h2>
-      <p className="max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">{description}</p>
-      {aside ? (
-        <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700">
-          {aside}
+  <main>
+    <div class="wrap grid">
+      <aside class="sidebar">
+        <div class="progress-meta">
+          <span>Employment Intake</span>
+          <span id="progressPercent">13%</span>
         </div>
-      ) : null}
-    </div>
-  );
-}
+        <div class="bar"><span id="progressBar"></span></div>
 
-function Input({ label, required, hint, ...props }) {
-  return (
-    <label className="block space-y-2">
-      <div className="flex items-center gap-2">
-        <span className="text-sm font-medium text-slate-900">{label}</span>
-        {required ? <span className="text-xs uppercase tracking-wide text-red-600">Required</span> : null}
-      </div>
-      <input
-        {...props}
-        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-950 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200"
-      />
-      {hint ? <p className="text-xs leading-5 text-slate-500">{hint}</p> : null}
-    </label>
-  );
-}
+        <ul class="step-list" id="stepList">
+          <li class="step-item active"><span class="step-badge">1</span><span>Welcome</span></li>
+          <li class="step-item"><span class="step-badge">2</span><span>Contact</span></li>
+          <li class="step-item"><span class="step-badge">3</span><span>Employment</span></li>
+          <li class="step-item"><span class="step-badge">4</span><span>What happened</span></li>
+          <li class="step-item"><span class="step-badge">5</span><span>Details</span></li>
+          <li class="step-item"><span class="step-badge">6</span><span>Timing</span></li>
+          <li class="step-item"><span class="step-badge">7</span><span>Documents</span></li>
+          <li class="step-item"><span class="step-badge">8</span><span>Review</span></li>
+        </ul>
 
-function TextArea({ label, hint, ...props }) {
-  return (
-    <label className="block space-y-2">
-      <span className="text-sm font-medium text-slate-900">{label}</span>
-      <textarea
-        {...props}
-        className="min-h-[120px] w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-950 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200"
-      />
-      {hint ? <p className="text-xs leading-5 text-slate-500">{hint}</p> : null}
-    </label>
-  );
-}
+        <div class="sidebar-note">Contact information is required so you can be reached. Most other answers can be based on a best estimate or skipped for now.</div>
+      </aside>
 
-function RadioTileGroup({ label, value, onChange, options, hint, columns = 2 }) {
-  return (
-    <div className="space-y-3">
-      <div>
-        <p className="text-sm font-medium text-slate-900">{label}</p>
-        {hint ? <p className="mt-1 text-xs leading-5 text-slate-500">{hint}</p> : null}
-      </div>
-      <div className={classNames("grid gap-3", columns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2")}>
-        {options.map((option) => {
-          const optionValue = typeof option === "string" ? option : option.value;
-          const optionLabel = typeof option === "string" ? option : option.label;
-          const selected = value === optionValue;
-          return (
-            <button
-              key={optionValue}
-              type="button"
-              onClick={() => onChange(optionValue)}
-              className={classNames(
-                "rounded-2xl border px-4 py-4 text-left text-sm transition",
-                selected
-                  ? "border-slate-900 bg-slate-900 text-white shadow-sm"
-                  : "border-slate-300 bg-white text-slate-800 hover:border-slate-500"
-              )}
-            >
-              {optionLabel}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
+      <form class="card" id="employmentIntakeForm">
+        <section class="step" data-step="0">
+          <div class="section-head">
+            <h2>A guided intake built for clarity</h2>
+            <p>This intake is designed to help you move quickly through the key issues. Start with basic information, choose the issue categories that fit best, and explain only where it helps.</p>
+            <div class="section-aside">You can use simple selections throughout. If you do not know an exact date, amount, or title, use your best estimate and continue.</div>
+          </div>
 
-function CheckboxTileGroup({ label, values, onToggle, options, hint, columns = 2 }) {
-  return (
-    <div className="space-y-3">
-      <div>
-        <p className="text-sm font-medium text-slate-900">{label}</p>
-        {hint ? <p className="mt-1 text-xs leading-5 text-slate-500">{hint}</p> : null}
-      </div>
-      <div className={classNames("grid gap-3", columns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2")}>
-        {options.map((option) => {
-          const optionValue = typeof option === "string" ? option : option.key;
-          const optionLabel = typeof option === "string" ? option : option.label;
-          const selected = values.includes(optionValue);
-          return (
-            <button
-              key={optionValue}
-              type="button"
-              onClick={() => onToggle(optionValue)}
-              className={classNames(
-                "rounded-2xl border px-4 py-4 text-left text-sm transition",
-                selected
-                  ? "border-slate-900 bg-slate-100 text-slate-950 shadow-sm"
-                  : "border-slate-300 bg-white text-slate-800 hover:border-slate-500"
-              )}
-            >
-              <div className="flex items-start gap-3">
-                <span
-                  className={classNames(
-                    "mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded border text-xs",
-                    selected ? "border-slate-900 bg-slate-900 text-white" : "border-slate-300 bg-white text-transparent"
-                  )}
-                >
-                  ✓
-                </span>
-                <span>{optionLabel}</span>
-              </div>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function EmploymentIntakeRebuild() {
-  const [step, setStep] = useState(0);
-  const [submitted, setSubmitted] = useState(false);
-  const [data, setData] = useState(initialData);
-
-  const totalSteps = STEP_KEYS.length;
-  const currentStepKey = STEP_KEYS[step];
-
-  const selectedIssues = useMemo(() => new Set(data.issues), [data.issues]);
-
-  const requiresContactFields = !data.fullName.trim() || !data.phone.trim() || !data.email.trim();
-  const requiresEmploymentFields = !data.employerName.trim() || !data.stillEmployed || !data.payType;
-  const requiresIssueSelection = data.issues.length === 0;
-  const requiresSummaryAgreement = !data.agreeNoRepresentation;
-
-  const nextDisabled =
-    (currentStepKey === "contact" && requiresContactFields) ||
-    (currentStepKey === "employment" && requiresEmploymentFields) ||
-    (currentStepKey === "issues" && requiresIssueSelection) ||
-    (currentStepKey === "summary" && requiresSummaryAgreement);
-
-  function updateField(field, value) {
-    setData((prev) => ({ ...prev, [field]: value }));
-  }
-
-  function toggleArrayValue(field, value) {
-    setData((prev) => {
-      const exists = prev[field].includes(value);
-      return {
-        ...prev,
-        [field]: exists ? prev[field].filter((item) => item !== value) : [...prev[field], value],
-      };
-    });
-  }
-
-  function goNext() {
-    if (step < totalSteps - 1) setStep((prev) => prev + 1);
-  }
-
-  function goBack() {
-    if (step > 0) setStep((prev) => prev - 1);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setSubmitted(true);
-    // Replace with your API / form submission handler.
-    console.log("Employment intake submission", data);
-  }
-
-  return (
-    <div className="min-h-screen bg-white text-slate-950">
-      <section className="border-b border-slate-200 bg-slate-950 text-white">
-        <div className="mx-auto max-w-6xl px-6 py-14 sm:px-8 lg:px-10 lg:py-20">
-          <div className="max-w-3xl space-y-6">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-300">Stoltz Law Corp</p>
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-              Start Your Employment Intake
-            </h1>
-            <p className="max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
-              Short guided questions. Simple selections. Best estimates are okay. You can move forward even if you do not have every detail right now.
-            </p>
-            <div className="inline-flex max-w-2xl rounded-2xl border border-white/15 bg-white/5 px-5 py-4 text-sm leading-6 text-slate-200">
-              We will not contact your employer unless and until you retain our firm and authorize us to act on your behalf.
+          <div class="intro-grid">
+            <div class="intro-box">
+              <h3>What this intake does</h3>
+              <ul>
+                <li>Identifies the main issue quickly</li>
+                <li>Captures wage and hour facts efficiently</li>
+                <li>Helps us understand timing, documents, and urgency</li>
+              </ul>
+            </div>
+            <div class="intro-box">
+              <h3>What you do not need</h3>
+              <ul>
+                <li>Exact legal terms</li>
+                <li>Perfect dates or numbers</li>
+                <li>Every document before you submit</li>
+              </ul>
             </div>
           </div>
+        </section>
+
+        <section class="step hidden" data-step="1">
+          <div class="section-head">
+            <h2>Your contact information</h2>
+            <p>We need this information so we can follow up. This is the only section that must be completed in full.</p>
+            <div class="section-aside">Use the contact information you check most often.</div>
+          </div>
+
+          <div class="two-col">
+            <div class="field">
+              <div class="label-row"><label class="label" for="fullName">Full name</label><span class="req">Required</span></div>
+              <input id="fullName" name="fullName" type="text" placeholder="Your full name" required />
+            </div>
+            <div class="field">
+              <div class="label-row"><label class="label" for="phone">Phone</label><span class="req">Required</span></div>
+              <input id="phone" name="phone" type="tel" placeholder="Best phone number" required />
+            </div>
+            <div class="field">
+              <div class="label-row"><label class="label" for="email">Email</label><span class="req">Required</span></div>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+            <div class="field">
+              <label class="label" for="cityCounty">City / county</label>
+              <input id="cityCounty" name="cityCounty" type="text" placeholder="City and county" />
+            </div>
+          </div>
+
+          <div class="two-col" style="margin-top:18px;">
+            <div class="tile-group">
+              <div class="group-label">Preferred contact method</div>
+              <div class="tile-grid three">
+                <label class="tile"><input type="radio" name="preferredContact" value="Phone" checked /><span class="tile-box"><span class="radio-dot"></span><span>Phone</span></span></label>
+                <label class="tile"><input type="radio" name="preferredContact" value="Email" /><span class="tile-box"><span class="radio-dot"></span><span>Email</span></span></label>
+                <label class="tile"><input type="radio" name="preferredContact" value="Text" /><span class="tile-box"><span class="radio-dot"></span><span>Text</span></span></label>
+              </div>
+            </div>
+
+            <div style="display:grid; gap:18px;">
+              <div class="field">
+                <label class="label" for="bestTimeToReach">Best time to reach you</label>
+                <input id="bestTimeToReach" name="bestTimeToReach" type="text" placeholder="Morning, afternoon, evenings, etc." />
+              </div>
+              <div class="field">
+                <label class="label" for="preferredLanguage">Preferred language</label>
+                <input id="preferredLanguage" name="preferredLanguage" type="text" placeholder="Optional" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step hidden" data-step="2">
+          <div class="section-head">
+            <h2>Your job and employer</h2>
+            <p>Tell us where you worked and the basics of your role. Best estimates are okay.</p>
+            <div class="section-aside">We will not contact your employer unless and until you retain our firm. We request this information only to evaluate your claims.</div>
+          </div>
+
+          <div class="two-col">
+            <div class="field">
+              <div class="label-row"><label class="label" for="employerName">Employer name</label><span class="req">Required</span></div>
+              <input id="employerName" name="employerName" type="text" placeholder="Company or employer name" required />
+            </div>
+            <div class="field">
+              <label class="label" for="jobTitle">Job title</label>
+              <input id="jobTitle" name="jobTitle" type="text" placeholder="Your role or position" />
+            </div>
+            <div class="field">
+              <label class="label" for="workLocation">Work location</label>
+              <input id="workLocation" name="workLocation" type="text" placeholder="City, site, or address" />
+            </div>
+            <div class="field">
+              <label class="label" for="supervisorName">Main supervisor or manager</label>
+              <input id="supervisorName" name="supervisorName" type="text" placeholder="Optional" />
+            </div>
+          </div>
+
+          <div class="two-col" style="margin-top:18px;">
+            <div class="tile-group">
+              <div class="label-row"><div class="group-label">Are you still employed there?</div><span class="req">Required</span></div>
+              <div class="tile-grid two">
+                <label class="tile"><input type="radio" name="stillEmployed" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
+                <label class="tile"><input type="radio" name="stillEmployed" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
+              </div>
+            </div>
+            <div class="tile-group">
+              <div class="label-row"><div class="group-label">How were you paid?</div><span class="req">Required</span></div>
+              <div class="tile-grid three">
+                <label class="tile"><input type="radio" name="payType" value="Hourly" /><span class="tile-box"><span class="radio-dot"></span><span>Hourly</span></span></label>
+                <label class="tile"><input type="radio" name="payType" value="Salary" /><span class="tile-box"><span class="radio-dot"></span><span>Salary</span></span></label>
+                <label class="tile"><input type="radio" name="payType" value="Day rate" /><span class="tile-box"><span class="radio-dot"></span><span>Day rate</span></span></label>
+                <label class="tile"><input type="radio" name="payType" value="Commission" /><span class="tile-box"><span class="radio-dot"></span><span>Commission</span></span></label>
+                <label class="tile"><input type="radio" name="payType" value="Mixed" /><span class="tile-box"><span class="radio-dot"></span><span>Mixed</span></span></label>
+                <label class="tile"><input type="radio" name="payType" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="three-col" style="margin-top:18px;">
+            <div class="field">
+              <label class="label" for="startDate">Approximate start date</label>
+              <input id="startDate" name="startDate" type="date" />
+              <div class="hint">Best estimate is okay.</div>
+            </div>
+            <div class="field">
+              <label class="label" for="endDate">Approximate end date</label>
+              <input id="endDate" name="endDate" type="date" />
+              <div class="hint">Leave blank if still employed.</div>
+            </div>
+            <div class="tile-group">
+              <div class="group-label">Exempt or non-exempt</div>
+              <div class="tile-grid three">
+                <label class="tile"><input type="radio" name="exemptStatus" value="Exempt" /><span class="tile-box"><span class="radio-dot"></span><span>Exempt</span></span></label>
+                <label class="tile"><input type="radio" name="exemptStatus" value="Non-exempt" /><span class="tile-box"><span class="radio-dot"></span><span>Non-exempt</span></span></label>
+                <label class="tile"><input type="radio" name="exemptStatus" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step hidden" data-step="3">
+          <div class="section-head">
+            <h2>What best describes the problem?</h2>
+            <p>Select all that apply. Start with the broad category that fits best.</p>
+            <div class="section-aside">Choose the closest option if you are not sure. You can move on and we can sort out the details later.</div>
+          </div>
+
+          <div class="tile-group">
+            <div class="group-label">Issue categories</div>
+            <div class="tile-grid two">
+              <label class="tile"><input type="checkbox" name="issues" value="wageHour" /><span class="tile-box"><span class="check-dot">✓</span><span>I was not paid correctly</span></span></label>
+              <label class="tile"><input type="checkbox" name="issues" value="termination" /><span class="tile-box"><span class="check-dot">✓</span><span>I was fired or forced out</span></span></label>
+              <label class="tile"><input type="checkbox" name="issues" value="retaliation" /><span class="tile-box"><span class="check-dot">✓</span><span>I was punished after speaking up</span></span></label>
+              <label class="tile"><input type="checkbox" name="issues" value="discrimination" /><span class="tile-box"><span class="check-dot">✓</span><span>I was treated differently because of who I am</span></span></label>
+              <label class="tile"><input type="checkbox" name="issues" value="harassment" /><span class="tile-box"><span class="check-dot">✓</span><span>I was harassed at work</span></span></label>
+              <label class="tile"><input type="checkbox" name="issues" value="leaveAccommodation" /><span class="tile-box"><span class="check-dot">✓</span><span>My leave or accommodation request was denied or mishandled</span></span></label>
+              <label class="tile"><input type="checkbox" name="issues" value="whistleblower" /><span class="tile-box"><span class="check-dot">✓</span><span>I reported illegal conduct</span></span></label>
+              <label class="tile"><input type="checkbox" name="issues" value="other" /><span class="tile-box"><span class="check-dot">✓</span><span>Something else happened</span></span></label>
+            </div>
+          </div>
+
+          <div class="field hidden" id="otherIssueWrap" style="margin-top:18px;">
+            <label class="label" for="otherIssueText">Briefly describe the other issue</label>
+            <textarea id="otherIssueText" name="otherIssueText" placeholder="A short explanation is enough."></textarea>
+          </div>
+        </section>
+
+        <section class="step hidden" data-step="4">
+          <div class="section-head">
+            <h2>Details that help us evaluate the case</h2>
+            <p>We use this section to understand what may be owed, what changed, and what follow-up questions matter most.</p>
+            <div class="section-aside">Keep moving even if you do not know every answer. Best estimates are okay.</div>
+          </div>
+
+          <div class="panel hidden" id="wagePanel">
+            <h3>Pay, schedule, and wage issues</h3>
+            <p>These questions help us estimate unpaid wages, penalties, and related claims.</p>
+            <div class="tile-group" style="margin-top:16px;">
+              <div class="group-label">What wage and hour problems apply?</div>
+              <div class="tile-grid two">
+                <label class="tile"><input type="checkbox" name="wageHourIssues" value="unpaidTime" /><span class="tile-box"><span class="check-dot">✓</span><span>Unpaid time worked</span></span></label>
+                <label class="tile"><input type="checkbox" name="wageHourIssues" value="overtime" /><span class="tile-box"><span class="check-dot">✓</span><span>Unpaid overtime</span></span></label>
+                <label class="tile"><input type="checkbox" name="wageHourIssues" value="mealBreaks" /><span class="tile-box"><span class="check-dot">✓</span><span>Missed, late, or interrupted meal breaks</span></span></label>
+                <label class="tile"><input type="checkbox" name="wageHourIssues" value="restBreaks" /><span class="tile-box"><span class="check-dot">✓</span><span>Missed or interrupted rest breaks</span></span></label>
+                <label class="tile"><input type="checkbox" name="wageHourIssues" value="paystubs" /><span class="tile-box"><span class="check-dot">✓</span><span>Inaccurate paystubs or wage statements</span></span></label>
+                <label class="tile"><input type="checkbox" name="wageHourIssues" value="finalPay" /><span class="tile-box"><span class="check-dot">✓</span><span>Late or incomplete final paycheck</span></span></label>
+                <label class="tile"><input type="checkbox" name="wageHourIssues" value="expenseReimbursement" /><span class="tile-box"><span class="check-dot">✓</span><span>Unreimbursed work expenses</span></span></label>
+                <label class="tile"><input type="checkbox" name="wageHourIssues" value="coworkersToo" /><span class="tile-box"><span class="check-dot">✓</span><span>Coworkers had the same issue</span></span></label>
+              </div>
+            </div>
+
+            <div class="two-col" style="margin-top:18px;">
+              <div class="field"><label class="label" for="wageRate">Approximate pay rate or salary</label><input id="wageRate" name="wageRate" type="text" placeholder="$20/hour, $65,000/year, or best estimate" /></div>
+              <div class="field"><label class="label" for="typicalSchedule">Typical schedule</label><input id="typicalSchedule" name="typicalSchedule" type="text" placeholder="For example: Mon-Fri, 8:00 AM to 5:00 PM" /></div>
+              <div class="field"><label class="label" for="approximateFrequency">How often did the issue happen?</label><input id="approximateFrequency" name="approximateFrequency" type="text" placeholder="Every shift, twice a week, occasionally, etc." /></div>
+              <div class="field"><label class="label" for="approximateDuration">How long did it go on?</label><input id="approximateDuration" name="approximateDuration" type="text" placeholder="Weeks, months, years, or best estimate" /></div>
+            </div>
+
+            <div class="field hidden" id="offClockWrap" style="margin-top:18px;">
+              <label class="label" for="offClockEstimate">Best estimate of unpaid or off-the-clock time</label>
+              <input id="offClockEstimate" name="offClockEstimate" type="text" placeholder="Minutes per shift, hours per week, or best estimate" />
+            </div>
+
+            <div class="field hidden" id="coworkersWrap" style="margin-top:18px;">
+              <label class="label" for="coworkersAffected">How many coworkers were affected?</label>
+              <input id="coworkersAffected" name="coworkersAffected" type="text" placeholder="Approximate number or department" />
+            </div>
+          </div>
+
+          <div class="panel hidden" id="reportPanel">
+            <h3>Complaints, reports, and what changed after</h3>
+            <div class="two-col" style="margin-top:16px;">
+              <div class="tile-group">
+                <div class="group-label">Did you complain, report something, or speak up before things changed?</div>
+                <div class="tile-grid three">
+                  <label class="tile"><input type="radio" name="complainedOrReported" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
+                  <label class="tile"><input type="radio" name="complainedOrReported" value="No" /><span class="tile-box"><span class="radio-dot"></span><span>No</span></span></label>
+                  <label class="tile"><input type="radio" name="complainedOrReported" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="reportToWhom">Who did you report it to?</label>
+                <input id="reportToWhom" name="reportToWhom" type="text" placeholder="Manager, HR, owner, agency, coworker, etc." />
+              </div>
+            </div>
+            <div class="two-col" style="margin-top:18px;">
+              <div class="field">
+                <label class="label" for="whatChangedAfter">What changed after that?</label>
+                <input id="whatChangedAfter" name="whatChangedAfter" type="text" placeholder="Discipline, write-up, demotion, firing, hostility, schedule changes, etc." />
+              </div>
+              <div class="field hidden" id="whistleblowerWrap">
+                <label class="label" for="whistleblowerSubject">What illegal or unsafe conduct did you report?</label>
+                <input id="whistleblowerSubject" name="whistleblowerSubject" type="text" placeholder="A short description is enough." />
+              </div>
+            </div>
+          </div>
+
+          <div class="panel hidden" id="treatmentPanel">
+            <h3>Treatment, people involved, and protected basis</h3>
+            <div class="tile-group" style="margin-top:16px;">
+              <div class="group-label">What do you think the treatment was based on?</div>
+              <div class="tile-grid three">
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Race or ethnicity" /><span class="tile-box"><span class="check-dot">✓</span><span>Race or ethnicity</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="National origin or ancestry" /><span class="tile-box"><span class="check-dot">✓</span><span>National origin or ancestry</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Sex or gender" /><span class="tile-box"><span class="check-dot">✓</span><span>Sex or gender</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Pregnancy" /><span class="tile-box"><span class="check-dot">✓</span><span>Pregnancy</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Sexual orientation" /><span class="tile-box"><span class="check-dot">✓</span><span>Sexual orientation</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Gender identity or expression" /><span class="tile-box"><span class="check-dot">✓</span><span>Gender identity or expression</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Disability or medical condition" /><span class="tile-box"><span class="check-dot">✓</span><span>Disability or medical condition</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Religion" /><span class="tile-box"><span class="check-dot">✓</span><span>Religion</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Age" /><span class="tile-box"><span class="check-dot">✓</span><span>Age</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Marital status" /><span class="tile-box"><span class="check-dot">✓</span><span>Marital status</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Military or veteran status" /><span class="tile-box"><span class="check-dot">✓</span><span>Military or veteran status</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Another protected reason" /><span class="tile-box"><span class="check-dot">✓</span><span>Another protected reason</span></span></label>
+                <label class="tile"><input type="checkbox" name="protectedBases" value="Not sure" /><span class="tile-box"><span class="check-dot">✓</span><span>Not sure</span></span></label>
+              </div>
+            </div>
+            <div class="field hidden" id="protectedOtherWrap" style="margin-top:18px;">
+              <label class="label" for="protectedOtherText">Please identify the other protected reason</label>
+              <input id="protectedOtherText" name="protectedOtherText" type="text" placeholder="Optional" />
+            </div>
+            <div class="two-col" style="margin-top:18px;">
+              <div class="field">
+                <label class="label" for="whoWasInvolved">Who was involved?</label>
+                <input id="whoWasInvolved" name="whoWasInvolved" type="text" placeholder="Manager, supervisor, coworker, owner, etc." />
+              </div>
+              <div class="tile-group">
+                <div class="group-label">Was it one incident or repeated?</div>
+                <div class="tile-grid three">
+                  <label class="tile"><input type="radio" name="repeatedOrOneTime" value="One incident" /><span class="tile-box"><span class="radio-dot"></span><span>One incident</span></span></label>
+                  <label class="tile"><input type="radio" name="repeatedOrOneTime" value="Repeated" /><span class="tile-box"><span class="radio-dot"></span><span>Repeated</span></span></label>
+                  <label class="tile"><input type="radio" name="repeatedOrOneTime" value="Not sure" /><span class="tile-box"><span class="radio-dot"></span><span>Not sure</span></span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel hidden" id="leavePanel">
+            <h3>Leave or accommodation request</h3>
+            <div class="two-col" style="margin-top:16px;">
+              <div class="field">
+                <label class="label" for="leaveType">What type of leave or accommodation did you request?</label>
+                <input id="leaveType" name="leaveType" type="text" placeholder="Medical leave, disability accommodation, pregnancy accommodation, schedule change, etc." />
+              </div>
+              <div class="field">
+                <label class="label" for="leaveOutcome">What was the employer's response?</label>
+                <input id="leaveOutcome" name="leaveOutcome" type="text" placeholder="Denied, ignored, delayed, approved, then punished, etc." />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step hidden" data-step="5">
+          <div class="section-head">
+            <h2>Approximate timing</h2>
+            <p>Timing helps us evaluate what happened and when. Best estimates are okay.</p>
+            <div class="section-aside">You do not need exact dates to continue.</div>
+          </div>
+
+          <div class="three-col">
+            <div class="field">
+              <label class="label" for="problemStarted">When did the problem start?</label>
+              <input id="problemStarted" name="problemStarted" type="date" />
+            </div>
+            <div class="field">
+              <label class="label" for="complaintDate">When did you complain or request help?</label>
+              <input id="complaintDate" name="complaintDate" type="date" />
+            </div>
+            <div class="field">
+              <label class="label" for="impactDate">When were you most affected?</label>
+              <input id="impactDate" name="impactDate" type="date" />
+            </div>
+          </div>
+        </section>
+
+        <section class="step hidden" data-step="6">
+          <div class="section-head">
+            <h2>Documents and evidence</h2>
+            <p>Let us know what you have now. You can still submit even if you do not have documents yet.</p>
+            <div class="section-aside">Choose anything you already have or believe you can gather.</div>
+          </div>
+
+          <div class="tile-group">
+            <div class="group-label">What do you have?</div>
+            <div class="tile-grid three">
+              <label class="tile"><input type="checkbox" name="evidence" value="Paystubs" /><span class="tile-box"><span class="check-dot">✓</span><span>Paystubs</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Time records" /><span class="tile-box"><span class="check-dot">✓</span><span>Time records</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Schedules" /><span class="tile-box"><span class="check-dot">✓</span><span>Schedules</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Emails" /><span class="tile-box"><span class="check-dot">✓</span><span>Emails</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Text messages" /><span class="tile-box"><span class="check-dot">✓</span><span>Text messages</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Write-ups" /><span class="tile-box"><span class="check-dot">✓</span><span>Write-ups</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Termination paperwork" /><span class="tile-box"><span class="check-dot">✓</span><span>Termination paperwork</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Doctor's notes" /><span class="tile-box"><span class="check-dot">✓</span><span>Doctor's notes</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Complaint to HR or management" /><span class="tile-box"><span class="check-dot">✓</span><span>Complaint to HR or management</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Photos or screenshots" /><span class="tile-box"><span class="check-dot">✓</span><span>Photos or screenshots</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="Witness names" /><span class="tile-box"><span class="check-dot">✓</span><span>Witness names</span></span></label>
+              <label class="tile"><input type="checkbox" name="evidence" value="None yet" /><span class="tile-box"><span class="check-dot">✓</span><span>None yet</span></span></label>
+            </div>
+          </div>
+
+          <div class="tile-group" style="margin-top:18px;">
+            <div class="group-label">Can you upload documents now?</div>
+            <div class="tile-grid three">
+              <label class="tile"><input type="radio" name="canUploadNow" value="Yes" /><span class="tile-box"><span class="radio-dot"></span><span>Yes</span></span></label>
+              <label class="tile"><input type="radio" name="canUploadNow" value="Later" /><span class="tile-box"><span class="radio-dot"></span><span>Later</span></span></label>
+              <label class="tile"><input type="radio" name="canUploadNow" value="Not yet" /><span class="tile-box"><span class="radio-dot"></span><span>Not yet</span></span></label>
+            </div>
+          </div>
+        </section>
+
+        <section class="step hidden" data-step="7">
+          <div class="section-head">
+            <h2>Final summary</h2>
+            <p>A short explanation is enough. Start with what happened, who was involved, and what changed.</p>
+            <div class="section-aside">Keep it simple. More detail can be gathered later if needed.</div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="shortNarrative">In a few sentences, what happened?</label>
+            <textarea id="shortNarrative" name="shortNarrative" placeholder="Start with the issue, what changed, and what you want us to know first."></textarea>
+          </div>
+
+          <div class="field" style="margin-top:18px;">
+            <label class="label" for="urgentNotes">Anything urgent we should know?</label>
+            <textarea id="urgentNotes" name="urgentNotes" placeholder="Hearing dates, deadlines, immediate job risk, final pay issues, etc."></textarea>
+          </div>
+
+          <label class="check-row" style="margin-top:18px;">
+            <input type="checkbox" id="agreeNoRepresentation" name="agreeNoRepresentation" />
+            <span>I understand that submitting this intake does not create an attorney-client relationship and does not mean the firm has agreed to represent me.</span>
+          </label>
+
+          <div class="success hidden" id="successMessage">Intake submitted. Replace the placeholder submit handler with your email service, form backend, Netlify/Formspree endpoint, or CRM.</div>
+        </section>
+
+        <div class="nav-row">
+          <div class="nav-text">Contact information is required. Most other questions can be answered later or with a best estimate.</div>
+          <div class="btns">
+            <button type="button" class="btn btn-secondary hidden" id="backBtn">Back</button>
+            <button type="button" class="btn btn-primary" id="nextBtn">Continue</button>
+            <button type="submit" class="btn btn-primary hidden" id="submitBtn">Submit Intake</button>
+          </div>
         </div>
-      </section>
-
-      <main className="mx-auto max-w-6xl px-6 py-10 sm:px-8 lg:px-10 lg:py-14">
-        <div className="grid gap-8 lg:grid-cols-[300px_minmax(0,1fr)]">
-          <aside className="h-fit rounded-3xl border border-slate-200 bg-slate-50 p-6 lg:sticky lg:top-8">
-            <ProgressBar current={step + 1} total={totalSteps} />
-
-            <div className="mt-8 space-y-3">
-              {[
-                "Welcome",
-                "Contact",
-                "Employment",
-                "What happened",
-                "Details",
-                "Timing",
-                "Documents",
-                "Review",
-              ].map((label, index) => {
-                const active = index === step;
-                const complete = index < step;
-                return (
-                  <div
-                    key={label}
-                    className={classNames(
-                      "flex items-center gap-3 rounded-2xl px-3 py-2 text-sm",
-                      active ? "bg-white text-slate-950 shadow-sm" : "text-slate-600"
-                    )}
-                  >
-                    <span
-                      className={classNames(
-                        "inline-flex h-7 w-7 items-center justify-center rounded-full border text-xs font-medium",
-                        active || complete
-                          ? "border-slate-900 bg-slate-900 text-white"
-                          : "border-slate-300 bg-transparent text-slate-500"
-                      )}
-                    >
-                      {complete ? "✓" : index + 1}
-                    </span>
-                    <span>{label}</span>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-4 text-sm leading-6 text-slate-600">
-              Contact information is required so we can follow up. Most other fields can be answered with a best estimate or skipped for now.
-            </div>
-          </aside>
-
-          <form onSubmit={handleSubmit} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 lg:p-10">
-            {currentStepKey === "intro" && (
-              <div>
-                <SectionIntro
-                  title="A guided intake built for clarity"
-                  description="This intake is designed to help you move quickly through the key issues. Start with basic information, choose the issue categories that fit best, and explain only where it helps."
-                  aside="You can use simple selections throughout. If you do not know an exact date, amount, or title, use your best estimate and continue."
-                />
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                    <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-700">What this intake does</h3>
-                    <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
-                      <li>• Identifies the main issue quickly</li>
-                      <li>• Captures wage and hour facts efficiently</li>
-                      <li>• Helps us understand timing, documents, and urgency</li>
-                    </ul>
-                  </div>
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                    <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-700">What you do not need</h3>
-                    <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
-                      <li>• Exact legal terms</li>
-                      <li>• Perfect dates or numbers</li>
-                      <li>• Every document before you submit</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {currentStepKey === "contact" && (
-              <div>
-                <SectionIntro
-                  title="Your contact information"
-                  description="We need this information so we can follow up. This is the only section that must be completed in full."
-                  aside="Use the contact information you check most often."
-                />
-
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <Input
-                    label="Full name"
-                    required
-                    placeholder="Your full name"
-                    value={data.fullName}
-                    onChange={(e) => updateField("fullName", e.target.value)}
-                  />
-                  <Input
-                    label="Phone"
-                    required
-                    placeholder="Best phone number"
-                    value={data.phone}
-                    onChange={(e) => updateField("phone", e.target.value)}
-                  />
-                  <Input
-                    label="Email"
-                    required
-                    type="email"
-                    placeholder="you@example.com"
-                    value={data.email}
-                    onChange={(e) => updateField("email", e.target.value)}
-                  />
-                  <Input
-                    label="City / county"
-                    placeholder="City and county"
-                    value={data.cityCounty}
-                    onChange={(e) => updateField("cityCounty", e.target.value)}
-                  />
-                </div>
-
-                <div className="mt-6 grid gap-5 sm:grid-cols-2">
-                  <RadioTileGroup
-                    label="Preferred contact method"
-                    value={data.preferredContact}
-                    onChange={(value) => updateField("preferredContact", value)}
-                    options={[
-                      { value: "phone", label: "Phone" },
-                      { value: "email", label: "Email" },
-                      { value: "text", label: "Text" },
-                    ]}
-                    columns={3}
-                  />
-                  <div className="space-y-5">
-                    <Input
-                      label="Best time to reach you"
-                      placeholder="Morning, afternoon, evenings, etc."
-                      value={data.bestTimeToReach}
-                      onChange={(e) => updateField("bestTimeToReach", e.target.value)}
-                    />
-                    <Input
-                      label="Preferred language"
-                      placeholder="Optional"
-                      value={data.preferredLanguage}
-                      onChange={(e) => updateField("preferredLanguage", e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {currentStepKey === "employment" && (
-              <div>
-                <SectionIntro
-                  title="Your job and employer"
-                  description="Tell us where you worked and the basics of your role. Best estimates are okay."
-                  aside="We will not contact your employer unless and until you retain our firm. We request this information only to evaluate your claims."
-                />
-
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <Input
-                    label="Employer name"
-                    required
-                    placeholder="Company or employer name"
-                    value={data.employerName}
-                    onChange={(e) => updateField("employerName", e.target.value)}
-                  />
-                  <Input
-                    label="Job title"
-                    placeholder="Your role or position"
-                    value={data.jobTitle}
-                    onChange={(e) => updateField("jobTitle", e.target.value)}
-                  />
-                  <Input
-                    label="Work location"
-                    placeholder="City, site, or address"
-                    value={data.workLocation}
-                    onChange={(e) => updateField("workLocation", e.target.value)}
-                  />
-                  <Input
-                    label="Main supervisor or manager"
-                    placeholder="Optional"
-                    value={data.supervisorName}
-                    onChange={(e) => updateField("supervisorName", e.target.value)}
-                  />
-                </div>
-
-                <div className="mt-6 grid gap-5 sm:grid-cols-2">
-                  <RadioTileGroup
-                    label="Are you still employed there?"
-                    value={data.stillEmployed}
-                    onChange={(value) => updateField("stillEmployed", value)}
-                    options={[
-                      { value: "yes", label: "Yes" },
-                      { value: "no", label: "No" },
-                    ]}
-                    hint="Required"
-                  />
-                  <RadioTileGroup
-                    label="How were you paid?"
-                    value={data.payType}
-                    onChange={(value) => updateField("payType", value)}
-                    options={[
-                      { value: "hourly", label: "Hourly" },
-                      { value: "salary", label: "Salary" },
-                      { value: "dayRate", label: "Day rate" },
-                      { value: "commission", label: "Commission" },
-                      { value: "mixed", label: "Mixed" },
-                      { value: "notSure", label: "Not sure" },
-                    ]}
-                    columns={3}
-                    hint="Required"
-                  />
-                </div>
-
-                <div className="mt-6 grid gap-5 sm:grid-cols-3">
-                  <Input
-                    label="Approximate start date"
-                    type="date"
-                    value={data.startDate}
-                    onChange={(e) => updateField("startDate", e.target.value)}
-                    hint="Best estimate is okay."
-                  />
-                  <Input
-                    label="Approximate end date"
-                    type="date"
-                    value={data.endDate}
-                    onChange={(e) => updateField("endDate", e.target.value)}
-                    hint="Leave blank if still employed."
-                  />
-                  <RadioTileGroup
-                    label="Exempt or non-exempt"
-                    value={data.exemptStatus}
-                    onChange={(value) => updateField("exemptStatus", value)}
-                    options={[
-                      { value: "exempt", label: "Exempt" },
-                      { value: "nonExempt", label: "Non-exempt" },
-                      { value: "notSure", label: "Not sure" },
-                    ]}
-                    columns={3}
-                  />
-                </div>
-              </div>
-            )}
-
-            {currentStepKey === "issues" && (
-              <div>
-                <SectionIntro
-                  title="What best describes the problem?"
-                  description="Select all that apply. Start with the broad category that fits best."
-                  aside="Choose the closest option if you are not sure. You can move on and we can sort out the details later."
-                />
-
-                <CheckboxTileGroup
-                  label="Issue categories"
-                  values={data.issues}
-                  onToggle={(value) => toggleArrayValue("issues", value)}
-                  options={ISSUE_OPTIONS}
-                />
-
-                {selectedIssues.has("other") && (
-                  <div className="mt-6">
-                    <TextArea
-                      label="Briefly describe the other issue"
-                      placeholder="A short explanation is enough."
-                      value={data.otherIssueText}
-                      onChange={(e) => updateField("otherIssueText", e.target.value)}
-                    />
-                  </div>
-                )}
-              </div>
-            )}
-
-            {currentStepKey === "details" && (
-              <div className="space-y-8">
-                <SectionIntro
-                  title="Details that help us evaluate the case"
-                  description="We use this section to understand what may be owed, what changed, and what follow-up questions matter most."
-                  aside="Keep moving even if you do not know every answer. Best estimates are okay."
-                />
-
-                {selectedIssues.has("wageHour") && (
-                  <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-6">
-                    <h3 className="text-lg font-semibold text-slate-950">Pay, schedule, and wage issues</h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">
-                      These questions help us estimate unpaid wages, penalties, and related claims.
-                    </p>
-                    <div className="mt-5 space-y-5">
-                      <CheckboxTileGroup
-                        label="What wage and hour problems apply?"
-                        values={data.wageHourIssues}
-                        onToggle={(value) => toggleArrayValue("wageHourIssues", value)}
-                        options={WAGE_HOUR_OPTIONS}
-                      />
-                      <div className="grid gap-5 sm:grid-cols-2">
-                        <Input
-                          label="Approximate pay rate or salary"
-                          placeholder="$20/hour, $65,000/year, or best estimate"
-                          value={data.wageRate}
-                          onChange={(e) => updateField("wageRate", e.target.value)}
-                        />
-                        <Input
-                          label="Typical schedule"
-                          placeholder="For example: Mon-Fri, 8:00 AM to 5:00 PM"
-                          value={data.typicalSchedule}
-                          onChange={(e) => updateField("typicalSchedule", e.target.value)}
-                        />
-                        <Input
-                          label="How often did the issue happen?"
-                          placeholder="Every shift, twice a week, occasionally, etc."
-                          value={data.approximateFrequency}
-                          onChange={(e) => updateField("approximateFrequency", e.target.value)}
-                        />
-                        <Input
-                          label="How long did it go on?"
-                          placeholder="Weeks, months, years, or best estimate"
-                          value={data.approximateDuration}
-                          onChange={(e) => updateField("approximateDuration", e.target.value)}
-                        />
-                      </div>
-                      {(data.wageHourIssues.includes("unpaidTime") || data.wageHourIssues.includes("overtime")) && (
-                        <Input
-                          label="Best estimate of unpaid or off-the-clock time"
-                          placeholder="Minutes per shift, hours per week, or best estimate"
-                          value={data.offClockEstimate}
-                          onChange={(e) => updateField("offClockEstimate", e.target.value)}
-                        />
-                      )}
-                      {data.wageHourIssues.includes("coworkersToo") && (
-                        <Input
-                          label="How many coworkers were affected?"
-                          placeholder="Approximate number or department"
-                          value={data.coworkersAffected}
-                          onChange={(e) => updateField("coworkersAffected", e.target.value)}
-                        />
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {(selectedIssues.has("retaliation") || selectedIssues.has("whistleblower") || selectedIssues.has("termination")) && (
-                  <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-6">
-                    <h3 className="text-lg font-semibold text-slate-950">Complaints, reports, and what changed after</h3>
-                    <div className="mt-5 grid gap-5 sm:grid-cols-2">
-                      <RadioTileGroup
-                        label="Did you complain, report something, or speak up before things changed?"
-                        value={data.complainedOrReported}
-                        onChange={(value) => updateField("complainedOrReported", value)}
-                        options={[
-                          { value: "yes", label: "Yes" },
-                          { value: "no", label: "No" },
-                          { value: "notSure", label: "Not sure" },
-                        ]}
-                        columns={3}
-                      />
-                      <Input
-                        label="Who did you report it to?"
-                        placeholder="Manager, HR, owner, agency, coworker, etc."
-                        value={data.reportToWhom}
-                        onChange={(e) => updateField("reportToWhom", e.target.value)}
-                      />
-                    </div>
-                    <div className="mt-5 grid gap-5 sm:grid-cols-2">
-                      <Input
-                        label="What changed after that?"
-                        placeholder="Discipline, write-up, demotion, firing, hostility, schedule changes, etc."
-                        value={data.whatChangedAfter}
-                        onChange={(e) => updateField("whatChangedAfter", e.target.value)}
-                      />
-                      {selectedIssues.has("whistleblower") && (
-                        <Input
-                          label="What illegal or unsafe conduct did you report?"
-                          placeholder="A short description is enough."
-                          value={data.whistleblowerSubject}
-                          onChange={(e) => updateField("whistleblowerSubject", e.target.value)}
-                        />
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {(selectedIssues.has("discrimination") || selectedIssues.has("harassment")) && (
-                  <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-6">
-                    <h3 className="text-lg font-semibold text-slate-950">Treatment, people involved, and protected basis</h3>
-                    <div className="mt-5 space-y-5">
-                      <CheckboxTileGroup
-                        label="What do you think the treatment was based on?"
-                        values={data.protectedBases}
-                        onToggle={(value) => toggleArrayValue("protectedBases", value)}
-                        options={PROTECTED_BASIS_OPTIONS}
-                        columns={3}
-                      />
-                      {data.protectedBases.includes("Another protected reason") && (
-                        <Input
-                          label="Please identify the other protected reason"
-                          placeholder="Optional"
-                          value={data.protectedOtherText}
-                          onChange={(e) => updateField("protectedOtherText", e.target.value)}
-                        />
-                      )}
-                      <div className="grid gap-5 sm:grid-cols-2">
-                        <Input
-                          label="Who was involved?"
-                          placeholder="Manager, supervisor, coworker, owner, etc."
-                          value={data.whoWasInvolved}
-                          onChange={(e) => updateField("whoWasInvolved", e.target.value)}
-                        />
-                        <RadioTileGroup
-                          label="Was it one incident or repeated?"
-                          value={data.repeatedOrOneTime}
-                          onChange={(value) => updateField("repeatedOrOneTime", value)}
-                          options={[
-                            { value: "oneTime", label: "One incident" },
-                            { value: "repeated", label: "Repeated" },
-                            { value: "notSure", label: "Not sure" },
-                          ]}
-                          columns={3}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {selectedIssues.has("leaveAccommodation") && (
-                  <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-6">
-                    <h3 className="text-lg font-semibold text-slate-950">Leave or accommodation request</h3>
-                    <div className="mt-5 grid gap-5 sm:grid-cols-2">
-                      <Input
-                        label="What type of leave or accommodation did you request?"
-                        placeholder="Medical leave, disability accommodation, pregnancy accommodation, schedule change, etc."
-                        value={data.leaveType}
-                        onChange={(e) => updateField("leaveType", e.target.value)}
-                      />
-                      <Input
-                        label="What was the employer's response?"
-                        placeholder="Denied, ignored, delayed, approved, then punished, etc."
-                        value={data.leaveOutcome}
-                        onChange={(e) => updateField("leaveOutcome", e.target.value)}
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {currentStepKey === "timeline" && (
-              <div>
-                <SectionIntro
-                  title="Approximate timing"
-                  description="Timing helps us evaluate what happened and when. Best estimates are okay."
-                  aside="You do not need exact dates to continue."
-                />
-
-                <div className="grid gap-5 sm:grid-cols-3">
-                  <Input
-                    label="When did the problem start?"
-                    type="date"
-                    value={data.problemStarted}
-                    onChange={(e) => updateField("problemStarted", e.target.value)}
-                  />
-                  <Input
-                    label="When did you complain or request help?"
-                    type="date"
-                    value={data.complaintDate}
-                    onChange={(e) => updateField("complaintDate", e.target.value)}
-                  />
-                  <Input
-                    label="When were you most affected?"
-                    type="date"
-                    value={data.impactDate}
-                    onChange={(e) => updateField("impactDate", e.target.value)}
-                  />
-                </div>
-              </div>
-            )}
-
-            {currentStepKey === "evidence" && (
-              <div>
-                <SectionIntro
-                  title="Documents and evidence"
-                  description="Let us know what you have now. You can still submit even if you do not have documents yet."
-                  aside="Choose anything you already have or believe you can gather."
-                />
-
-                <CheckboxTileGroup
-                  label="What do you have?"
-                  values={data.evidence}
-                  onToggle={(value) => toggleArrayValue("evidence", value)}
-                  options={EVIDENCE_OPTIONS}
-                  columns={3}
-                />
-
-                <div className="mt-6">
-                  <RadioTileGroup
-                    label="Can you upload documents now?"
-                    value={data.canUploadNow}
-                    onChange={(value) => updateField("canUploadNow", value)}
-                    options={[
-                      { value: "yes", label: "Yes" },
-                      { value: "later", label: "Later" },
-                      { value: "notYet", label: "Not yet" },
-                    ]}
-                    columns={3}
-                  />
-                </div>
-              </div>
-            )}
-
-            {currentStepKey === "summary" && (
-              <div>
-                <SectionIntro
-                  title="Final summary"
-                  description="A short explanation is enough. Start with what happened, who was involved, and what changed."
-                  aside="Keep it simple. We can gather more detail later if needed."
-                />
-
-                <div className="space-y-5">
-                  <TextArea
-                    label="In a few sentences, what happened?"
-                    placeholder="Start with the issue, what changed, and what you want us to know first."
-                    value={data.shortNarrative}
-                    onChange={(e) => updateField("shortNarrative", e.target.value)}
-                  />
-                  <TextArea
-                    label="Anything urgent we should know?"
-                    placeholder="Hearing dates, deadlines, immediate job risk, final pay issues, etc."
-                    value={data.urgentNotes}
-                    onChange={(e) => updateField("urgentNotes", e.target.value)}
-                  />
-
-                  <label className="flex items-start gap-3 rounded-2xl border border-slate-300 bg-slate-50 p-4 text-sm leading-6 text-slate-700">
-                    <input
-                      type="checkbox"
-                      checked={data.agreeNoRepresentation}
-                      onChange={(e) => updateField("agreeNoRepresentation", e.target.checked)}
-                      className="mt-1 h-4 w-4 rounded border-slate-300 text-slate-900"
-                    />
-                    <span>
-                      I understand that submitting this intake does not create an attorney-client relationship and does not mean the firm has agreed to represent me.
-                    </span>
-                  </label>
-
-                  {submitted ? (
-                    <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-                      Intake submitted. Replace the placeholder submission handler with your form backend, CRM, or API endpoint.
-                    </div>
-                  ) : null}
-                </div>
-              </div>
-            )}
-
-            <div className="mt-10 flex flex-col gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-xs leading-5 text-slate-500">
-                Contact information is required. Most other questions can be answered later or with a best estimate.
-              </div>
-              <div className="flex flex-col-reverse gap-3 sm:flex-row">
-                {step > 0 ? (
-                  <button
-                    type="button"
-                    onClick={goBack}
-                    className="rounded-2xl border border-slate-300 px-5 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-500 hover:text-slate-950"
-                  >
-                    Back
-                  </button>
-                ) : null}
-
-                {step < totalSteps - 1 ? (
-                  <button
-                    type="button"
-                    onClick={goNext}
-                    disabled={nextDisabled}
-                    className={classNames(
-                      "rounded-2xl px-5 py-3 text-sm font-medium transition",
-                      nextDisabled
-                        ? "cursor-not-allowed bg-slate-300 text-slate-500"
-                        : "bg-slate-950 text-white hover:bg-slate-800"
-                    )}
-                  >
-                    Continue
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800"
-                  >
-                    Submit Intake
-                  </button>
-                )}
-              </div>
-            </div>
-          </form>
-        </div>
-      </main>
+      </form>
     </div>
-  );
-}
+  </main>
 
-export default EmploymentIntakeRebuild;
+  <script>
+    (function () {
+      const form = document.getElementById('employmentIntakeForm');
+      const steps = Array.from(document.querySelectorAll('.step'));
+      const stepItems = Array.from(document.querySelectorAll('.step-item'));
+      const progressBar = document.getElementById('progressBar');
+      const progressPercent = document.getElementById('progressPercent');
+      const backBtn = document.getElementById('backBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const submitBtn = document.getElementById('submitBtn');
+      const successMessage = document.getElementById('successMessage');
+
+      const otherIssueInput = document.querySelector('input[name="issues"][value="other"]');
+      const otherIssueWrap = document.getElementById('otherIssueWrap');
+      const wagePanel = document.getElementById('wagePanel');
+      const reportPanel = document.getElementById('reportPanel');
+      const treatmentPanel = document.getElementById('treatmentPanel');
+      const leavePanel = document.getElementById('leavePanel');
+      const whistleblowerWrap = document.getElementById('whistleblowerWrap');
+      const offClockWrap = document.getElementById('offClockWrap');
+      const coworkersWrap = document.getElementById('coworkersWrap');
+      const protectedOtherWrap = document.getElementById('protectedOtherWrap');
+
+      let currentStep = 0;
+      const totalSteps = steps.length;
+
+      function getCheckedValues(name) {
+        return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map((el) => el.value);
+      }
+
+      function updateConditionalSections() {
+        const issues = getCheckedValues('issues');
+        otherIssueWrap.classList.toggle('hidden', !issues.includes('other'));
+        wagePanel.classList.toggle('hidden', !issues.includes('wageHour'));
+        reportPanel.classList.toggle('hidden', !(issues.includes('retaliation') || issues.includes('whistleblower') || issues.includes('termination')));
+        treatmentPanel.classList.toggle('hidden', !(issues.includes('discrimination') || issues.includes('harassment')));
+        leavePanel.classList.toggle('hidden', !issues.includes('leaveAccommodation'));
+        whistleblowerWrap.classList.toggle('hidden', !issues.includes('whistleblower'));
+
+        const wageIssues = getCheckedValues('wageHourIssues');
+        offClockWrap.classList.toggle('hidden', !(wageIssues.includes('unpaidTime') || wageIssues.includes('overtime')));
+        coworkersWrap.classList.toggle('hidden', !wageIssues.includes('coworkersToo'));
+
+        const protectedBases = getCheckedValues('protectedBases');
+        protectedOtherWrap.classList.toggle('hidden', !protectedBases.includes('Another protected reason'));
+      }
+
+      function validateStep(index) {
+        if (index === 1) {
+          const fullName = document.getElementById('fullName').value.trim();
+          const phone = document.getElementById('phone').value.trim();
+          const email = document.getElementById('email').value.trim();
+          return !!(fullName && phone && email);
+        }
+
+        if (index === 2) {
+          const employerName = document.getElementById('employerName').value.trim();
+          const stillEmployed = document.querySelector('input[name="stillEmployed"]:checked');
+          const payType = document.querySelector('input[name="payType"]:checked');
+          return !!(employerName && stillEmployed && payType);
+        }
+
+        if (index === 3) {
+          return getCheckedValues('issues').length > 0;
+        }
+
+        if (index === 7) {
+          return document.getElementById('agreeNoRepresentation').checked;
+        }
+
+        return true;
+      }
+
+      function updateButtons() {
+        backBtn.classList.toggle('hidden', currentStep === 0);
+        nextBtn.classList.toggle('hidden', currentStep === totalSteps - 1);
+        submitBtn.classList.toggle('hidden', currentStep !== totalSteps - 1);
+        nextBtn.disabled = !validateStep(currentStep);
+      }
+
+      function updateProgress() {
+        const pct = Math.round(((currentStep + 1) / totalSteps) * 100);
+        progressBar.style.width = pct + '%';
+        progressPercent.textContent = pct + '%';
+
+        stepItems.forEach((item, index) => {
+          item.classList.toggle('active', index === currentStep);
+          item.classList.toggle('done', index < currentStep);
+          const badge = item.querySelector('.step-badge');
+          badge.textContent = index < currentStep ? '✓' : String(index + 1);
+        });
+      }
+
+      function showStep(index) {
+        currentStep = index;
+        steps.forEach((stepEl, i) => stepEl.classList.toggle('hidden', i !== currentStep));
+        updateProgress();
+        updateButtons();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      form.addEventListener('input', function () {
+        updateConditionalSections();
+        updateButtons();
+      });
+
+      form.addEventListener('change', function () {
+        updateConditionalSections();
+        updateButtons();
+      });
+
+      nextBtn.addEventListener('click', function () {
+        if (!validateStep(currentStep)) return;
+        if (currentStep < totalSteps - 1) showStep(currentStep + 1);
+      });
+
+      backBtn.addEventListener('click', function () {
+        if (currentStep > 0) showStep(currentStep - 1);
