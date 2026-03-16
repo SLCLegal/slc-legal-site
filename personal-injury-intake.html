@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personal Injury Intake | SLC Legal, Inc.</title>
-  <meta name="description" content="Personal injury intake for SLC Legal, Inc. Serious facts, clear timing, and the records that matter from the start." />
+  <meta
+    name="description"
+    content="Personal injury intake for SLC Legal, Inc. Serious facts, clear timing, and the records that matter from the start."
+  />
   <style>
     :root {
       --bg: #ffffff;
@@ -35,6 +38,7 @@
       color: var(--text);
       line-height: 1.5;
     }
+
     a { color: inherit; }
     .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
 
@@ -96,7 +100,13 @@
       font-size: 14px;
       color: var(--muted);
     }
-    .main-nav a { text-decoration: none; }
+    .main-nav a {
+      text-decoration: none;
+    }
+    .main-nav a.active {
+      color: var(--text);
+      font-weight: 700;
+    }
 
     .hero {
       background: linear-gradient(180deg, var(--brand) 0%, var(--brand-2) 100%);
@@ -309,6 +319,7 @@
       line-height: 1.7;
       margin-top: -2px;
     }
+
     input[type="text"],
     input[type="email"],
     input[type="tel"],
@@ -514,6 +525,7 @@
       background: #fef2f2;
       color: #991b1b;
     }
+
     .check-row {
       display: flex;
       align-items: flex-start;
@@ -570,8 +582,8 @@
         </span>
       </a>
       <nav class="main-nav">
-        <a href="index.html#employment">Employment</a>
-        <a href="index.html#personal-injury">Personal Injury</a>
+        <a href="employment-intake.html">Employment</a>
+        <a href="personal-injury-intake.html" class="active">Personal Injury</a>
         <a href="index.html#about">About</a>
         <a href="index.html#contact">Contact</a>
       </nav>
@@ -1114,7 +1126,9 @@
       const totalSteps = steps.length;
 
       function getCheckedValues(name) {
-        return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(function (el) { return el.value; });
+        return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(function (el) {
+          return el.value;
+        });
       }
 
       function escapeHtml(value) {
